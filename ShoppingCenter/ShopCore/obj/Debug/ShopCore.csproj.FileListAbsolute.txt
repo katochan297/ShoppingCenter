@@ -1,0 +1,12 @@
+E:\ShoppingCenter\ShoppingCenter\ShopCore\bin\Debug\ShopCore.dll
+E:\ShoppingCenter\ShoppingCenter\ShopCore\bin\Debug\ShopCore.pdb
+E:\ShoppingCenter\ShoppingCenter\ShopCore\bin\Debug\ShopData.dll
+E:\ShoppingCenter\ShoppingCenter\ShopCore\bin\Debug\EntityFramework.dll
+E:\ShoppingCenter\ShoppingCenter\ShopCore\bin\Debug\ShopData.pdb
+E:\ShoppingCenter\ShoppingCenter\ShopCore\bin\Debug\EntityFramework.xml
+E:\ShoppingCenter\ShoppingCenter\ShopCore\obj\Debug\ShopCore.csprojResolveAssemblyReference.cache
+E:\ShoppingCenter\ShoppingCenter\ShopCore\obj\Debug\ShopCore.dll
+E:\ShoppingCenter\ShoppingCenter\ShopCore\obj\Debug\ShopCore.pdb
+E:\ShoppingCenter\ShoppingCenter\ShopCore\bin\Debug\ShopCore.dll.config
+E:\ShoppingCenter\ShoppingCenter\ShopCore\bin\Debug\EntityFramework.SqlServer.dll
+E:\ShoppingCenter\ShoppingCenter\ShopCore\bin\Debug\EntityFramework.SqlServer.xml

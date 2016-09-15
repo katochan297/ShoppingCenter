@@ -1,0 +1,12 @@
+a:hover, a:hover,
+.flat-mega-menu > ul > li:hover > a,
+.flat-mega-menu .drop-down.full-width ul li a:hover,
+.pagination > li > a:hover, .pagination > li > span:hover, .pagination > li > a:focus, .pagination > li > span:focus,
+.filter-toggle .active,
+.nav-tabs > li > a:hover,
+.description-product:hover i,
+.flat-mega-menu .drop-down li .footer-bag .view-bag:hover a,
+.portfolio-project-detail .categories p a:hover,
+.tweet_text a, .tweet_text a:hover{
+	color: #e26842;
+}

@@ -1,0 +1,71 @@
+/*Sing In Panel------------------------------------------------------------*/
+#loginpanel{
+	text-align: left;
+	font-size: 13px;
+	line-height: 23px;
+}
+.login_form{
+	margin-top: 10px;
+}
+.login_form label{	
+	color: #fff;
+	font-weight: lighter;
+	margin-top: 0.7rem;
+	margin-bottom: 0;
+}
+#loginpanel .social_bottons{
+	margin: 0;
+}
+#loginpanel .social_bottons li{
+	border: none;
+	padding: 0.2rem 1rem;
+}
+#loginpanel input {
+	border-radius: 0px;
+	-moz-border-radius: 0px;
+	-webkit-border-radius: 0px;
+	height: 30px;
+	font-size: 1.1rem;
+	line-height: 2.1rem;
+	padding: 0 10px;
+	width: 99%;	
+	margin-right: 0;
+	margin-bottom: 5px;
+}
+#loginpanel .botton_border{
+	font-size: 12px;
+	padding: 3px 15px;
+	margin-top: 5px;
+	border: none;
+	color: #fff;
+}
+.login_form ul{
+	margin: 0;
+}
+.login_form ul li{
+	list-style:none;
+	border: none; 
+	padding-right:0px; 
+	margin-bottom: 3px;
+}
+.login_form ul li a:hover{
+	text-decoration: underline;
+}
+#loginpanel {
+	background-color: #45413e;
+	z-index: 9; 
+	display:none; 
+	width: 200px; 
+	padding: 15px 10px 10px 10px; 
+	position: absolute;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	margin-top: 5px;
+	right: 0;
+	z-index: 9999;
+}
+.bar-login #triangle_down,
+.bar-login #triangle_up{
+	font-size: 10px;
+} 

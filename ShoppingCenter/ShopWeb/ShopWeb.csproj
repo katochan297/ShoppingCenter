@@ -1,0 +1,533 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CB0706CD-98C0-4440-855E-AF2F9CE5E7DB}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ShopWeb</RootNamespace>
+    <AssemblyName>ShopWeb</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.1.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.1.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.1.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.1.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.1.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.1.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Presentation\Content\css\animations\animate.css" />
+    <Content Include="Areas\Presentation\Content\css\assets\arrowleft.png" />
+    <Content Include="Areas\Presentation\Content\css\assets\arrowright.png" />
+    <Content Include="Areas\Presentation\Content\css\assets\arrow_large_left.png" />
+    <Content Include="Areas\Presentation\Content\css\assets\arrow_large_right.png" />
+    <Content Include="Areas\Presentation\Content\css\assets\arrow_left.png" />
+    <Content Include="Areas\Presentation\Content\css\assets\arrow_left2.png" />
+    <Content Include="Areas\Presentation\Content\css\assets\arrow_right.png" />
+    <Content Include="Areas\Presentation\Content\css\assets\arrow_right2.png" />
+    <Content Include="Areas\Presentation\Content\css\assets\black50.png" />
+    <Content Include="Areas\Presentation\Content\css\assets\boxed_bgtile.png" />
+    <Content Include="Areas\Presentation\Content\css\assets\bullet.png" />
+    <Content Include="Areas\Presentation\Content\css\assets\bullets.png" />
+    <Content Include="Areas\Presentation\Content\css\assets\bullets2.png" />
+    <Content Include="Areas\Presentation\Content\css\assets\bullet_boxed.png" />
+    <Content Include="Areas\Presentation\Content\css\assets\coloredbg.png" />
+    <Content Include="Areas\Presentation\Content\css\assets\grain.png" />
+    <Content Include="Areas\Presentation\Content\css\assets\gridtile.png" />
+    <Content Include="Areas\Presentation\Content\css\assets\gridtile1.png" />
+    <Content Include="Areas\Presentation\Content\css\assets\gridtile_3x3.png" />
+    <Content Include="Areas\Presentation\Content\css\assets\gridtile_3x3_white.png" />
+    <Content Include="Areas\Presentation\Content\css\assets\gridtile_white.png" />
+    <Content Include="Areas\Presentation\Content\css\assets\large_left.png" />
+    <Content Include="Areas\Presentation\Content\css\assets\large_right.png" />
+    <Content Include="Areas\Presentation\Content\css\assets\loader.gif" />
+    <Content Include="Areas\Presentation\Content\css\assets\loader2.gif" />
+    <Content Include="Areas\Presentation\Content\css\assets\navigdots.png" />
+    <Content Include="Areas\Presentation\Content\css\assets\navigdots_bgtile.png" />
+    <Content Include="Areas\Presentation\Content\css\assets\shadow1.png" />
+    <Content Include="Areas\Presentation\Content\css\assets\shadow2.png" />
+    <Content Include="Areas\Presentation\Content\css\assets\shadow3.png" />
+    <Content Include="Areas\Presentation\Content\css\assets\small_left.png" />
+    <Content Include="Areas\Presentation\Content\css\assets\small_left_boxed.png" />
+    <Content Include="Areas\Presentation\Content\css\assets\small_right.png" />
+    <Content Include="Areas\Presentation\Content\css\assets\small_right_boxed.png" />
+    <Content Include="Areas\Presentation\Content\css\assets\timer.png" />
+    <Content Include="Areas\Presentation\Content\css\assets\timerdot.png" />
+    <Content Include="Areas\Presentation\Content\css\assets\transparent.jpg" />
+    <Content Include="Areas\Presentation\Content\css\assets\white50.png" />
+    <Content Include="Areas\Presentation\Content\css\bootstrap\bootstrap-theme.css" />
+    <Content Include="Areas\Presentation\Content\css\bootstrap\bootstrap-theme.min.css" />
+    <Content Include="Areas\Presentation\Content\css\bootstrap\bootstrap.css" />
+    <Content Include="Areas\Presentation\Content\css\bootstrap\bootstrap.min.css" />
+    <Content Include="Areas\Presentation\Content\css\carousel\carousel.css" />
+    <Content Include="Areas\Presentation\Content\css\carousel\owl.theme.css" />
+    <Content Include="Areas\Presentation\Content\css\flickr\flickr.css" />
+    <Content Include="Areas\Presentation\Content\css\fonts\fontawesome-webfont.svg" />
+    <Content Include="Areas\Presentation\Content\css\fonts\index.php" />
+    <Content Include="Areas\Presentation\Content\css\fonts\revicons\index.php" />
+    <Content Include="Areas\Presentation\Content\css\fonts\revicons\revicons.svg" />
+    <Content Include="Areas\Presentation\Content\css\font\revicons.svg" />
+    <Content Include="Areas\Presentation\Content\css\icons\font-awesome.css" />
+    <Content Include="Areas\Presentation\Content\css\ie.css" />
+    <Content Include="Areas\Presentation\Content\css\login\login.css" />
+    <Content Include="Areas\Presentation\Content\css\menu\style.css" />
+    <Content Include="Areas\Presentation\Content\css\responsive-theme.css" />
+    <Content Include="Areas\Presentation\Content\css\skins\blue\blue.css" />
+    <Content Include="Areas\Presentation\Content\css\skins\cocoa\cocoa.css" />
+    <Content Include="Areas\Presentation\Content\css\skins\green\green.css" />
+    <Content Include="Areas\Presentation\Content\css\skins\orange\orange.css" />
+    <Content Include="Areas\Presentation\Content\css\skins\purple\purple.css" />
+    <Content Include="Areas\Presentation\Content\css\skins\red\red.css" />
+    <Content Include="Areas\Presentation\Content\css\skins\theme-options.css" />
+    <Content Include="Areas\Presentation\Content\css\skins\yellow\yellow.css" />
+    <Content Include="Areas\Presentation\Content\css\slide-revolution\extralayers.css" />
+    <Content Include="Areas\Presentation\Content\css\slide-revolution\layers.css" />
+    <Content Include="Areas\Presentation\Content\css\slide-revolution\navigation.css" />
+    <Content Include="Areas\Presentation\Content\css\slide-revolution\settings.css" />
+    <Content Include="Areas\Presentation\Content\css\style.css" />
+    <Content Include="Areas\Presentation\Content\css\tabs\style.css" />
+    <Content Include="Areas\Presentation\Content\css\transitions.css" />
+    <Content Include="Areas\Presentation\Content\css\twitter\style.css" />
+    <Content Include="Areas\Presentation\Content\img\about\image-left-about.jpg" />
+    <Content Include="Areas\Presentation\Content\img\about\image-right-about.jpg" />
+    <Content Include="Areas\Presentation\Content\img\banners\banner-01.jpg" />
+    <Content Include="Areas\Presentation\Content\img\banners\banner-02.jpg" />
+    <Content Include="Areas\Presentation\Content\img\banners\banner-03.jpg" />
+    <Content Include="Areas\Presentation\Content\img\banners\banner-04.jpg" />
+    <Content Include="Areas\Presentation\Content\img\banners\banner-05.jpg" />
+    <Content Include="Areas\Presentation\Content\img\banners\banner-06.jpg" />
+    <Content Include="Areas\Presentation\Content\img\banners\banner-07.jpg" />
+    <Content Include="Areas\Presentation\Content\img\banners\banner-about.jpg" />
+    <Content Include="Areas\Presentation\Content\img\banners\banner-shop-01.jpg" />
+    <Content Include="Areas\Presentation\Content\img\banners\banner-shop.jpg" />
+    <Content Include="Areas\Presentation\Content\img\bg-theme\1.png" />
+    <Content Include="Areas\Presentation\Content\img\bg-theme\10.png" />
+    <Content Include="Areas\Presentation\Content\img\bg-theme\11.png" />
+    <Content Include="Areas\Presentation\Content\img\bg-theme\12.png" />
+    <Content Include="Areas\Presentation\Content\img\bg-theme\13.png" />
+    <Content Include="Areas\Presentation\Content\img\bg-theme\14.png" />
+    <Content Include="Areas\Presentation\Content\img\bg-theme\15.png" />
+    <Content Include="Areas\Presentation\Content\img\bg-theme\16.png" />
+    <Content Include="Areas\Presentation\Content\img\bg-theme\17.png" />
+    <Content Include="Areas\Presentation\Content\img\bg-theme\18.png" />
+    <Content Include="Areas\Presentation\Content\img\bg-theme\19.png" />
+    <Content Include="Areas\Presentation\Content\img\bg-theme\2.png" />
+    <Content Include="Areas\Presentation\Content\img\bg-theme\20.png" />
+    <Content Include="Areas\Presentation\Content\img\bg-theme\21.png" />
+    <Content Include="Areas\Presentation\Content\img\bg-theme\22.png" />
+    <Content Include="Areas\Presentation\Content\img\bg-theme\23.png" />
+    <Content Include="Areas\Presentation\Content\img\bg-theme\24.png" />
+    <Content Include="Areas\Presentation\Content\img\bg-theme\25.png" />
+    <Content Include="Areas\Presentation\Content\img\bg-theme\26.png" />
+    <Content Include="Areas\Presentation\Content\img\bg-theme\3.png" />
+    <Content Include="Areas\Presentation\Content\img\bg-theme\4.png" />
+    <Content Include="Areas\Presentation\Content\img\bg-theme\5.png" />
+    <Content Include="Areas\Presentation\Content\img\bg-theme\6.png" />
+    <Content Include="Areas\Presentation\Content\img\bg-theme\7.png" />
+    <Content Include="Areas\Presentation\Content\img\bg-theme\8.png" />
+    <Content Include="Areas\Presentation\Content\img\bg-theme\9.png" />
+    <Content Include="Areas\Presentation\Content\img\bg-theme\none.jpg" />
+    <Content Include="Areas\Presentation\Content\img\blog\blog-01.jpg" />
+    <Content Include="Areas\Presentation\Content\img\blog\blog-02.jpg" />
+    <Content Include="Areas\Presentation\Content\img\blog\blog-03.jpg" />
+    <Content Include="Areas\Presentation\Content\img\blog\blog-04.jpg" />
+    <Content Include="Areas\Presentation\Content\img\blog\blog-mini-02.jpg" />
+    <Content Include="Areas\Presentation\Content\img\blog\blog-mini.jpg" />
+    <Content Include="Areas\Presentation\Content\img\brands\brand-01.png" />
+    <Content Include="Areas\Presentation\Content\img\brands\brand-02.png" />
+    <Content Include="Areas\Presentation\Content\img\brands\brand-03.png" />
+    <Content Include="Areas\Presentation\Content\img\brands\brand-04.png" />
+    <Content Include="Areas\Presentation\Content\img\brands\brand-05.png" />
+    <Content Include="Areas\Presentation\Content\img\content-general\accordion-ico.png" />
+    <Content Include="Areas\Presentation\Content\img\content-general\avatar-comments.png" />
+    <Content Include="Areas\Presentation\Content\img\content-general\cart-white.png" />
+    <Content Include="Areas\Presentation\Content\img\content-general\cart.png" />
+    <Content Include="Areas\Presentation\Content\img\content-general\color-dark.png" />
+    <Content Include="Areas\Presentation\Content\img\content-general\color-gray.png" />
+    <Content Include="Areas\Presentation\Content\img\content-general\icon-instagram.png" />
+    <Content Include="Areas\Presentation\Content\img\content-general\image-errorpage.png" />
+    <Content Include="Areas\Presentation\Content\img\content-general\img-01.jpg" />
+    <Content Include="Areas\Presentation\Content\img\content-general\img-02.jpg" />
+    <Content Include="Areas\Presentation\Content\img\content-general\img-03.jpg" />
+    <Content Include="Areas\Presentation\Content\img\content-general\img-aside.jpg" />
+    <Content Include="Areas\Presentation\Content\img\content-general\logo-white.png" />
+    <Content Include="Areas\Presentation\Content\img\content-general\logo.png" />
+    <Content Include="Areas\Presentation\Content\img\content-general\overlay-portfolio.png" />
+    <Content Include="Areas\Presentation\Content\img\content-general\pin.png" />
+    <Content Include="Areas\Presentation\Content\img\content-general\preloader.gif" />
+    <Content Include="Areas\Presentation\Content\img\content-general\totop.png" />
+    <Content Include="Areas\Presentation\Content\img\gallery\gallery-01.jpg" />
+    <Content Include="Areas\Presentation\Content\img\gallery\gallery-02.jpg" />
+    <Content Include="Areas\Presentation\Content\img\gallery\gallery-03.jpg" />
+    <Content Include="Areas\Presentation\Content\img\gallery\gallery-04.jpg" />
+    <Content Include="Areas\Presentation\Content\img\gallery\gallery-05.jpg" />
+    <Content Include="Areas\Presentation\Content\img\gallery\gallery-06.jpg" />
+    <Content Include="Areas\Presentation\Content\img\gallery\gallery-07.jpg" />
+    <Content Include="Areas\Presentation\Content\img\gallery\gallery-08.jpg" />
+    <Content Include="Areas\Presentation\Content\img\gallery\gallery-09.jpg" />
+    <Content Include="Areas\Presentation\Content\img\gallery\gallery-10.jpg" />
+    <Content Include="Areas\Presentation\Content\img\gallery\gallery-11.jpg" />
+    <Content Include="Areas\Presentation\Content\img\gallery\gallery-12.jpg" />
+    <Content Include="Areas\Presentation\Content\img\gallery\gallery-13.jpg" />
+    <Content Include="Areas\Presentation\Content\img\gallery\gallery-14.jpg" />
+    <Content Include="Areas\Presentation\Content\img\gallery\gallery-15.jpg" />
+    <Content Include="Areas\Presentation\Content\img\gallery\gallery-16.jpg" />
+    <Content Include="Areas\Presentation\Content\img\icons\apple-touch-icon-114x114.png" />
+    <Content Include="Areas\Presentation\Content\img\icons\apple-touch-icon-72x72.png" />
+    <Content Include="Areas\Presentation\Content\img\icons\apple-touch-icon.png" />
+    <Content Include="Areas\Presentation\Content\img\icons\favicon.ico" />
+    <Content Include="Areas\Presentation\Content\img\lookbook\lookbook-01.jpg" />
+    <Content Include="Areas\Presentation\Content\img\lookbook\lookbook-02.jpg" />
+    <Content Include="Areas\Presentation\Content\img\lookbook\lookbook-03.jpg" />
+    <Content Include="Areas\Presentation\Content\img\lookbook\lookbook-04.jpg" />
+    <Content Include="Areas\Presentation\Content\img\lookbook\lookbook-05.jpg" />
+    <Content Include="Areas\Presentation\Content\img\lookbook\lookbook-06.jpg" />
+    <Content Include="Areas\Presentation\Content\img\lookbook\lookbook-07.jpg" />
+    <Content Include="Areas\Presentation\Content\img\portfolio\portfolio-01.jpg" />
+    <Content Include="Areas\Presentation\Content\img\portfolio\portfolio-02.jpg" />
+    <Content Include="Areas\Presentation\Content\img\portfolio\portfolio-03.jpg" />
+    <Content Include="Areas\Presentation\Content\img\products\product-01-mini.png" />
+    <Content Include="Areas\Presentation\Content\img\products\product-01.png" />
+    <Content Include="Areas\Presentation\Content\img\products\product-02-mini.png" />
+    <Content Include="Areas\Presentation\Content\img\products\product-02.png" />
+    <Content Include="Areas\Presentation\Content\img\products\product-03.png" />
+    <Content Include="Areas\Presentation\Content\img\products\product-04.png" />
+    <Content Include="Areas\Presentation\Content\img\products\product-05.png" />
+    <Content Include="Areas\Presentation\Content\img\products\product-06.png" />
+    <Content Include="Areas\Presentation\Content\img\products\product-07.png" />
+    <Content Include="Areas\Presentation\Content\img\products\product-08.png" />
+    <Content Include="Areas\Presentation\Content\img\products\product-09.png" />
+    <Content Include="Areas\Presentation\Content\img\products\product-10.png" />
+    <Content Include="Areas\Presentation\Content\img\products\product-11.png" />
+    <Content Include="Areas\Presentation\Content\img\products\product-12.png" />
+    <Content Include="Areas\Presentation\Content\img\slider\slider-01.png" />
+    <Content Include="Areas\Presentation\Content\img\slider\slider-02.jpg" />
+    <Content Include="Areas\Presentation\Content\img\slider\slider-03.jpg" />
+    <Content Include="Areas\Presentation\Content\img\slider\slider-04.jpg" />
+    <Content Include="Areas\Presentation\Content\img\slider\slider-05.jpg" />
+    <Content Include="Areas\Presentation\Content\img\slider\slider-06.jpg" />
+    <Content Include="Areas\Presentation\Content\img\stay-connect\stay-connect-01.jpg" />
+    <Content Include="Areas\Presentation\Content\img\stay-connect\stay-connect-02.png" />
+    <Content Include="Areas\Presentation\Content\img\theme-options.png" />
+    <Content Include="Areas\Presentation\Content\js\accordion\accordion.js" />
+    <Content Include="Areas\Presentation\Content\js\animations\wow.js" />
+    <Content Include="Areas\Presentation\Content\js\bootstrap\bootstrap.js" />
+    <Content Include="Areas\Presentation\Content\js\carousel\carousel.js" />
+    <Content Include="Areas\Presentation\Content\js\css3selectors\selectivizr.js" />
+    <Content Include="Areas\Presentation\Content\js\fancybox\blank.gif" />
+    <Content Include="Areas\Presentation\Content\js\fancybox\fancybox-x.png" />
+    <Content Include="Areas\Presentation\Content\js\fancybox\fancybox-y.png" />
+    <Content Include="Areas\Presentation\Content\js\fancybox\fancybox.png" />
+    <Content Include="Areas\Presentation\Content\js\fancybox\fancybox_loading%402x.gif" />
+    <Content Include="Areas\Presentation\Content\js\fancybox\fancybox_loading.gif" />
+    <Content Include="Areas\Presentation\Content\js\fancybox\fancybox_overlay.png" />
+    <Content Include="Areas\Presentation\Content\js\fancybox\fancybox_sprite%402x.png" />
+    <Content Include="Areas\Presentation\Content\js\fancybox\fancybox_sprite.png" />
+    <Content Include="Areas\Presentation\Content\js\fancybox\fancy_close.png" />
+    <Content Include="Areas\Presentation\Content\js\fancybox\fancy_loading.png" />
+    <Content Include="Areas\Presentation\Content\js\fancybox\fancy_nav_left.png" />
+    <Content Include="Areas\Presentation\Content\js\fancybox\fancy_nav_right.png" />
+    <Content Include="Areas\Presentation\Content\js\fancybox\fancy_shadow_e.png" />
+    <Content Include="Areas\Presentation\Content\js\fancybox\fancy_shadow_n.png" />
+    <Content Include="Areas\Presentation\Content\js\fancybox\fancy_shadow_ne.png" />
+    <Content Include="Areas\Presentation\Content\js\fancybox\fancy_shadow_nw.png" />
+    <Content Include="Areas\Presentation\Content\js\fancybox\fancy_shadow_s.png" />
+    <Content Include="Areas\Presentation\Content\js\fancybox\fancy_shadow_se.png" />
+    <Content Include="Areas\Presentation\Content\js\fancybox\fancy_shadow_sw.png" />
+    <Content Include="Areas\Presentation\Content\js\fancybox\fancy_shadow_w.png" />
+    <Content Include="Areas\Presentation\Content\js\fancybox\fancy_title_left.png" />
+    <Content Include="Areas\Presentation\Content\js\fancybox\fancy_title_main.png" />
+    <Content Include="Areas\Presentation\Content\js\fancybox\fancy_title_over.png" />
+    <Content Include="Areas\Presentation\Content\js\fancybox\fancy_title_right.png" />
+    <Content Include="Areas\Presentation\Content\js\fancybox\helpers\fancybox_buttons.png" />
+    <Content Include="Areas\Presentation\Content\js\fancybox\helpers\jquery.fancybox-buttons.css" />
+    <Content Include="Areas\Presentation\Content\js\fancybox\helpers\jquery.fancybox-buttons.js" />
+    <Content Include="Areas\Presentation\Content\js\fancybox\helpers\jquery.fancybox-media.js" />
+    <Content Include="Areas\Presentation\Content\js\fancybox\helpers\jquery.fancybox-thumbs.css" />
+    <Content Include="Areas\Presentation\Content\js\fancybox\helpers\jquery.fancybox-thumbs.js" />
+    <Content Include="Areas\Presentation\Content\js\fancybox\jquery.easing-1.3.pack.js" />
+    <Content Include="Areas\Presentation\Content\js\fancybox\jquery.fancybox-1.3.1.css" />
+    <Content Include="Areas\Presentation\Content\js\fancybox\jquery.fancybox-1.3.1.js" />
+    <Content Include="Areas\Presentation\Content\js\fancybox\jquery.fancybox-1.3.1.pack.js" />
+    <Content Include="Areas\Presentation\Content\js\fancybox\jquery.fancybox.css" />
+    <Content Include="Areas\Presentation\Content\js\fancybox\jquery.fancybox.js" />
+    <Content Include="Areas\Presentation\Content\js\fancybox\jquery.fancybox.pack.js" />
+    <Content Include="Areas\Presentation\Content\js\fancybox\jquery.mousewheel-3.0.2.pack.js" />
+    <Content Include="Areas\Presentation\Content\js\filters\jquery.isotope.js" />
+    <Content Include="Areas\Presentation\Content\js\jquery-ui.1.11.3.min.js" />
+    <Content Include="Areas\Presentation\Content\js\jquery.js" />
+    <Content Include="Areas\Presentation\Content\js\main.js" />
+    <Content Include="Areas\Presentation\Content\js\maps\gmap3.js" />
+    <Content Include="Areas\Presentation\Content\js\modernizr\modernizr.js" />
+    <Content Include="Areas\Presentation\Content\js\slide-revolution\extensions\index.php" />
+    <Content Include="Areas\Presentation\Content\js\slide-revolution\extensions\revolution.extension.actions.min.js" />
+    <Content Include="Areas\Presentation\Content\js\slide-revolution\extensions\revolution.extension.carousel.min.js" />
+    <Content Include="Areas\Presentation\Content\js\slide-revolution\extensions\revolution.extension.kenburn.min.js" />
+    <Content Include="Areas\Presentation\Content\js\slide-revolution\extensions\revolution.extension.layeranimation.min.js" />
+    <Content Include="Areas\Presentation\Content\js\slide-revolution\extensions\revolution.extension.migration.min.js" />
+    <Content Include="Areas\Presentation\Content\js\slide-revolution\extensions\revolution.extension.navigation.min.js" />
+    <Content Include="Areas\Presentation\Content\js\slide-revolution\extensions\revolution.extension.parallax.min.js" />
+    <Content Include="Areas\Presentation\Content\js\slide-revolution\extensions\revolution.extension.slideanims.min.js" />
+    <Content Include="Areas\Presentation\Content\js\slide-revolution\extensions\revolution.extension.video.min.js" />
+    <Content Include="Areas\Presentation\Content\js\slide-revolution\extensions\source\index.php" />
+    <Content Include="Areas\Presentation\Content\js\slide-revolution\extensions\source\revolution.extension.actions.js" />
+    <Content Include="Areas\Presentation\Content\js\slide-revolution\extensions\source\revolution.extension.carousel.js" />
+    <Content Include="Areas\Presentation\Content\js\slide-revolution\extensions\source\revolution.extension.kenburn.js" />
+    <Content Include="Areas\Presentation\Content\js\slide-revolution\extensions\source\revolution.extension.layeranimation.js" />
+    <Content Include="Areas\Presentation\Content\js\slide-revolution\extensions\source\revolution.extension.migration.js" />
+    <Content Include="Areas\Presentation\Content\js\slide-revolution\extensions\source\revolution.extension.navigation.js" />
+    <Content Include="Areas\Presentation\Content\js\slide-revolution\extensions\source\revolution.extension.parallax.js" />
+    <Content Include="Areas\Presentation\Content\js\slide-revolution\extensions\source\revolution.extension.slideanims.js" />
+    <Content Include="Areas\Presentation\Content\js\slide-revolution\extensions\source\revolution.extension.video.js" />
+    <Content Include="Areas\Presentation\Content\js\slide-revolution\jquery.themepunch.revolution.min.js" />
+    <Content Include="Areas\Presentation\Content\js\slide-revolution\jquery.themepunch.tools.min.js" />
+    <Content Include="Areas\Presentation\Content\js\theme-options\jquery.cookies.js" />
+    <Content Include="Areas\Presentation\Content\js\theme-options\jquery.easing.1.3.min.js" />
+    <Content Include="Areas\Presentation\Content\js\theme-options\theme-options.js" />
+    <Content Include="Areas\Presentation\Content\js\totop\jquery.ui.totop.js" />
+    <Content Include="Areas\Presentation\Content\js\twitter\index.php" />
+    <Content Include="Areas\Presentation\Content\js\twitter\jquery.tweet.js" />
+    <Content Include="Areas\Presentation\Content\js\twitter\jquery.tweet.min.js" />
+    <Content Include="Areas\Presentation\Content\js\twitter\lib\tmhOAuth.php" />
+    <Content Include="Areas\Presentation\Content\js\twitter\lib\tmhUtilities.php" />
+    <Content Include="Areas\Presentation\Content\php\mailchip\inc\config.inc.php" />
+    <Content Include="Areas\Presentation\Content\php\mailchip\inc\MCAPI.class.php" />
+    <Content Include="Areas\Presentation\Content\php\mailchip\newsletter-subscribe.php" />
+    <Content Include="Areas\Presentation\Content\php\send-mail-contact.php" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="scripts\ai.0.22.19-build00125.js" />
+    <Content Include="scripts\ai.0.22.19-build00125.min.js" />
+    <Content Include="scripts\bootstrap.js" />
+    <Content Include="scripts\bootstrap.min.js" />
+    <Content Include="Areas\Presentation\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Presentation\Views\Shared\_HeaderPartial.cshtml" />
+    <Content Include="Areas\Presentation\Views\Shared\_FooterPartial.cshtml" />
+    <None Include="scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="scripts\jquery-1.10.2.js" />
+    <Content Include="scripts\jquery-1.10.2.min.js" />
+    <Content Include="scripts\modernizr-2.6.2.js" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Presentation\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Presentation\Controllers\MenuController.cs" />
+    <Compile Include="Areas\Presentation\Models\MenuModel.cs" />
+    <Compile Include="Areas\Presentation\PresentationAreaRegistration.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <Content Include="packages.config" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Presentation\Views\web.config" />
+    <Content Include="Areas\Presentation\Content\css\assets\arrows.psd" />
+    <Content Include="Areas\Presentation\Content\css\assets\bullets.psd" />
+    <Content Include="Areas\Presentation\Content\css\assets\small_arrows.psd" />
+    <Content Include="Areas\Presentation\Content\css\bootstrap\bootstrap-theme.css.map" />
+    <Content Include="Areas\Presentation\Content\css\bootstrap\bootstrap.css.map" />
+    <Content Include="Areas\Presentation\Content\css\fonts\fontawesome-webfont.eot" />
+    <Content Include="Areas\Presentation\Content\css\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Areas\Presentation\Content\css\fonts\fontawesome-webfont.woff" />
+    <Content Include="Areas\Presentation\Content\css\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Areas\Presentation\Content\css\fonts\FontAwesome.otf" />
+    <Content Include="Areas\Presentation\Content\css\fonts\revicons\revicons.eot" />
+    <Content Include="Areas\Presentation\Content\css\fonts\revicons\revicons.ttf" />
+    <Content Include="Areas\Presentation\Content\css\fonts\revicons\revicons.woff" />
+    <Content Include="Areas\Presentation\Content\css\font\revicons.eot" />
+    <Content Include="Areas\Presentation\Content\css\font\revicons.ttf" />
+    <Content Include="Areas\Presentation\Content\css\font\revicons.woff" />
+    <Content Include="Areas\Presentation\Content\js\fancybox\desktop.ini" />
+    <Content Include="Areas\Presentation\Content\js\totop\desktop.ini" />
+    <Content Include="Areas\Presentation\Content\js\twitter\a11d142aaaf9d0c16985f126bba70ed4.json" />
+    <Content Include="Areas\Presentation\Content\js\twitter\bdc6cd87fd8fac34113d41c913e1f568.json" />
+    <Content Include="Areas\Presentation\Content\js\twitter\f2ded65502bbf97144489dda8335c92e.json" />
+    <Content Include="Areas\Presentation\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Presentation\Views\Shared\_Layout.cshtml" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="scripts\jquery-1.10.2.min.map" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
+    <Folder Include="Views\Home\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ShopCore\ShopCore.csproj">
+      <Project>{dfdec88a-c383-4a5a-96ec-b4f775dbfb91}</Project>
+      <Name>ShopCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ShopData\ShopData.csproj">
+      <Project>{50B79F3A-E271-4E06-AB8B-4C1B954E2A82}</Project>
+      <Name>ShopData</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>20984</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:20984/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
