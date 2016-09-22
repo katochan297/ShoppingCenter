@@ -14,6 +14,7 @@ namespace ShopWeb.Areas.Presentation.Models
         public List<MenuCatalog> ListCatalog { get; set; }
         public MenuActivated Activated { get; set; }
     }
+    
 
     public class MenuCatalog
     {

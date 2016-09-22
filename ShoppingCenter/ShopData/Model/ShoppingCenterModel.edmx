@@ -24,6 +24,17 @@
           <Property Name="PictureUrl" Type="varchar" MaxLength="100" />
           <Property Name="Status" Type="smallint" Nullable="false" />
         </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="MenuID" />
+          </Key>
+          <Property Name="MenuID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Path" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Icon" Type="nvarchar" MaxLength="50" />
+          <Property Name="ParentID" Type="int" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="ProductID" />
@@ -87,6 +98,7 @@
         <EntityContainer Name="ShoppingCenterModelStoreContainer">
           <EntitySet Name="Banner" EntityType="Self.Banner" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductImage" EntityType="Self.ProductImage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subcategory" EntityType="Self.Subcategory" Schema="dbo" store:Type="Tables" />
@@ -155,6 +167,7 @@
             <End Role="Category" EntitySet="Categories" />
             <End Role="Subcategory" EntitySet="Subcategories" />
           </AssociationSet>
+          <EntitySet Name="Menus" EntityType="ShoppingCenterModel.Menu" />
         </EntityContainer>
         <EntityType Name="ProductImage">
           <Key>
@@ -201,6 +214,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="MenuID" />
+          </Key>
+          <Property Name="MenuID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Path" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Icon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ParentID" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -264,6 +288,18 @@
                 <ScalarProperty Name="SubcategoryName" ColumnName="SubcategoryName" />
                 <ScalarProperty Name="ParentID" ColumnName="ParentID" />
                 <ScalarProperty Name="SubcategoryID" ColumnName="SubcategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menus">
+            <EntityTypeMapping TypeName="ShoppingCenterModel.Menu">
+              <MappingFragment StoreEntitySet="Menu">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="MenuID" ColumnName="MenuID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

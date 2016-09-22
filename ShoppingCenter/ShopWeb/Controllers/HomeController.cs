@@ -11,7 +11,6 @@ namespace ShopWeb.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            return null;
             return RedirectToAction("Index", "Home", new { Area = "Presentation" });
         }
     }

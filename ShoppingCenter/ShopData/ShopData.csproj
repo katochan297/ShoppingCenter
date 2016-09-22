@@ -60,6 +60,9 @@
     <Compile Include="Model\Category.cs">
       <DependentUpon>ShoppingCenterModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Menu.cs">
+      <DependentUpon>ShoppingCenterModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Product.cs">
       <DependentUpon>ShoppingCenterModel.tt</DependentUpon>
     </Compile>

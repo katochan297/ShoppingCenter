@@ -16,6 +16,14 @@ namespace ShopWeb.Areas.Presentation.Controllers
         [ChildActionOnly]
         public async Task<PartialViewResult> GetMenu()
         {
+
+            return PartialView("_HeaderPartial");
+        }
+
+
+        [ChildActionOnly]
+        public async Task<PartialViewResult> GetMenu2()
+        {
             List<MenuModel> lst = new List<MenuModel>
             {
                 new MenuModel {Title = "Home", Path = Url.Action("Index","Home"), Activated = MenuActivated.Home},

@@ -61,5 +61,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Menus">
+      <EntityTypeMapping TypeName="ShoppingCenterModel.Menu">
+        <MappingFragment StoreEntitySet="Menu">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+          <ScalarProperty Name="Icon" ColumnName="Icon" />
+          <ScalarProperty Name="Path" ColumnName="Path" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="MenuID" ColumnName="MenuID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

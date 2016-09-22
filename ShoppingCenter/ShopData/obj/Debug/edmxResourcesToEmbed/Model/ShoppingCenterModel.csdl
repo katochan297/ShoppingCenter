@@ -52,6 +52,7 @@
       <End Role="Category" EntitySet="Categories" />
       <End Role="Subcategory" EntitySet="Subcategories" />
     </AssociationSet>
+    <EntitySet Name="Menus" EntityType="ShoppingCenterModel.Menu" />
   </EntityContainer>
   <EntityType Name="ProductImage">
     <Key>
@@ -98,4 +99,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="Menu">
+    <Key>
+      <PropertyRef Name="MenuID" />
+    </Key>
+    <Property Name="MenuID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Path" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Icon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ParentID" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+  </EntityType>
 </Schema>

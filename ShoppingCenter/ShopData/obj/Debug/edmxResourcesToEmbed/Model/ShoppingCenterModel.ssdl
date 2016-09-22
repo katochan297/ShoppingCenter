@@ -19,6 +19,17 @@
     <Property Name="PictureUrl" Type="varchar" MaxLength="100" />
     <Property Name="Status" Type="smallint" Nullable="false" />
   </EntityType>
+  <EntityType Name="Menu">
+    <Key>
+      <PropertyRef Name="MenuID" />
+    </Key>
+    <Property Name="MenuID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Path" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Icon" Type="nvarchar" MaxLength="50" />
+    <Property Name="ParentID" Type="int" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="Product">
     <Key>
       <PropertyRef Name="ProductID" />
@@ -82,6 +93,7 @@
   <EntityContainer Name="ShoppingCenterModelStoreContainer">
     <EntitySet Name="Banner" EntityType="Self.Banner" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProductImage" EntityType="Self.ProductImage" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Subcategory" EntityType="Self.Subcategory" Schema="dbo" store:Type="Tables" />
