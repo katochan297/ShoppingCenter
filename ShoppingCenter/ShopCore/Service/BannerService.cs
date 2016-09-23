@@ -12,9 +12,9 @@ namespace ShopCore.Service
             return await ContextInstance.Banners.ToListAsync();
         }
 
-        public async Task<Banner> GetDetailBanner(int id)
+        public async Task<Banner> FindBanner(int id)
         {
-            Banner banner = await ContextInstance.Banners.FindAsync(id);
+            var banner = await ContextInstance.Banners.FindAsync(id);
             return banner;
         }
         
@@ -32,7 +32,7 @@ namespace ShopCore.Service
 
         public async Task<int> DeleteBanner(int id)
         {
-            Banner banner = await ContextInstance.Banners.FindAsync(id);
+            var banner = await ContextInstance.Banners.FindAsync(id);
             ContextInstance.Banners.Remove(banner);
             return await ContextInstance.SaveChangesAsync();
         }

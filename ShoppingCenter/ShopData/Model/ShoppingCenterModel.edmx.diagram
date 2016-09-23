@@ -13,6 +13,7 @@
         <EntityTypeShape EntityType="ShoppingCenterModel.Subcategory" Width="1.5" PointX="5" PointY="8" />
         <AssociationConnector Association="ShoppingCenterModel.FK_Subcategory_Category" />
         <EntityTypeShape EntityType="ShoppingCenterModel.Menu" Width="1.5" PointX="5.375" PointY="0.75" />
+        <AssociationConnector Association="ShoppingCenterModel.FK_Menu_Menu" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

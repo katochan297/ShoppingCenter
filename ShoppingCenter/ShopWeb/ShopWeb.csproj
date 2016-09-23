@@ -427,7 +427,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Presentation\Controllers\HomeController.cs" />
     <Compile Include="Areas\Presentation\Controllers\MenuController.cs" />
-    <Compile Include="Areas\Presentation\Models\MenuModel.cs" />
     <Compile Include="Areas\Presentation\PresentationAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -478,6 +477,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Presentation\Models\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Home\" />
   </ItemGroup>
@@ -506,7 +506,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>20984</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:1668/</IISUrl>
+          <IISUrl>http://localhost:16668/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

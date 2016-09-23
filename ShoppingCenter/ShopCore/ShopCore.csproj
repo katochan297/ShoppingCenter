@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cache\CacheManagement.cs" />
     <Compile Include="Enum\DataStatus.cs" />
     <Compile Include="Enum\MenuActivated.cs" />
     <Compile Include="Enum\SessionName.cs" />

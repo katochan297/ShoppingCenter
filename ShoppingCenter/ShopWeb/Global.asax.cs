@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using ShopCore.Cache;
+using ShopData.Model;
 
 namespace ShopWeb
 {
@@ -13,6 +15,10 @@ namespace ShopWeb
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+            //Load Cache
+            CacheManagement.Instance.Init();
         }
+
     }
 }

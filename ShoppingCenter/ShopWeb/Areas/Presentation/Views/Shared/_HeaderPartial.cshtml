@@ -1,7 +1,7 @@
 ﻿@using ShopCore.Enum
-@using ShopWeb.Areas.Presentation.Models
+@using ShopData.Model
 @{
-    List<MenuModel> lstMenu = ViewBag.ListMenu;
+    List<Menu> lstMenu = ViewBag.ListMenu;
     var active = (MenuActivated)(Session[SessionName.MenuActivity] != null 
         ? Session[SessionName.MenuActivity] 
         : MenuActivated.None);
@@ -27,22 +27,22 @@
 
                     @foreach (var menu in lstMenu)
                     {
-                        var isActive = menu.Activated == active ? "activated" : "";
+                        var isActive = "activated";
 
                         <li class="@isActive">
                             <a href="@menu.Path">@menu.Title</a>
-                            @if (menu.ListCatalog != null && menu.ListCatalog.Count > 0)
+                            @if (menu.Menu1 != null && menu.Menu1.Count > 0)
                             {
-                                <div class="drop-down one-column hover-fade">
-                                    @foreach (var item in menu.ListCatalog)
+                                <div class="drop-down full-width hover-fade">
+                                    @foreach (var item in menu.Menu1)
                                     {
                                         <ul>
                                             <li>
-                                                <h3>@item.Category.CategoryName</h3>
+                                                <h3>@item.Title</h3>
                                             </li>
-                                            @foreach (var sub in item.ListSubcategory)
+                                            @foreach (var sub in item.Menu1)
                                             {
-                                                <li><a href="#">@sub.SubcategoryName</a></li>
+                                                <li><a href="#">@sub.Title</a></li>
                                             }
                                         </ul>
                                     }

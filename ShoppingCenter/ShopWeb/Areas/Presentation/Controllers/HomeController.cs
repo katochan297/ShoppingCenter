@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using ShopCore.Cache;
 using ShopCore.Enum;
 using ShopCore.Service;
 using ShopData.Model;
@@ -13,22 +14,20 @@ namespace ShopWeb.Areas.Presentation.Controllers
     public class HomeController : Controller
     {
         // GET: Presentation/Home
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            BannerService bannerSvc = new BannerService();
-            List<Banner> lstBanner = await bannerSvc.GetListBanner();
-            
-            ProductService productSvc = new ProductService();
-            List<Product> lstProduct = await productSvc.GetListProductLevel(8);
+            var lstBanner = CacheManagement.Instance.ListBanner;
+
+            var lstProduct = CacheManagement.Instance.ListProduct.OrderByDescending(x => x.OrderLevel).Take(8).ToList();
 
             ViewBag.ListBanner = lstBanner;
             ViewBag.ListProduct = lstProduct;
-            Session[SessionName.MenuActivity] = MenuActivated.Home;
+            Session[SessionName.MenuActivity] = 0;
 
             return View();
         }
 
-        
+
 
     }
 }

@@ -14,11 +14,21 @@ namespace ShopData.Model
     
     public partial class Menu
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Menu()
+        {
+            this.Menu1 = new HashSet<Menu>();
+        }
+    
         public int MenuID { get; set; }
         public string Title { get; set; }
         public string Path { get; set; }
         public string Icon { get; set; }
-        public int ParentID { get; set; }
+        public Nullable<int> ParentID { get; set; }
         public int Status { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Menu> Menu1 { get; set; }
+        public virtual Menu Menu2 { get; set; }
     }
 }

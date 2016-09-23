@@ -27,7 +27,7 @@
     <Property Name="Title" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="Path" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Icon" Type="nvarchar" MaxLength="50" />
-    <Property Name="ParentID" Type="int" Nullable="false" />
+    <Property Name="ParentID" Type="int" />
     <Property Name="Status" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Product">
@@ -66,6 +66,18 @@
     <Property Name="PictureUrl" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="Status" Type="smallint" Nullable="false" />
   </EntityType>
+  <Association Name="FK_Menu_Menu">
+    <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+    <End Role="Menu1" Type="Self.Menu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Menu">
+        <PropertyRef Name="MenuID" />
+      </Principal>
+      <Dependent Role="Menu1">
+        <PropertyRef Name="ParentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ProductImage_Product">
     <End Role="Product" Type="Self.Product" Multiplicity="1" />
     <End Role="ProductImage" Type="Self.ProductImage" Multiplicity="*" />
@@ -97,6 +109,10 @@
     <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProductImage" EntityType="Self.ProductImage" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Subcategory" EntityType="Self.Subcategory" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Menu_Menu" Association="Self.FK_Menu_Menu">
+      <End Role="Menu" EntitySet="Menu" />
+      <End Role="Menu1" EntitySet="Menu" />
+    </AssociationSet>
     <AssociationSet Name="FK_ProductImage_Product" Association="Self.FK_ProductImage_Product">
       <End Role="Product" EntitySet="Product" />
       <End Role="ProductImage" EntitySet="ProductImage" />
