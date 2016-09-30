@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using ShopCore.Repository;
 using ShopCore.Service;
 using ShopData.Model;
 
@@ -22,11 +24,14 @@ namespace ShopCore.Cache
         }
 
 
-        public async void Init()
+        public void Init()
         {
-            ListBanner = await new BannerService().GetListBanner();
-            ListMenu = await new MenuService().GetListMenu();
-            ListProduct = await new ProductService().GetListProduct();
+            using (var uow = new ServiceUoW())
+            {
+                ListMenu = uow.MenuRepository.GetListAvailable().ToList();
+                ListBanner = uow.BannerRepository.GetAll().ToList();
+                ListProduct = uow.ProductRepository.GetAll().ToList();
+            }
         }
 
 

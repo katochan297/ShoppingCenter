@@ -57,12 +57,11 @@
     <Compile Include="Enum\MenuActivated.cs" />
     <Compile Include="Enum\SessionName.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service\BannerService.cs" />
-    <Compile Include="Service\BaseService.cs" />
-    <Compile Include="Service\CategoryService.cs" />
-    <Compile Include="Service\MenuService.cs" />
-    <Compile Include="Service\ProductService.cs" />
-    <Compile Include="Service\SubcategoryService.cs" />
+    <Compile Include="Repository\BannerRepository.cs" />
+    <Compile Include="Repository\GenericRepository.cs" />
+    <Compile Include="Repository\MenuRepository.cs" />
+    <Compile Include="Repository\ProductRepository.cs" />
+    <Compile Include="Service\ServiceUoW.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ShopData\ShopData.csproj">

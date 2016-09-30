@@ -2,9 +2,9 @@
 @using ShopData.Model
 @{
     List<Menu> lstMenu = ViewBag.ListMenu;
-    var active = (MenuActivated)(Session[SessionName.MenuActivity] != null 
+    var active = (int)(Session[SessionName.MenuActivity] != null 
         ? Session[SessionName.MenuActivity] 
-        : MenuActivated.None);
+        : 0);
 }
 
 <header class="menu-standar">
@@ -27,7 +27,7 @@
 
                     @foreach (var menu in lstMenu)
                     {
-                        var isActive = "activated";
+                        var isActive = menu.MenuID == active ? "activated" : "";
 
                         <li class="@isActive">
                             <a href="@menu.Path">@menu.Title</a>
@@ -42,7 +42,7 @@
                                             </li>
                                             @foreach (var sub in item.Menu1)
                                             {
-                                                <li><a href="#">@sub.Title</a></li>
+                                                <li><a href="@sub.Path">@sub.Title</a></li>
                                             }
                                         </ul>
                                     }
