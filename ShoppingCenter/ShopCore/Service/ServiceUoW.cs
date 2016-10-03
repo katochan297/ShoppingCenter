@@ -15,7 +15,7 @@ namespace ShopCore.Service
         public IMenuRepository MenuRepository { get; private set; }
         public IProductRepository ProductRepository { get; private set; }
         public IBannerRepository BannerRepository { get; private set; }
-
+      
 
         public ServiceUoW()
         {

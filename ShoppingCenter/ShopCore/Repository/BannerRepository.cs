@@ -11,7 +11,7 @@ namespace ShopCore.Repository
 {
     public class BannerRepository : GenericRepository<Banner>, IBannerRepository
     {
-        public BannerRepository(DbContext ctx) : base(ctx)
+        internal BannerRepository(DbContext ctx) : base(ctx)
         {
         }
 

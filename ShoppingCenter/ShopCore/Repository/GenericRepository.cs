@@ -14,7 +14,7 @@ namespace ShopCore.Repository
         protected readonly DbContext Context;
         private readonly DbSet<T> _dbSet;
 
-        public GenericRepository(DbContext ctx)
+        internal GenericRepository(DbContext ctx)
         {
             Context = ctx;
             _dbSet = Context.Set<T>();

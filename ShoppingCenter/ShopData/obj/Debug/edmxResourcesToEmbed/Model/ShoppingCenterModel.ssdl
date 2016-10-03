@@ -36,16 +36,16 @@
     </Key>
     <Property Name="ProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ProductSKU" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="ProductName" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Description" Type="ntext" Nullable="false" />
-    <Property Name="SupplierID" Type="int" Nullable="false" />
-    <Property Name="CategoryID" Type="int" Nullable="false" />
+    <Property Name="Description" Type="ntext" />
     <Property Name="Quantity" Type="int" Nullable="false" />
     <Property Name="Price" Type="money" Nullable="false" />
     <Property Name="UnitOnOrder" Type="smallint" Nullable="false" />
     <Property Name="OrderLevel" Type="smallint" Nullable="false" />
-    <Property Name="PictureUrl" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="PictureUrl" Type="varchar" MaxLength="100" />
     <Property Name="Status" Type="smallint" Nullable="false" />
+    <Property Name="MaskContent" Type="nvarchar" MaxLength="50" />
+    <Property Name="MaskSkinType" Type="nvarchar" MaxLength="50" />
+    <Property Name="Discriminator" Type="nvarchar" MaxLength="20" />
   </EntityType>
   <EntityType Name="ProductImage">
     <Key>

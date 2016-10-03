@@ -2,9 +2,9 @@
 @using ShopData.Model
 @{
     List<Menu> lstMenu = ViewBag.ListMenu;
-    var active = (int)(Session[SessionName.MenuActivity] != null 
+    var active = (string)(Session[SessionName.MenuActivity] != null 
         ? Session[SessionName.MenuActivity] 
-        : 0);
+        : "");
 }
 
 <header class="menu-standar">
@@ -27,22 +27,22 @@
 
                     @foreach (var menu in lstMenu)
                     {
-                        var isActive = menu.MenuID == active ? "activated" : "";
+                        var isActive = menu.Path.Contains(active) ? "activated" : "";
 
                         <li class="@isActive">
                             <a href="@menu.Path">@menu.Title</a>
                             @if (menu.Menu1 != null && menu.Menu1.Count > 0)
                             {
                                 <div class="drop-down full-width hover-fade">
-                                    @foreach (var item in menu.Menu1)
+                                    @foreach (var mnLevel2 in menu.Menu1)
                                     {
                                         <ul>
                                             <li>
-                                                <h3>@item.Title</h3>
+                                                <a href="@mnLevel2.Path"><h3>@mnLevel2.Title</h3></a>
                                             </li>
-                                            @foreach (var sub in item.Menu1)
+                                            @foreach (var mnLevel3 in mnLevel2.Menu1)
                                             {
-                                                <li><a href="@sub.Path">@sub.Title</a></li>
+                                                <li><a href="@mnLevel3.Path">@mnLevel3.Title</a></li>
                                             }
                                         </ul>
                                     }

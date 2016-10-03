@@ -20,33 +20,9 @@
     <Property Name="Status" Type="Int16" Nullable="false" />
     <NavigationProperty Name="Subcategories" Relationship="ShoppingCenterModel.FK_Subcategory_Category" FromRole="Category" ToRole="Subcategory" />
   </EntityType>
-  <EntityType Name="Product">
-    <Key>
-      <PropertyRef Name="ProductID" />
-    </Key>
-    <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ProductSKU" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="SupplierID" Type="Int32" Nullable="false" />
-    <Property Name="CategoryID" Type="Int32" Nullable="false" />
-    <Property Name="Quantity" Type="Int32" Nullable="false" />
-    <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-    <Property Name="UnitOnOrder" Type="Int16" Nullable="false" />
-    <Property Name="OrderLevel" Type="Int16" Nullable="false" />
-    <Property Name="Status" Type="Int16" Nullable="false" />
-    <Property Name="PictureUrl" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="ProductImages" Relationship="ShoppingCenterModel.FK_ProductImage_Product" FromRole="Product" ToRole="ProductImage" />
-  </EntityType>
   <EntityContainer Name="ShoppingCenterContext" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Banners" EntityType="Self.Banner" />
     <EntitySet Name="Categories" EntityType="Self.Category" />
-    <EntitySet Name="Products" EntityType="Self.Product" />
-    <EntitySet Name="ProductImages" EntityType="ShoppingCenterModel.ProductImage" />
-    <AssociationSet Name="FK_ProductImage_Product" Association="ShoppingCenterModel.FK_ProductImage_Product">
-      <End Role="Product" EntitySet="Products" />
-      <End Role="ProductImage" EntitySet="ProductImages" />
-    </AssociationSet>
     <EntitySet Name="Subcategories" EntityType="ShoppingCenterModel.Subcategory" />
     <AssociationSet Name="FK_Subcategory_Category" Association="ShoppingCenterModel.FK_Subcategory_Category">
       <End Role="Category" EntitySet="Categories" />
@@ -57,28 +33,13 @@
       <End Role="Menu" EntitySet="Menus" />
       <End Role="Menu1" EntitySet="Menus" />
     </AssociationSet>
+    <EntitySet Name="ProductImages" EntityType="ShoppingCenterModel.ProductImage" />
+    <EntitySet Name="Products" EntityType="ShoppingCenterModel.Product" />
+    <AssociationSet Name="FK_ProductImage_Product" Association="ShoppingCenterModel.FK_ProductImage_Product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="ProductImage" EntitySet="ProductImages" />
+    </AssociationSet>
   </EntityContainer>
-  <EntityType Name="ProductImage">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="ProductID" Type="Int32" Nullable="false" />
-    <Property Name="ImageUrl" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Product" Relationship="ShoppingCenterModel.FK_ProductImage_Product" FromRole="ProductImage" ToRole="Product" />
-  </EntityType>
-  <Association Name="FK_ProductImage_Product">
-    <End Type="ShoppingCenterModel.Product" Role="Product" Multiplicity="1" />
-    <End Type="ShoppingCenterModel.ProductImage" Role="ProductImage" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Product">
-        <PropertyRef Name="ProductID" />
-      </Principal>
-      <Dependent Role="ProductImage">
-        <PropertyRef Name="ProductID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="Subcategory">
     <Key>
       <PropertyRef Name="SubcategoryID" />
@@ -125,6 +86,43 @@
       </Principal>
       <Dependent Role="Menu1">
         <PropertyRef Name="ParentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ProductImage">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductID" Type="Int32" Nullable="false" />
+    <Property Name="ImageUrl" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Product" Relationship="ShoppingCenterModel.FK_ProductImage_Product" FromRole="ProductImage" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductSKU" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="Price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="UnitOnOrder" Type="Int16" Nullable="false" />
+    <Property Name="OrderLevel" Type="Int16" Nullable="false" />
+    <Property Name="PictureUrl" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="Int16" Nullable="false" />
+    <Property Name="Discriminator" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ProductImages" Relationship="ShoppingCenterModel.FK_ProductImage_Product" FromRole="Product" ToRole="ProductImage" />
+  </EntityType>
+  <Association Name="FK_ProductImage_Product">
+    <End Type="ShoppingCenterModel.Product" Role="Product" Multiplicity="1" />
+    <End Type="ShoppingCenterModel.ProductImage" Role="ProductImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="ProductImage">
+        <PropertyRef Name="ProductID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

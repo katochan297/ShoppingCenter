@@ -12,7 +12,7 @@ namespace ShopCore.Repository
 {
     public class ProductRepository : GenericRepository<Product>, IProductRepository
     {
-        public ProductRepository(DbContext ctx) : base(ctx)
+        internal ProductRepository(DbContext ctx) : base(ctx)
         {
         }
         

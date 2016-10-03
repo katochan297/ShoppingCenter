@@ -12,13 +12,13 @@ namespace ShopCore.Repository
 {
     public class MenuRepository : GenericRepository<Menu>, IMenuRepository
     {
-        public MenuRepository(DbContext ctx) : base(ctx)
+        internal MenuRepository(DbContext ctx) : base(ctx)
         {
         }
 
         public IEnumerable<Menu> GetListAvailable()
         {
-            return Context.Set<Menu>().Where(x => x.Status == DataStatus.Available).ToList();
+            return Context.Set<Menu>().Include(x => x.Menu1).Where(x => x.Status == DataStatus.Available).ToList();
         }
 
 

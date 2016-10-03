@@ -22,16 +22,14 @@ namespace ShopData.Model
     
         public int ProductID { get; set; }
         public string ProductSKU { get; set; }
-        public string ProductName { get; set; }
         public string Description { get; set; }
-        public int SupplierID { get; set; }
-        public int CategoryID { get; set; }
         public int Quantity { get; set; }
         public decimal Price { get; set; }
         public short UnitOnOrder { get; set; }
         public short OrderLevel { get; set; }
-        public short Status { get; set; }
         public string PictureUrl { get; set; }
+        public short Status { get; set; }
+        public string Discriminator { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductImage> ProductImages { get; set; }

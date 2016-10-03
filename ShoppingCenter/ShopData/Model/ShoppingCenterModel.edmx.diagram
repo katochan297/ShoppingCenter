@@ -7,13 +7,13 @@
       <Diagram DiagramId="284f631582f444a0853fde43b50e1dd7" Name="Diagram1">
         <EntityTypeShape EntityType="ShoppingCenterModel.Banner" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ShoppingCenterModel.Category" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShoppingCenterModel.Product" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShoppingCenterModel.ProductImage" Width="1.5" PointX="3" PointY="4.625" />
-        <AssociationConnector Association="ShoppingCenterModel.FK_ProductImage_Product" />
         <EntityTypeShape EntityType="ShoppingCenterModel.Subcategory" Width="1.5" PointX="5" PointY="8" />
         <AssociationConnector Association="ShoppingCenterModel.FK_Subcategory_Category" />
         <EntityTypeShape EntityType="ShoppingCenterModel.Menu" Width="1.5" PointX="5.375" PointY="0.75" />
         <AssociationConnector Association="ShoppingCenterModel.FK_Menu_Menu" />
+        <EntityTypeShape EntityType="ShoppingCenterModel.ProductImage" Width="1.5" PointX="3" PointY="4.625" />
+        <EntityTypeShape EntityType="ShoppingCenterModel.Product" Width="1.5" PointX="0.75" PointY="3.75" />
+        <AssociationConnector Association="ShoppingCenterModel.FK_ProductImage_Product" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
