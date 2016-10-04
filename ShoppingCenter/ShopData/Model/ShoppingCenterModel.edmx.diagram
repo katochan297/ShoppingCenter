@@ -6,15 +6,18 @@
     <edmx:Diagrams>
       <Diagram DiagramId="284f631582f444a0853fde43b50e1dd7" Name="Diagram1">
         <EntityTypeShape EntityType="ShoppingCenterModel.Banner" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShoppingCenterModel.Category" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShoppingCenterModel.Subcategory" Width="1.5" PointX="5" PointY="8" />
-        <AssociationConnector Association="ShoppingCenterModel.FK_Subcategory_Category" />
-        <EntityTypeShape EntityType="ShoppingCenterModel.Menu" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ShoppingCenterModel.Menu" Width="1.5" PointX="2.625" PointY="0.75" />
         <AssociationConnector Association="ShoppingCenterModel.FK_Menu_Menu" />
-        <EntityTypeShape EntityType="ShoppingCenterModel.ProductImage" Width="1.5" PointX="3" PointY="4.625" />
-        <EntityTypeShape EntityType="ShoppingCenterModel.Product" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="ShoppingCenterModel.Category" Width="1.5" PointX="7.625" PointY="1" />
+        <EntityTypeShape EntityType="ShoppingCenterModel.MaskProduct" Width="1.5" PointX="4" PointY="4.75" />
+        <EntityTypeShape EntityType="ShoppingCenterModel.Product" Width="1.5" PointX="0.75" PointY="5.5" />
+        <EntityTypeShape EntityType="ShoppingCenterModel.ProductImage" Width="1.5" PointX="3" PointY="7.625" />
         <AssociationConnector Association="ShoppingCenterModel.FK_ProductImage_Product" />
-      </Diagram>
+        <InheritanceConnector EntityType="ShoppingCenterModel.MaskProduct" />
+        <EntityTypeShape EntityType="ShoppingCenterModel.CategoryType" Width="1.5" PointX="5.375" PointY="1.375" />
+        <AssociationConnector Association="ShoppingCenterModel.FK_Category_CategoryType" />
+        <AssociationConnector Association="ShoppingCenterModel.FK_Product_Category" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

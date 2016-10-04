@@ -10,12 +10,11 @@ using ShopData.Repository;
 
 namespace ShopCore.Repository
 {
-    public class ProductRepository : GenericRepository<Product>, IProductRepository
+    internal class ProductRepository : GenericRepository<Product>, IProductRepository
     {
         internal ProductRepository(DbContext ctx) : base(ctx)
         {
         }
         
-
     }
 }

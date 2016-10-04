@@ -7,8 +7,8 @@ using ShopData.Model;
 
 namespace ShopData.Repository
 {
-    public interface IMenuRepository : IGenericRepository<Menu>
+    public interface ICategoryRepository : IGenericRepository<Category>
     {
-        IEnumerable<Menu> GetAllAvailable();
+        IEnumerable<Category> GetAllByType(int typeId);
     }
 }

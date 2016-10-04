@@ -12,28 +12,18 @@ namespace ShopData.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Product
+    public partial class CategoryType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Product()
+        public CategoryType()
         {
-            this.ProductImages = new HashSet<ProductImage>();
+            this.Categories = new HashSet<Category>();
         }
     
-        public int ProductID { get; set; }
-        public string ProductSKU { get; set; }
-        public string ProductName { get; set; }
-        public string Description { get; set; }
-        public int Quantity { get; set; }
-        public decimal Price { get; set; }
-        public short UnitOnOrder { get; set; }
-        public Nullable<short> OrderLevel { get; set; }
-        public string PictureUrl { get; set; }
-        public short Status { get; set; }
-        public Nullable<int> CategoryID { get; set; }
+        public int CategoryTypeID { get; set; }
+        public string TypeName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProductImage> ProductImages { get; set; }
-        public virtual Category Category { get; set; }
+        public virtual ICollection<Category> Categories { get; set; }
     }
 }

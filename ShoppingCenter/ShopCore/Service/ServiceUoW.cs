@@ -15,13 +15,19 @@ namespace ShopCore.Service
         public IMenuRepository MenuRepository { get; private set; }
         public IProductRepository ProductRepository { get; private set; }
         public IBannerRepository BannerRepository { get; private set; }
-      
+        public IMaskProductRepository MaskProductRepository { get; private set; }
+        public ICategoryTypeRepository CategoryTypeRepository { get; private set; }
+        public ICategoryRepository CategoryRepository { get; private set; }
+
 
         public ServiceUoW()
         {
             MenuRepository = new MenuRepository(_context);
             ProductRepository = new ProductRepository(_context);
             BannerRepository = new BannerRepository(_context);
+            MaskProductRepository = new MaskProductRepository(_context);
+            CategoryTypeRepository = new CategoryTypeRepository(_context);
+            CategoryRepository = new CategoryRepository(_context);
         }
 
        

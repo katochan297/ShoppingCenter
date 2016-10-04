@@ -12,15 +12,9 @@ namespace ShopData.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Subcategory
+    public partial class MaskProduct : Product
     {
-        public int SubcategoryID { get; set; }
-        public int ParentID { get; set; }
-        public string SubcategoryName { get; set; }
-        public string Description { get; set; }
-        public string PictureUrl { get; set; }
-        public short Status { get; set; }
-    
-        public virtual Category Category { get; set; }
+        public string MaskContent { get; set; }
+        public string SkinType { get; set; }
     }
 }

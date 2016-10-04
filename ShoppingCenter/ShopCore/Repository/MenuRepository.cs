@@ -10,15 +10,18 @@ using ShopData.Repository;
 
 namespace ShopCore.Repository
 {
-    public class MenuRepository : GenericRepository<Menu>, IMenuRepository
+    internal class MenuRepository : GenericRepository<Menu>, IMenuRepository
     {
         internal MenuRepository(DbContext ctx) : base(ctx)
         {
         }
 
-        public IEnumerable<Menu> GetListAvailable()
+        public IEnumerable<Menu> GetAllAvailable()
         {
-            return Context.Set<Menu>().Include(x => x.Menu1).Where(x => x.Status == DataStatus.Available).ToList();
+            return Context.Set<Menu>()
+                .Include(x => x.Menu1)
+                .Where(x => x.Status == DataStatus.Available)
+                .ToList();
         }
 
 

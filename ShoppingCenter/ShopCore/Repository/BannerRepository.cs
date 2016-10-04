@@ -9,7 +9,7 @@ using ShopData.Repository;
 
 namespace ShopCore.Repository
 {
-    public class BannerRepository : GenericRepository<Banner>, IBannerRepository
+    internal class BannerRepository : GenericRepository<Banner>, IBannerRepository
     {
         internal BannerRepository(DbContext ctx) : base(ctx)
         {

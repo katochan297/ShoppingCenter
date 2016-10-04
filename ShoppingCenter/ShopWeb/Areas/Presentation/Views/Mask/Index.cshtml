@@ -1,4 +1,12 @@
-﻿<div class="paddings">
+﻿@using ShopCore.Enum
+@using ShopCore.Helper
+@using ShopData.Model
+@{
+    List<MaskProduct> lstMask = ViewBag.ListMask;
+    List<Category> lstMaskCategory = ViewBag.ListMaskCategory;
+}
+
+<div class="paddings">
     <div class="container">
         <!--Sort by list filter-->
         <div class="row">
@@ -27,20 +35,22 @@
                     <div class="col-lg-3 col-md-3 col-sm-3">
                         <h4>Categories</h4>
                         <div class="checkbox-shipping">
-                            <label><input type="checkbox" value=""> Topx</label>
-                            <label><input type="checkbox" value="" checked="checked"> Jeans</label>
-                            <label><input type="checkbox" value=""> Jackets</label>
-                            <label><input type="checkbox" value=""> shoes</label>
-                            <label><input type="checkbox" value=""> bags</label>
-                            <label><input type="checkbox" value=""> t-shirt</label>
-                            <label><input type="checkbox" value=""> swearters</label>
-                            <label><input type="checkbox" value=""> others</label>
+                            @foreach (var item in lstMaskCategory)
+                            {
+                                <label><input type="checkbox" class="chkCategory" value="@item.CategoryID"> @item.CategoryName</label>
+                            }
+                            <label><input type="checkbox" class="chkCategory" value="Jackets"> Jackets</label>
+                            <label><input type="checkbox" class="chkCategory" value="shoes"> shoes</label>
+                            <label><input type="checkbox" class="chkCategory" value="bags"> bags</label>
+                            <label><input type="checkbox" class="chkCategory" value="shirt"> t-shirt</label>
+                            <label><input type="checkbox" class="chkCategory" value="swearters"> swearters</label>
+                            <label><input type="checkbox" class="chkCategory" value="others"> others</label>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-3">
                         <h4>size</h4>
                         <div class="checkbox-shipping">
-                            <label><input type="checkbox" value=""> x</label>
+                            <label><input type="checkbox" class="chkTest" value="abc"> x</label>
                             <label><input type="checkbox" value=""> xs</label>
                             <label><input type="checkbox" value=""> s</label>
                             <label><input type="checkbox" value="" checked="checked"> m</label>
@@ -80,206 +90,31 @@
     <div class="container">
         <!--Products List-->
         <div class="product producthover row top-mini">
-            <!--Item-->
-            <div class="col-lg-4 col-md-3 col-sm-4">
+            @foreach (var item in lstMask)
+            {
                 <!--Item-->
-                <div class="product-hover">
-                    <a href="#">
-                        <!--Image Product-->
-                        <div class="image-product">
-                            <img src="img/products/product-10.png" alt="">
-                        </div>
-                        <!--Image Product-->
-                        <!--Description Product-->
-                        <div class="text-uppercase hover-description center">
-                            <h4>YX  WHITE T-Shirt</h4>
-                            <p class="price">36.90</p>
-                            <div class="boton-dark top-mini">add to cart</div>
-                        </div>
-                        <!--Description Product-->
-                    </a>
+                <div class="col-lg-4 col-md-3 col-sm-4">
+                    <div class="product-hover">
+                        <a href="#">
+                            <!--Image Product-->
+                            <div class="image-product">
+                                <img src="@item.PictureUrl" alt="">
+                            </div>
+                            <!--Image Product-->
+                            <!--Description Product-->
+                            <div class="text-uppercase hover-description center">
+                                <h4>@item.ProductName</h4>
+                                <p>@Utilities.FormatAmountToVnd(item.Price.ToString())</p>
+                                <div class="boton-dark top-mini">add to cart</div>
+                            </div>
+                            <!--Description Product-->
+                        </a>
+                    </div>
                 </div>
                 <!--Item-->
-            </div>
-            <!--Item-->
-            <!--Item-->
-            <div class="col-lg-4 col-md-3 col-sm-4">
-                <!--Item-->
-                <div class="product-hover">
-                    <a href="#">
-                        <!--Image Product-->
-                        <div class="image-product">
-                            <img src="img/products/product-02.png" alt="">
-                        </div>
-                        <!--Image Product-->
-                        <!--Description Product-->
-                        <div class="text-uppercase hover-description center">
-                            <h4>YX  Black BAG</h4>
-                            <p class="price">36.90</p>
-                            <div class="boton-dark top-mini">add to cart</div>
-                        </div>
-                        <!--Description Product-->
-                    </a>
-                </div>
-                <!--Item-->
-            </div>
-            <!--Item-->
-            <!--Item-->
-            <div class="col-lg-4 col-md-3 col-sm-4">
-                <!--Item-->
-                <div class="product-hover">
-                    <a href="#">
-                        <!--Image Product-->
-                        <div class="image-product">
-                            <img src="img/products/product-03.png" alt="">
-                        </div>
-                        <!--Image Product-->
-                        <!--Description Product-->
-                        <div class="text-uppercase hover-description center">
-                            <h4>YX  LEATHER WALLET</h4>
-                            <p class="price">36.90</p>
-                            <div class="boton-dark top-mini">add to cart</div>
-                        </div>
-                        <!--Description Product-->
-                    </a>
-                </div>
-                <!--Item-->
-            </div>
-            <!--Item-->
-            <!--Item-->
-            <div class="col-lg-4 col-md-3 col-sm-4">
-                <!--Item-->
-                <div class="product-hover">
-                    <a href="#">
-                        <!--Image Product-->
-                        <div class="image-product">
-                            <img src="img/products/product-05.png" alt="">
-                        </div>
-                        <!--Image Product-->
-                        <!--Description Product-->
-                        <div class="text-uppercase hover-description center">
-                            <h4>YX  MODERN HEADPHONES</h4>
-                            <p class="price">36.90</p>
-                            <div class="boton-dark top-mini">add to cart</div>
-                        </div>
-                        <!--Description Product-->
-                    </a>
-                </div>
-                <!--Item-->
-            </div>
-            <!--Item-->
-            <!--Item-->
-            <div class="col-lg-4 col-md-3 col-sm-4">
-                <!--Item-->
-                <div class="product-hover">
-                    <a href="#">
-                        <!--Image Product-->
-                        <div class="image-product">
-                            <img src="img/products/product-11.png" alt="">
-                        </div>
-                        <!--Image Product-->
-                        <!--Description Product-->
-                        <div class="text-uppercase hover-description center">
-                            <h4>YX  Black T-Shirt</h4>
-                            <p class="price">36.90</p>
-                            <div class="boton-dark top-mini">add to cart</div>
-                        </div>
-                        <!--Description Product-->
-                    </a>
-                </div>
-                <!--Item-->
-            </div>
-            <!--Item-->
-            <!--Item-->
-            <div class="col-lg-4 col-md-3 col-sm-4">
-                <!--Item-->
-                <div class="product-hover">
-                    <a href="#">
-                        <!--Image Product-->
-                        <div class="image-product">
-                            <img src="img/products/product-07.png" alt="">
-                        </div>
-                        <!--Image Product-->
-                        <!--Description Product-->
-                        <div class="text-uppercase hover-description center">
-                            <h4>YX  BEIGE CANVAS BAG</h4>
-                            <p class="price">36.90</p>
-                            <div class="boton-dark top-mini">add to cart</div>
-                        </div>
-                        <!--Description Product-->
-                    </a>
-                </div>
-                <!--Item-->
-            </div>
-            <!--Item-->
-            <!--Item-->
-            <div class="col-lg-4 col-md-3 col-sm-4">
-                <!--Item-->
-                <div class="product-hover">
-                    <a href="#">
-                        <!--Image Product-->
-                        <div class="image-product">
-                            <img src="img/products/product-09.png" alt="">
-                        </div>
-                        <!--Image Product-->
-                        <!--Description Product-->
-                        <div class="text-uppercase hover-description center">
-                            <h4>YX  SPORT SHOE</h4>
-                            <p class="price">36.90</p>
-                            <div class="boton-dark top-mini">add to cart</div>
-                        </div>
-                        <!--Description Product-->
-                    </a>
-                </div>
-                <!--Item-->
-            </div>
-            <!--Item-->
-            <!--Item-->
-            <div class="col-lg-4 col-md-3 col-sm-4">
-                <!--Item-->
-                <div class="product-hover">
-                    <a href="#">
-                        <!--Image Product-->
-                        <div class="image-product">
-                            <img src="img/products/product-08.png" alt="">
-                        </div>
-                        <!--Image Product-->
-                        <!--Description Product-->
-                        <div class="text-uppercase hover-description center">
-                            <h4>YX  SPORT SHOE</h4>
-                            <p class="price">36.90</p>
-                            <div class="boton-dark top-mini">add to cart</div>
-                        </div>
-                        <!--Description Product-->
-                    </a>
-                </div>
-                <!--Item-->
-            </div>
-            <!--Item-->
-            <!--Item-->
-            <div class="col-lg-4 col-md-3 col-sm-4">
-                <!--Item-->
-                <div class="product-hover">
-                    <a href="#">
-                        <!--Image Product-->
-                        <div class="image-product">
-                            <img src="img/products/product-04.png" alt="">
-                        </div>
-                        <!--Image Product-->
-                        <!--Description Product-->
-                        <div class="text-uppercase hover-description center">
-                            <h4>YX  SPORT SHOE</h4>
-                            <p class="price">36.90</p>
-                            <div class="boton-dark top-mini">add to cart</div>
-                        </div>
-                        <!--Description Product-->
-                    </a>
-                </div>
-                <!--Item-->
-            </div>
-            <!--Item-->
+            }
         </div>
-        <!--Products List-->
+       
         <div class="row">
             <!--Pagination-->
             <div class="col-lg-6 col-md-6 col-sm-6">
@@ -302,3 +137,26 @@
         <!--Products List-->
     </div>
 </div>
+
+
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            $(".chkCategory").click(function () {
+                var dt = [];
+                $.each($(".chkCategory:checked"), function() {
+                    dt.push($(this).val());
+                });
+                $.ajax({
+                    type: "POST",
+                    url: "/Mask/Filter",
+                    data: { @GlobalVariable.ListCategoryFilter : dt },
+                    datatype: "html",
+                    success: function(data) {
+                        @lstMask = data;
+                    }
+                });
+            });
+        });
+    </script>
+}

@@ -14,10 +14,26 @@
       <PropertyRef Name="CategoryID" />
     </Key>
     <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CategoryTypeID" Type="int" />
     <Property Name="CategoryName" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Description" Type="ntext" />
     <Property Name="PictureUrl" Type="varchar" MaxLength="100" />
     <Property Name="Status" Type="smallint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CategoryType">
+    <Key>
+      <PropertyRef Name="CategoryTypeID" />
+    </Key>
+    <Property Name="CategoryTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MaskProduct">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="int" Nullable="false" />
+    <Property Name="MaskContent" Type="nvarchar" MaxLength="100" />
+    <Property Name="SkinType" Type="nvarchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="Menu">
     <Key>
@@ -36,16 +52,15 @@
     </Key>
     <Property Name="ProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ProductSKU" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ProductName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CategoryID" Type="int" />
     <Property Name="Description" Type="ntext" />
     <Property Name="Quantity" Type="int" Nullable="false" />
-    <Property Name="Price" Type="money" Nullable="false" />
+    <Property Name="Price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
     <Property Name="UnitOnOrder" Type="smallint" Nullable="false" />
-    <Property Name="OrderLevel" Type="smallint" Nullable="false" />
+    <Property Name="OrderLevel" Type="smallint" />
     <Property Name="PictureUrl" Type="varchar" MaxLength="100" />
     <Property Name="Status" Type="smallint" Nullable="false" />
-    <Property Name="MaskContent" Type="nvarchar" MaxLength="50" />
-    <Property Name="MaskSkinType" Type="nvarchar" MaxLength="50" />
-    <Property Name="Discriminator" Type="nvarchar" MaxLength="20" />
   </EntityType>
   <EntityType Name="ProductImage">
     <Key>
@@ -55,17 +70,32 @@
     <Property Name="ProductID" Type="int" Nullable="false" />
     <Property Name="ImageUrl" Type="varchar" MaxLength="100" />
   </EntityType>
-  <EntityType Name="Subcategory">
-    <Key>
-      <PropertyRef Name="SubcategoryID" />
-    </Key>
-    <Property Name="SubcategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="ParentID" Type="int" Nullable="false" />
-    <Property Name="SubcategoryName" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Description" Type="ntext" Nullable="false" />
-    <Property Name="PictureUrl" Type="varchar" MaxLength="100" Nullable="false" />
-    <Property Name="Status" Type="smallint" Nullable="false" />
-  </EntityType>
+  <Association Name="FK_Category_CategoryType">
+    <End Role="CategoryType" Type="Self.CategoryType" Multiplicity="0..1" />
+    <End Role="Category" Type="Self.Category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CategoryType">
+        <PropertyRef Name="CategoryTypeID" />
+      </Principal>
+      <Dependent Role="Category">
+        <PropertyRef Name="CategoryTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MaskProduct_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="MaskProduct" Type="Self.MaskProduct" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="MaskProduct">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Menu_Menu">
     <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
     <End Role="Menu1" Type="Self.Menu" Multiplicity="*" />
@@ -78,8 +108,22 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Product_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ProductImage_Product">
-    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="ProductImage" Type="Self.ProductImage" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Product">
@@ -90,36 +134,33 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Subcategory_Category">
-    <End Role="Category" Type="Self.Category" Multiplicity="1" />
-    <End Role="Subcategory" Type="Self.Subcategory" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Category">
-        <PropertyRef Name="CategoryID" />
-      </Principal>
-      <Dependent Role="Subcategory">
-        <PropertyRef Name="ParentID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityContainer Name="ShoppingCenterModelStoreContainer">
     <EntitySet Name="Banner" EntityType="Self.Banner" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CategoryType" EntityType="Self.CategoryType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MaskProduct" EntityType="Self.MaskProduct" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProductImage" EntityType="Self.ProductImage" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Subcategory" EntityType="Self.Subcategory" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Category_CategoryType" Association="Self.FK_Category_CategoryType">
+      <End Role="CategoryType" EntitySet="CategoryType" />
+      <End Role="Category" EntitySet="Category" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MaskProduct_Product" Association="Self.FK_MaskProduct_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="MaskProduct" EntitySet="MaskProduct" />
+    </AssociationSet>
     <AssociationSet Name="FK_Menu_Menu" Association="Self.FK_Menu_Menu">
       <End Role="Menu" EntitySet="Menu" />
       <End Role="Menu1" EntitySet="Menu" />
     </AssociationSet>
+    <AssociationSet Name="FK_Product_Category" Association="Self.FK_Product_Category">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
     <AssociationSet Name="FK_ProductImage_Product" Association="Self.FK_ProductImage_Product">
       <End Role="Product" EntitySet="Product" />
       <End Role="ProductImage" EntitySet="ProductImage" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Subcategory_Category" Association="Self.FK_Subcategory_Category">
-      <End Role="Category" EntitySet="Category" />
-      <End Role="Subcategory" EntitySet="Subcategory" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

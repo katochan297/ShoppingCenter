@@ -9,7 +9,7 @@ using ShopData.Repository;
 
 namespace ShopCore.Repository
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : class 
+    internal class GenericRepository<T> : IGenericRepository<T> where T : class 
     {
         protected readonly DbContext Context;
         private readonly DbSet<T> _dbSet;
@@ -24,7 +24,7 @@ namespace ShopCore.Repository
         {
             return _dbSet.ToList();
         }
-
+        
         public T FindById(int id)
         {
             return _dbSet.Find(id);

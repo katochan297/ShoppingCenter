@@ -17,16 +17,18 @@ namespace ShopData.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Category()
         {
-            this.Subcategories = new HashSet<Subcategory>();
+            this.Products = new HashSet<Product>();
         }
     
         public int CategoryID { get; set; }
+        public Nullable<int> CategoryTypeID { get; set; }
         public string CategoryName { get; set; }
         public string Description { get; set; }
         public string PictureUrl { get; set; }
         public short Status { get; set; }
     
+        public virtual CategoryType CategoryType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Subcategory> Subcategories { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

@@ -26,10 +26,10 @@ namespace ShopData.Model
         }
     
         public virtual DbSet<Banner> Banners { get; set; }
-        public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<Subcategory> Subcategories { get; set; }
         public virtual DbSet<Menu> Menus { get; set; }
-        public virtual DbSet<ProductImage> ProductImages { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<ProductImage> ProductImages { get; set; }
+        public virtual DbSet<CategoryType> CategoryTypes { get; set; }
     }
 }
