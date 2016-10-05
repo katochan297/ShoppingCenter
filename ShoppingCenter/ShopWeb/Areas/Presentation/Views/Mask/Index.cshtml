@@ -152,8 +152,8 @@
                     url: "/Mask/Filter",
                     data: { @GlobalVariable.ListCategoryFilter : dt },
                     datatype: "html",
-                    success: function(data) {
-                        @lstMask = data;
+                    success: function(resp) {
+                        alert(resp.html);
                     }
                 });
             });

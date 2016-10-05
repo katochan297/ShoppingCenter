@@ -20,6 +20,7 @@ namespace ShopCore.Repository
         public IEnumerable<MaskProduct> GetAllAvailable()
         {
             return Context.Set<MaskProduct>()
+                .Include(x => x.ProductImages)
                 .Where(x => x.Status == DataStatus.Available)
                 .ToList();
         }
@@ -27,13 +28,17 @@ namespace ShopCore.Repository
         public IEnumerable<MaskProduct> GetByCategory(int categoryId)
         {
             return Context.Set<MaskProduct>()
-                .Where(x => x.Status == DataStatus.Available && x.CategoryID == categoryId)
+                .Include(x => x.ProductImages)
+                .Where(
+                    x => x.Status == DataStatus.Available && 
+                    x.CategoryID == categoryId)
                 .ToList();
         }
 
         public IEnumerable<MaskProduct> GetByListCategory(int[] lstCategoryId)
         {
             return Context.Set<MaskProduct>()
+                .Include(x => x.ProductImages)
                 .Where(
                     x =>
                         x.Status == DataStatus.Available &&

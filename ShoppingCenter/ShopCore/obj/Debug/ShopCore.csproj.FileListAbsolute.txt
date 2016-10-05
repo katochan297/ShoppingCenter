@@ -22,3 +22,15 @@ E:\GitHub\ShoppingCenter\ShoppingCenter\ShopCore\bin\Debug\EntityFramework.SqlSe
 E:\GitHub\ShoppingCenter\ShoppingCenter\ShopCore\obj\Debug\ShopCore.csprojResolveAssemblyReference.cache
 E:\GitHub\ShoppingCenter\ShoppingCenter\ShopCore\obj\Debug\ShopCore.dll
 E:\GitHub\ShoppingCenter\ShoppingCenter\ShopCore\obj\Debug\ShopCore.pdb
+C:\1 - Personal\GitHub\ShoppingCenter\ShoppingCenter\ShopCore\bin\Debug\ShopCore.dll.config
+C:\1 - Personal\GitHub\ShoppingCenter\ShoppingCenter\ShopCore\bin\Debug\ShopCore.dll
+C:\1 - Personal\GitHub\ShoppingCenter\ShoppingCenter\ShopCore\bin\Debug\ShopCore.pdb
+C:\1 - Personal\GitHub\ShoppingCenter\ShoppingCenter\ShopCore\bin\Debug\EntityFramework.dll
+C:\1 - Personal\GitHub\ShoppingCenter\ShoppingCenter\ShopCore\bin\Debug\EntityFramework.SqlServer.dll
+C:\1 - Personal\GitHub\ShoppingCenter\ShoppingCenter\ShopCore\bin\Debug\ShopData.dll
+C:\1 - Personal\GitHub\ShoppingCenter\ShoppingCenter\ShopCore\bin\Debug\ShopData.pdb
+C:\1 - Personal\GitHub\ShoppingCenter\ShoppingCenter\ShopCore\bin\Debug\EntityFramework.xml
+C:\1 - Personal\GitHub\ShoppingCenter\ShoppingCenter\ShopCore\bin\Debug\EntityFramework.SqlServer.xml
+C:\1 - Personal\GitHub\ShoppingCenter\ShoppingCenter\ShopCore\obj\Debug\ShopCore.csprojResolveAssemblyReference.cache
+C:\1 - Personal\GitHub\ShoppingCenter\ShoppingCenter\ShopCore\obj\Debug\ShopCore.dll
+C:\1 - Personal\GitHub\ShoppingCenter\ShoppingCenter\ShopCore\obj\Debug\ShopCore.pdb

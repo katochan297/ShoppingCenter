@@ -18,6 +18,7 @@ namespace ShopCore.Repository
         public IEnumerable<Category> GetAllByType(int typeId)
         {
             return Context.Set<Category>()
+                .Include(x => x.Products)
                 .Where(x => x.CategoryTypeID == typeId)
                 .ToList();
         }

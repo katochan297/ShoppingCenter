@@ -18,6 +18,7 @@ namespace ShopCore.Repository
         public CategoryType FindByName(string name)
         {
             return Context.Set<CategoryType>()
+                .Include(x => x.Categories)
                 .FirstOrDefault(x => x.TypeName.Contains(name));
         }
 
