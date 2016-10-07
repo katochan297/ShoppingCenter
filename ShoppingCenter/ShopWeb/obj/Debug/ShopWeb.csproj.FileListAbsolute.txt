@@ -160,3 +160,7 @@ C:\1 - Personal\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\System.Web.Mvc.
 C:\1 - Personal\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\obj\Debug\ShopWeb.csprojResolveAssemblyReference.cache
 C:\1 - Personal\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\obj\Debug\ShopWeb.dll
 C:\1 - Personal\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\obj\Debug\ShopWeb.pdb
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\PagedList.dll
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\PagedList.Mvc.dll
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\PagedList.xml
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\PagedList.Mvc.xml

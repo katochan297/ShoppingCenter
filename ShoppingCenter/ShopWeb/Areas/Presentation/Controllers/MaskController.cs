@@ -7,29 +7,57 @@ using ShopCore.Cache;
 using ShopCore.Enum;
 using ShopCore.Service;
 using ShopData.Model;
+using PagedList;
 
 namespace ShopWeb.Areas.Presentation.Controllers
 {
     public class MaskController : Controller
     {
+        private const int PageSize = 3;
+
         // GET: Presentation/Mask
-        public ActionResult Index()
+        public ActionResult Index(int page = 1)
         {
             var lstMask = CacheManagement.Instance.ListMaskProduct;
             var lstMaskCategory = CacheManagement.Instance.ListMaskCategory;
-
-            ViewBag.ListMask = lstMask;
+            
             ViewBag.ListMaskCategory = lstMaskCategory;
 
             Session[SessionName.MenuActivity] = ControllerContext.RouteData.Values["controller"].ToString();
-            return View();
+            
+            //return View(lstMask.ToPagedList(page, PageSize));
+
+            return Request.IsAjaxRequest()
+               ? (ActionResult)PartialView("_MaskListPartial", lstMask.ToPagedList(page, PageSize))
+               : View(lstMask.ToPagedList(page, PageSize));
         }
 
-        [HttpPost]
-        public JsonResult Filter()
+     
+        public ActionResult Filter()
         {
             var cateFilter = Request[GlobalVariable.ListCategoryFilter + "[]"];
-            var html = @"
+            var html = string.Empty;
+            List<MaskProduct> lst = new List<MaskProduct>();
+
+            if (cateFilter != null)
+            {
+                var lstCateId = new List<int>();
+                foreach (var item in cateFilter.Split(','))
+                {
+                    int i;
+                    int.TryParse(item, out i);
+                    lstCateId.Add(i);
+                }
+                
+                using (var uow = new ServiceUoW())
+                {
+                    lst = uow.MaskProductRepository.GetByListCategory(lstCateId.ToArray()).ToList();
+                }
+
+
+                foreach (var item in lst)
+                {
+                    html += @"
 <div class='col-lg-4 col-md-3 col-sm-4'>
     <div class='product-hover'>
         <a href='@product_path'>
@@ -44,26 +72,21 @@ namespace ShopWeb.Areas.Presentation.Controllers
          </a>
     </div>
 </div>";
-
-            if (cateFilter != null)
-            {
-                var lstCateId = new List<int>();
-                foreach (var item in cateFilter.Split(','))
-                {
-                    int i;
-                    int.TryParse(item, out i);
-                    lstCateId.Add(i);
+                    html = html.Replace("@product_path", "");
                 }
-                List<MaskProduct> lst;
-                using (var uow = new ServiceUoW())
-                {
-                    lst = uow.MaskProductRepository.GetByListCategory(lstCateId.ToArray()).ToList();
-                }
-
-
 
             }
-            return Json(new { foo = "bar", baz = "Blech" });
+
+
+            //return Json(new {html});
+
+            //return Json(new { foo = "bar", baz = "Blech" });
+            return Index();
+
+            return Request.IsAjaxRequest()
+               ? (ActionResult)PartialView("_MaskListPartial", lst.ToPagedList(1, PageSize))
+               : View("Index",lst.ToPagedList(1, PageSize));
+
         }
 
 

@@ -42,7 +42,7 @@ namespace ShopCore.Repository
                 .Where(
                     x =>
                         x.Status == DataStatus.Available &&
-                        lstCategoryId.Contains(x.CategoryID ?? 0))
+                        lstCategoryId.Contains(x.CategoryID ?? -1))
                 .ToList();
         }
 

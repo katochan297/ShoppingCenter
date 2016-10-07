@@ -1,8 +1,8 @@
 ﻿@using ShopCore.Enum
-@using ShopCore.Helper
 @using ShopData.Model
+@model PagedList.IPagedList<MaskProduct>
+
 @{
-    List<MaskProduct> lstMask = ViewBag.ListMask;
     List<Category> lstMaskCategory = ViewBag.ListMaskCategory;
 }
 
@@ -87,54 +87,9 @@
         </div>
     </div>
     <!--Sort by  list filter-->
-    <div class="container">
-        <!--Products List-->
-        <div class="product producthover row top-mini">
-            @foreach (var item in lstMask)
-            {
-                <!--Item-->
-                <div class="col-lg-4 col-md-3 col-sm-4">
-                    <div class="product-hover">
-                        <a href="#">
-                            <!--Image Product-->
-                            <div class="image-product">
-                                <img src="@item.PictureUrl" alt="">
-                            </div>
-                            <!--Image Product-->
-                            <!--Description Product-->
-                            <div class="text-uppercase hover-description center">
-                                <h4>@item.ProductName</h4>
-                                <p>@Utilities.FormatAmountToVnd(item.Price.ToString())</p>
-                                <div class="boton-dark top-mini">add to cart</div>
-                            </div>
-                            <!--Description Product-->
-                        </a>
-                    </div>
-                </div>
-                <!--Item-->
-            }
-        </div>
-       
-        <div class="row">
-            <!--Pagination-->
-            <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="top pagination-view">
-                    <p>Viewing 12 out of 36 products</p>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-6 pag-right">
-                <ul class="pagination top">
-                    <li><a href="#" class="active">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">NEXT</a></li>
-                    <li><a href="#" class="next"><i class="fa fa-angle-right"></i></a></li>
-                </ul>
-            </div>
-            <!--Pagination-->
-        </div>
-        <!--Products List-->
+
+    <div class="container" id="product-list">
+        @Html.Partial("_MaskListPartial", Model)
     </div>
 </div>
 
@@ -142,6 +97,8 @@
 @section scripts{
     <script type="text/javascript">
         $(function () {
+
+            //Filtering
             $(".chkCategory").click(function () {
                 var dt = [];
                 $.each($(".chkCategory:checked"), function() {
@@ -151,12 +108,27 @@
                     type: "POST",
                     url: "/Mask/Filter",
                     data: { @GlobalVariable.ListCategoryFilter : dt },
-                    datatype: "html",
+                    //datatype: "html",
                     success: function(resp) {
-                        alert(resp.html);
+                        alert(resp);
+                        $("#product-list").html(resp);
                     }
                 });
             });
+
+            //Paging
+            $('body').on('click', '#product-list .pagination a', function(event) {
+                event.preventDefault();
+               
+                var url = $(this).attr('href');
+                $.ajax({
+                    url: url,
+                    success: function(result) {
+                        $('#product-list').html(result);
+                    }
+                });
+            });
+
         });
     </script>
 }
