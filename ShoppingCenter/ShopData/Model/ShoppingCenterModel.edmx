@@ -14,6 +14,14 @@
           <Property Name="Description" Type="ntext" Nullable="false" />
           <Property Name="PictureUrl" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="CartID" />
+          </Key>
+          <Property Name="CartID" Type="int" Nullable="false" />
+          <Property Name="Count" Type="int" />
+          <Property Name="Total" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="CategoryID" />
@@ -58,6 +66,7 @@
           <Property Name="ProductSKU" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="ProductName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CategoryID" Type="int" />
+          <Property Name="CartID" Type="int" />
           <Property Name="Description" Type="ntext" />
           <Property Name="Quantity" Type="int" Nullable="false" />
           <Property Name="Price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
@@ -112,6 +121,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Product_Cart">
+          <End Role="Cart" Type="Self.Cart" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cart">
+              <PropertyRef Name="CartID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="CartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Product_Category">
           <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
@@ -140,6 +161,7 @@
         </Association>
         <EntityContainer Name="ShoppingCenterModelStoreContainer">
           <EntitySet Name="Banner" EntityType="Self.Banner" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CategoryType" EntityType="Self.CategoryType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MaskProduct" EntityType="Self.MaskProduct" Schema="dbo" store:Type="Tables" />
@@ -157,6 +179,10 @@
           <AssociationSet Name="FK_Menu_Menu" Association="Self.FK_Menu_Menu">
             <End Role="Menu" EntitySet="Menu" />
             <End Role="Menu1" EntitySet="Menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Cart" Association="Self.FK_Product_Cart">
+            <End Role="Cart" EntitySet="Cart" />
+            <End Role="Product" EntitySet="Product" />
           </AssociationSet>
           <AssociationSet Name="FK_Product_Category" Association="Self.FK_Product_Category">
             <End Role="Category" EntitySet="Category" />
@@ -201,6 +227,11 @@
           </AssociationSet>
           <AssociationSet Name="FK_Product_Category" Association="ShoppingCenterModel.FK_Product_Category">
             <End Role="Category" EntitySet="Categories" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <EntitySet Name="Carts" EntityType="ShoppingCenterModel.Cart" />
+          <AssociationSet Name="FK_Product_Cart" Association="ShoppingCenterModel.FK_Product_Cart">
+            <End Role="Cart" EntitySet="Carts" />
             <End Role="Product" EntitySet="Products" />
           </AssociationSet>
           </EntityContainer>
@@ -250,6 +281,8 @@
           <NavigationProperty Name="ProductImages" Relationship="ShoppingCenterModel.FK_ProductImage_Product" FromRole="Product" ToRole="ProductImage" />
           <Property Name="CategoryID" Type="Int32" />
           <NavigationProperty Name="Category" Relationship="ShoppingCenterModel.FK_Product_Category" FromRole="Product" ToRole="Category" />
+          <Property Name="CartID" Type="Int32" />
+          <NavigationProperty Name="Cart" Relationship="ShoppingCenterModel.FK_Product_Cart" FromRole="Product" ToRole="Cart" />
         </EntityType>
         <EntityType Name="ProductImage">
           <Key>
@@ -316,6 +349,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="CartID" />
+          </Key>
+          <Property Name="CartID" Type="Int32" Nullable="false" />
+          <Property Name="Count" Type="Int32" />
+          <Property Name="Total" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Products" Relationship="ShoppingCenterModel.FK_Product_Cart" FromRole="Cart" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK_Product_Cart">
+          <End Type="ShoppingCenterModel.Cart" Role="Cart" Multiplicity="0..1" />
+          <End Type="ShoppingCenterModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cart">
+              <PropertyRef Name="CartID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="CartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -347,6 +401,7 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="IsTypeOf(ShoppingCenterModel.Product)">
               <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="CartID" ColumnName="CartID" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
@@ -393,6 +448,15 @@
                 <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
                 <ScalarProperty Name="CategoryTypeID" ColumnName="CategoryTypeID" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Carts">
+            <EntityTypeMapping TypeName="ShoppingCenterModel.Cart">
+              <MappingFragment StoreEntitySet="Cart">
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="CartID" ColumnName="CartID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -108,7 +108,7 @@
                 $.ajax({
                     type: "POST",
                     url: "/Presentation/Mask/Filter",
-                    data: { @GlobalVariable.ListCategoryFilter : dt },
+                    data: { @GlobalVariable.lstCategoryFilter : dt },
                     datatype: "html",
                     success: function(result) {
                         $("#product-list").html(result);

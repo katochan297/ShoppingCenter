@@ -1,190 +1,251 @@
-﻿@using ShopCore.Helper
+﻿@using ShopCore.Enum
+@using ShopCore.Helper
 @using ShopData.Model
 @model MaskProduct
+
 @{
     List<MaskProduct> lstMask = ViewBag.ListMask;
 }
 
-<div class="paddings">
-    <div class="container">
-        
-        <div class="row">
-            <div class="col-lg-12">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-title">@Model.ProductName</li>
-                </ol>
+<form id="frm" method="post" action="@Url.Action("AddCart","Cart")">>
+
+    <div class="paddings">
+        <div class="container">
+            <!--BreadCrumbs-->
+            <div class="row">
+                <div class="col-lg-12">
+                    <ol class="breadcrumb">
+                        @*<li><a href="#">Home</a></li>
+                            <li class="active">Products</li>*@
+                        <li class="breadcrumb-title">@Model.ProductName</li>
+                    </ol>
+                </div>
+            </div>
+            <!--BreadCrumbs-->
+
+            <div class="margin-top-section">
+                <div class="row">
+                    <div class="col-lg-5 col-md-5 col-sm-5">
+                        <ul class="list-inline carousel-product-view">
+                            <li>
+                                <a class="fancybox" title="" href="@Model.PictureUrl">
+                                    <img src="~/Areas/Presentation/Content/img/products/product-12.png" alt="" />
+                                </a>
+                            </li>
+                            @if (Model.ProductImages.Count > 0)
+                            {
+                                foreach (var item in Model.ProductImages)
+                                {
+                                    <li>
+                                        <a class="fancybox" title="" href="@item.ImageUrl">
+                                            <img src="@item.ImageUrl" alt="" />
+                                        </a>
+                                    </li>
+                                }
+                            }
+                            else
+                            {
+                                <li>
+                                    <a class="fancybox" title="" href="@Model.PictureUrl">
+                                        <img src="@Model.PictureUrl" alt="" />
+                                    </a>
+                                </li>
+                            }
+
+                        </ul>
+                        @*<ul class="social-simple list-inline top-mini center">
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-vimeo"></i></a></li>
+                                <li><a href="#"><i class="fa fa-google"></i></a></li>
+                                <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
+                            </ul>*@
+                    </div>
+
+                    <div class="col-lg-7 col-md-7 col-sm-7 bottom">
+                        <!--quickview-->
+                        <div class="quickview-info">
+                            <h3 class="product-bag">@Model.ProductName</h3>
+                            <p>@Utilities.FormatAmountToVnd(Model.Price.ToString())</p>
+                            <!--Rating-->
+                            <span class="rating-star">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </span>
+                            <!--Rating-->
+                            <!--description-->
+                            <div class="description top">
+                                @Model.Description
+                            </div>
+                            <!--description-->
+                            <!--sizes-->
+                            @*<ul class="sizes list-inline top text-uppercase">
+                                    <li class="bg-gray"><a href="#">XS</a></li>
+                                    <li class="bg-gray"><a href="#">s</a></li>
+                                    <li class="bg-gray"><a href="#">m</a></li>
+                                    <li class="bg-gray"><a href="#">l</a></li>
+                                    <li class="bg-gray"><a href="#">Xl</a></li>
+                                </ul>*@
+                            <!--sizes-->
+                            <!--colors-->
+                            @*<ul class="colors list-inline text-uppercase">
+                                    <li><a href="#"><img src="img/content-general/color-dark.png" alt="colors select dark"></a></li>
+                                    <li><a href="#"><img src="img/content-general/color-gray.png" alt="colors select gray"></a></li>
+                                </ul>*@
+                            <!--colors-->
+
+                            <div class="row top">
+                                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-6">
+                                    <!--Counter bag-->
+                                    <ul class="counter-bag list-inline">
+                                        <li><a href="#" id="subCount">-</a></li>
+                                        <li><label id="lblCount">1</label></li>
+                                        <li><a href="#" id="addCount">+</a></li>
+                                    </ul>
+                                    <!--Counter bag-->
+                                </div>
+                                <div class="col-lg-5 col-md-6 col-sm-8 col-xs-6">
+                                    <button type="submit" value="Submit" class="boton-dark text-uppercase" id="btnAddToCart">add to cart</button>
+                                </div>
+                                @*<div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                                        <!--Add to bag and save to closet-->
+                                        <ul class="gotobag text-uppercase list-unstyled">
+                                            <li><span><a href="#">add to wishlist +</a></span></li>
+                                        </ul>
+                                        <!--Add to bag and save to closet-->
+                                    </div>*@
+                            </div>
+                        </div>
+                        <!--quickview-->
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="margin-top-section">
+        <div class="container">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs margin-top-section text-uppercase" role="tablist">
+                <li role="presentation"><a href="#description" aria-controls="description" role="tab" data-toggle="tab">description</a></li>
+                <li role="presentation" class="active"><a href="#details" aria-controls="details" role="tab" data-toggle="tab">details</a></li>
+            </ul>
+        </div>
+        <!-- Tab Content -->
+        <div class="bg-gray">
+            <div class="container">
+                <div class="tab-content">
+                    <!--Details-->
+                    <div role="tabpanel" class="tab-pane active" id="details">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Thông tin</th>
+                                    <th>Chi tiết</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Content</th>
+                                    <td>@Model.MaskContent</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Skin Type</th>
+                                    <td>@Model.SkinType</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--Details-->
+                    <!--Description-->
+                    <div role="tabpanel" class="tab-pane fade" id="description">
+                        <p>
+                            @Model.Description
+                        </p>
+                    </div>
+                    <!--Description-->
+                </div>
+            </div>
+        </div>
+        <!-- Tab Content -->
+        <!--Products Gallery-->
+        <div class="container">
+            <div class="row margin-top-section">
+                <div class="col-lg-12">
+                    <div class="small-title text-uppercase">
+                        <h3>Products</h3>
+                    </div>
+                </div>
+            </div>
+
             <div class="row">
-                <div class="col-lg-5 col-md-5 col-sm-5">
-                    <ul class="list-inline carousel-product-view">
-                        <li>
-                            <a class="fancybox" title="" href="@Model.PictureUrl">
-                                <img src="img/products/product-12.png" alt="">
-                            </a>
-                        </li>
-                        @foreach (var item in Model.ProductImages)
+                <!--Products List-->
+                <div class="col-lg-12">
+                    <ul class="carousel-product list-inline top-mini">
+                        @foreach (var item in lstMask)
                         {
-                            <li>
-                                <a class="fancybox" title="" href="@item.ImageUrl">
-                                    <img src="@item.ImageUrl" alt="">
+                            <li class="product">
+                                <a href="/Presentation/Mask/MaskDetail/@item.ProductID">
+                                    <!--Image Product-->
+                                    <div class="image-product">
+                                        <img src="@item.PictureUrl" alt="">
+                                    </div>
+                                    <!--Image Product-->
+                                    <!--Description Product-->
+                                    <div class="description-product text-uppercase">
+                                        <h4>@item.ProductName</h4>
+                                        <p>@Utilities.FormatAmountToVnd(item.Price.ToString())</p>
+                                    </div>
+                                    <!--Description Product-->
                                 </a>
                             </li>
                         }
                     </ul>
-                    @*<ul class="social-simple list-inline top-mini center">
-                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fa fa-vimeo"></i></a></li>
-                        <li><a href="#"><i class="fa fa-google"></i></a></li>
-                        <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
-                    </ul>*@
                 </div>
-
-                <div class="col-lg-7 col-md-7 col-sm-7 bottom">
-                    <!--quickview-->
-                    <div class="quickview-info">
-                        <h3 class="product-bag">@Model.ProductName</h3>
-                        <p class="bottom-mini">
-                            @Utilities.FormatAmountToVnd(Model.Price.ToString())
-                        </p>
-                        <!--Rating-->
-                        <span class="rating-star">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </span>
-                        <!--Rating-->
-                        <!--description-->
-                        <div class="description top">
-                            @Model.Description
-                        </div>
-                        <!--description-->
-                        <!--sizes-->
-                        @*<ul class="sizes list-inline top text-uppercase">
-                            <li class="bg-gray"><a href="#">XS</a></li>
-                            <li class="bg-gray"><a href="#">s</a></li>
-                            <li class="bg-gray"><a href="#">m</a></li>
-                            <li class="bg-gray"><a href="#">l</a></li>
-                            <li class="bg-gray"><a href="#">Xl</a></li>
-                        </ul>*@
-                        <!--sizes-->
-                        <!--colors-->
-                        @*<ul class="colors list-inline text-uppercase">
-                            <li><a href="#"><img src="img/content-general/color-dark.png" alt="colors select dark"></a></li>
-                            <li><a href="#"><img src="img/content-general/color-gray.png" alt="colors select gray"></a></li>
-                        </ul>*@
-                        <!--colors-->
-
-                        <div class="row top">
-                            <div class="col-lg-3 col-md-6 col-sm-4 col-xs-6">
-                                <!--Counter bag-->
-                                <ul class="counter-bag list-inline">
-                                    <li><a href="#">-</a></li>
-                                    <li>1</li>
-                                    <li><a href="#">+</a></li>
-                                </ul>
-                                <!--Counter bag-->
-                            </div>
-                            <div class="col-lg-5 col-md-6 col-sm-8 col-xs-6">
-                                <!--Buttom Add to cart-->
-                                <button type="submit" value="Submit" class="boton-dark text-uppercase">add to cart</button>
-                                <!--Buttom Add to cart-->
-                            </div>
-                            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                                <!--Add to bag and save to closet-->
-                                <ul class="gotobag text-uppercase list-unstyled">
-                                    <li><span><a href="#">add to wishlist +</a></span></li>
-                                </ul>
-                                <!--Add to bag and save to closet-->
-                            </div>
-                        </div>
-                    </div>
-                    <!--quickview-->
-                </div>
+                <!--Products List-->
             </div>
         </div>
+        <!--Products Gallery-->
     </div>
+    
+    <input type="hidden" id="@GlobalVariable.hidCount" name="@GlobalVariable.hidCount" value="1" />
+    <input type="hidden" id="@GlobalVariable.hidProductId" name="@GlobalVariable.hidProductId" value="@Model.ProductID" />
+</form>
 
-    <div class="container">
-        <!-- Nav tabs -->
-        <ul class="nav nav-tabs margin-top-section text-uppercase" role="tablist">
-            <li role="presentation" class="active"><a href="#details" aria-controls="details" role="tab" data-toggle="tab">details</a></li>
-            <li role="presentation"><a href="#description" aria-controls="description" role="tab" data-toggle="tab">description</a></li>
-        </ul>
-    </div>
-    <!-- Tab panes -->
-    <!-- Tab Content -->
-    <div class="bg-gray">
-        <div class="container">
-            <div class="tab-content">
-                <!--Details-->
-                <div role="tabpanel" class="tab-pane active" id="details">
-                    <table class="table">
-                        <tbody>
-                            <tr>
-                                <th scope="row">Content</th>
-                                <td>@Model.MaskContent</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Skin</th>
-                                <td>@Model.SkinType</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <!--Details-->
-                <!--Description-->
-                <div role="tabpanel" class="tab-pane fade" id="description">
-                    <p>@Model.Description</p>
-                </div>
-                <!--Description-->
-            </div>
-        </div>
-    </div>
-    <!-- Tab Content -->
-    <!--Products Gallery-->
-    <div class="container">
-        <div class="row margin-top-section">
-            <!--Main title-->
-            <div class="col-lg-12">
-                <div class="small-title text-uppercase">
-                    <h3>Products</h3>
-                </div>
-            </div>
-            <!--Main title-->
-        </div>
 
-        <div class="row">
-            <!--Products List-->
-            <div class="col-lg-12">
-                <ul class="carousel-product list-inline top-mini">
-                    @foreach (var item in lstMask)
-                    {
-                        <li class="product">
-                            <a href="/Presentation/Mask/MaskDetail/@item.ProductID">
-                                <!--Image Product-->
-                                <div class="image-product">
-                                    <img src="@item.PictureUrl" alt="">
-                                </div>
-                                <!--Image Product-->
-                                <!--Description Product-->
-                                <div class="description-product text-uppercase">
-                                    <h4>@item.ProductName</h4>
-                                    <p>@Utilities.FormatAmountToVnd(item.Price.ToString())</p>
-                                </div>
-                                <!--Description Product-->
-                            </a>
-                        </li>
-                    }
-                </ul>
-            </div>
-            <!--Products List-->
-        </div>
-    </div>
-    <!--Products Gallery-->
-</div>
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            $("#btnAddToCart").click(function () {
+                var animationName = "animated rollOut";
+                var animationend = "webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend";
+                var obj = $(this);
+                obj.addClass(animationName).one(animationend, function () {
+                    $(this).removeClass(animationName);
+                });
+            });
+
+
+            var hidCount = $("#@GlobalVariable.hidCount");
+            var count = $("#lblCount");
+            $("#addCount").click(function () {
+                var size = parseInt(count.text());
+                if (size >= 1 && size < 10)
+                    size = size + 1;
+                count.text(size);
+                hidCount.val(size);
+            });
+
+            $("#subCount").click(function () {
+                var size = parseInt(count.text());
+                if (size > 1 && size <= 10)
+                    size = size - 1;
+                count.text(size);
+                hidCount.val(size);
+            });
+
+        });
+    </script>
+}

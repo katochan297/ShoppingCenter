@@ -43,7 +43,7 @@ namespace ShopWeb.Areas.Presentation.Controllers
         [HttpPost]
         public ActionResult Filter()
         {
-            var cateFilter = Request[GlobalVariable.ListCategoryFilter + "[]"];
+            var cateFilter = Request[GlobalVariable.lstCategoryFilter + "[]"];
             if (cateFilter != null)
             {
                 var lstCateId = new List<int>();
@@ -91,7 +91,7 @@ namespace ShopWeb.Areas.Presentation.Controllers
             MaskProduct mask;
             using (var uow = new ServiceUoW())
             {
-                lstMask = uow.MaskProductRepository.GetOrderbyLevel(8).ToList();
+                lstMask = uow.MaskProductRepository.GetRandom(6).ToList();
                 mask = uow.MaskProductRepository.FindById(id);
             }
             ViewBag.ListMask = lstMask;

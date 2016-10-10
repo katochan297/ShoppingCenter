@@ -31,5 +31,6 @@ namespace ShopData.Model
         public virtual DbSet<ProductImage> ProductImages { get; set; }
         public virtual DbSet<CategoryType> CategoryTypes { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Cart> Carts { get; set; }
     }
 }

@@ -47,6 +47,11 @@ namespace ShopCore.Repository
                 .OrderByDescending(x => x.OrderLevel).Take(size);
         }
 
+        public IEnumerable<MaskProduct> GetRandom(int size)
+        {
+            return GetAllAvailable()
+                .OrderByDescending(x => Guid.NewGuid()).Take(size);
+        }
 
     }
 

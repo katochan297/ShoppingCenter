@@ -31,9 +31,11 @@ namespace ShopData.Model
         public string PictureUrl { get; set; }
         public short Status { get; set; }
         public Nullable<int> CategoryID { get; set; }
+        public Nullable<int> CartID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductImage> ProductImages { get; set; }
         public virtual Category Category { get; set; }
+        public virtual Cart Cart { get; set; }
     }
 }

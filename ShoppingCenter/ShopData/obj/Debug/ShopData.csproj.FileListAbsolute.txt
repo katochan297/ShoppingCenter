@@ -17,7 +17,6 @@ E:\GitHub\ShoppingCenter\ShoppingCenter\ShopData\bin\Debug\EntityFramework.xml
 E:\GitHub\ShoppingCenter\ShoppingCenter\ShopData\bin\Debug\EntityFramework.SqlServer.xml
 E:\GitHub\ShoppingCenter\ShoppingCenter\ShopData\obj\Debug\ShopData.dll
 E:\GitHub\ShoppingCenter\ShoppingCenter\ShopData\obj\Debug\ShopData.pdb
-E:\GitHub\ShoppingCenter\ShoppingCenter\ShopData\obj\Debug\ShopData.csprojResolveAssemblyReference.cache
 C:\1 - Personal\GitHub\ShoppingCenter\ShoppingCenter\ShopData\bin\Debug\ShopData.dll.config
 C:\1 - Personal\GitHub\ShoppingCenter\ShoppingCenter\ShopData\bin\Debug\ShopData.dll
 C:\1 - Personal\GitHub\ShoppingCenter\ShoppingCenter\ShopData\bin\Debug\ShopData.pdb
@@ -28,3 +27,4 @@ C:\1 - Personal\GitHub\ShoppingCenter\ShoppingCenter\ShopData\bin\Debug\EntityFr
 C:\1 - Personal\GitHub\ShoppingCenter\ShoppingCenter\ShopData\obj\Debug\ShopData.dll
 C:\1 - Personal\GitHub\ShoppingCenter\ShoppingCenter\ShopData\obj\Debug\ShopData.pdb
 C:\1 - Personal\GitHub\ShoppingCenter\ShoppingCenter\ShopData\obj\Debug\ShopData.csprojResolveAssemblyReference.cache
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopData\obj\Debug\ShopData.csprojResolveAssemblyReference.cache

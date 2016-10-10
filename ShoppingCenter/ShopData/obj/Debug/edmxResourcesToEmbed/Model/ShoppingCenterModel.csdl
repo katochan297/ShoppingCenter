@@ -32,6 +32,11 @@
       <End Role="Category" EntitySet="Categories" />
       <End Role="Product" EntitySet="Products" />
     </AssociationSet>
+    <EntitySet Name="Carts" EntityType="ShoppingCenterModel.Cart" />
+    <AssociationSet Name="FK_Product_Cart" Association="ShoppingCenterModel.FK_Product_Cart">
+      <End Role="Cart" EntitySet="Carts" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Menu">
     <Key>
@@ -79,6 +84,8 @@
     <NavigationProperty Name="ProductImages" Relationship="ShoppingCenterModel.FK_ProductImage_Product" FromRole="Product" ToRole="ProductImage" />
     <Property Name="CategoryID" Type="Int32" />
     <NavigationProperty Name="Category" Relationship="ShoppingCenterModel.FK_Product_Category" FromRole="Product" ToRole="Category" />
+    <Property Name="CartID" Type="Int32" />
+    <NavigationProperty Name="Cart" Relationship="ShoppingCenterModel.FK_Product_Cart" FromRole="Product" ToRole="Cart" />
   </EntityType>
   <EntityType Name="ProductImage">
     <Key>
@@ -142,6 +149,27 @@
       </Principal>
       <Dependent Role="Product">
         <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Cart">
+    <Key>
+      <PropertyRef Name="CartID" />
+    </Key>
+    <Property Name="CartID" Type="Int32" Nullable="false" />
+    <Property Name="Count" Type="Int32" />
+    <Property Name="Total" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="Products" Relationship="ShoppingCenterModel.FK_Product_Cart" FromRole="Cart" ToRole="Product" />
+  </EntityType>
+  <Association Name="FK_Product_Cart">
+    <End Type="ShoppingCenterModel.Cart" Role="Cart" Multiplicity="0..1" />
+    <End Type="ShoppingCenterModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cart">
+        <PropertyRef Name="CartID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="CartID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

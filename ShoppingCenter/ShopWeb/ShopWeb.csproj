@@ -437,6 +437,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Presentation\Controllers\CartController.cs" />
     <Compile Include="Areas\Presentation\Controllers\HomeController.cs" />
     <Compile Include="Areas\Presentation\Controllers\MaskController.cs" />
     <Compile Include="Areas\Presentation\Controllers\MenuController.cs" />

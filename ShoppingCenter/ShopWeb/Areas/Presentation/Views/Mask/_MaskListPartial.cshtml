@@ -19,7 +19,9 @@
                     <div class="text-uppercase hover-description center">
                         <h4>@item.ProductName</h4>
                         <p class="price">@Utilities.FormatAmountToVnd(item.Price.ToString())</p>
-                        <div class="boton-dark top-mini">add to cart</div>
+                        <div class="boton-border top-mini">
+                            Xem chi tiết
+                        </div>
                     </div>
                     <!--Description Product-->
                 </a>
@@ -39,11 +41,11 @@
     <div class="col-lg-6 col-md-6 col-sm-6 pag-right">
         <ul class="pagination top">
             @*<li><a href="#" class="active">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">NEXT</a></li>
-            <li><a href="#" class="next"><i class="fa fa-angle-right"></i></a></li>*@
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">NEXT</a></li>
+                <li><a href="#" class="next"><i class="fa fa-angle-right"></i></a></li>*@
             @Html.PagedListPager(Model, page => Url.Action("Index", "Mask", new { page }))
         </ul>
     </div>

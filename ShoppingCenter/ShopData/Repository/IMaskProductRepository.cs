@@ -13,5 +13,7 @@ namespace ShopData.Repository
         IEnumerable<MaskProduct> GetByCategory(int categoryId); 
         IEnumerable<MaskProduct> GetByListCategory(int[] listCategoryId);
         IEnumerable<MaskProduct> GetOrderbyLevel(int size);
+        IEnumerable<MaskProduct> GetRandom(int size);
+
     }
 }

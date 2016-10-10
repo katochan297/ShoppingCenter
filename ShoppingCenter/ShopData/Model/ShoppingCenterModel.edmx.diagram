@@ -17,6 +17,8 @@
         <EntityTypeShape EntityType="ShoppingCenterModel.Category" Width="1.5" PointX="7.625" PointY="1" />
         <AssociationConnector Association="ShoppingCenterModel.FK_Category_CategoryType" />
         <AssociationConnector Association="ShoppingCenterModel.FK_Product_Category" />
+        <EntityTypeShape EntityType="ShoppingCenterModel.Cart" Width="1.5" PointX="6.375" PointY="4.875" />
+        <AssociationConnector Association="ShoppingCenterModel.FK_Product_Cart" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

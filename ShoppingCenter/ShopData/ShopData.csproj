@@ -57,6 +57,9 @@
     <Compile Include="Model\Banner.cs">
       <DependentUpon>ShoppingCenterModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Cart.cs">
+      <DependentUpon>ShoppingCenterModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Category.cs">
       <DependentUpon>ShoppingCenterModel.tt</DependentUpon>
     </Compile>

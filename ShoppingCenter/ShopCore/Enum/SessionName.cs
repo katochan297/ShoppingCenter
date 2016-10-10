@@ -11,5 +11,9 @@ namespace ShopCore.Enum
         public static string MenuActivity = "MenuActivity";
 
         public static string MaskList = "MaskList";
+
+        public static string ShoppingCart = "ShoppingCart";
+
+
     }
 }
