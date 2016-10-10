@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using ShopCore.Cache;
 using ShopCore.Enum;
+using ShopCore.Helper;
 using ShopCore.Repository;
 using ShopCore.Service;
 using ShopData.Model;
@@ -19,12 +20,16 @@ namespace ShopWeb.Areas.Presentation.Controllers
         {
             var lstBanner = CacheManagement.Instance.ListBanner;
 
-            var lstProduct = CacheManagement.Instance.ListProduct.OrderByDescending(x => x.OrderLevel).Take(8).ToList();
+            List<MaskProduct> lstMask;
+            using (var uow = new ServiceUoW())
+            {
+                lstMask = uow.MaskProductRepository.GetOrderbyLevel(8).ToList();
+            }
 
             ViewBag.ListBanner = lstBanner;
-            ViewBag.ListProduct = lstProduct;
-
-            Session[SessionName.MenuActivity] = ControllerContext.RouteData.Values["controller"].ToString();
+            ViewBag.ListMask = lstMask;
+            
+            SessionHelper.SetSession(SessionName.MenuActivity, ControllerContext.RouteData.Values["controller"].ToString());
             
             return View();
         }

@@ -23,18 +23,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Categories">
-      <EntityTypeMapping TypeName="ShoppingCenterModel.Category">
-        <MappingFragment StoreEntitySet="Category">
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="PictureUrl" ColumnName="PictureUrl" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
-          <ScalarProperty Name="CategoryTypeID" ColumnName="CategoryTypeID" />
-          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Products">
       <EntityTypeMapping TypeName="IsTypeOf(ShoppingCenterModel.Product)">
         <MappingFragment StoreEntitySet="Product">
@@ -73,6 +61,17 @@
         <MappingFragment StoreEntitySet="CategoryType">
           <ScalarProperty Name="TypeName" ColumnName="TypeName" />
           <ScalarProperty Name="CategoryTypeID" ColumnName="CategoryTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="ShoppingCenterModel.Category">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="PictureUrl" ColumnName="PictureUrl" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+          <ScalarProperty Name="CategoryTypeID" ColumnName="CategoryTypeID" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

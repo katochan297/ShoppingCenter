@@ -1,0 +1,51 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@using ShopCore.Helper
+@model IPagedList<ShopData.Model.MaskProduct>
+
+<div class="product producthover row top-mini">
+    @foreach (var item in Model)
+    {
+        <!--Item-->
+        <div class="col-lg-4 col-md-3 col-sm-4">
+            <div class="product-hover">
+                <a href="/Presentation/Mask/MaskDetail/@item.ProductID">
+                    <!--Image Product-->
+                    <div class="image-product">
+                        <img src="@item.PictureUrl" alt="">
+                    </div>
+                    <!--Image Product-->
+                    <!--Description Product-->
+                    <div class="text-uppercase hover-description center">
+                        <h4>@item.ProductName</h4>
+                        <p class="price">@Utilities.FormatAmountToVnd(item.Price.ToString())</p>
+                        <div class="boton-dark top-mini">add to cart</div>
+                    </div>
+                    <!--Description Product-->
+                </a>
+            </div>
+        </div>
+        <!--Item-->
+    }
+</div>
+
+<div class="row">
+    <!--Pagination-->
+    <div class="col-lg-6 col-md-6 col-sm-6">
+        <div class="top pagination-view">
+            <p></p>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 pag-right">
+        <ul class="pagination top">
+            @*<li><a href="#" class="active">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">NEXT</a></li>
+            <li><a href="#" class="next"><i class="fa fa-angle-right"></i></a></li>*@
+            @Html.PagedListPager(Model, page => Url.Action("Index", "Mask", new { page }))
+        </ul>
+    </div>
+    <!--Pagination-->
+</div>

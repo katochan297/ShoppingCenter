@@ -10,7 +10,8 @@ namespace ShopData.Repository
     public interface IMaskProductRepository : IGenericRepository<MaskProduct>
     {
         IEnumerable<MaskProduct> GetAllAvailable();
-        IEnumerable<MaskProduct> GetByCategory(int categoryId);
-        IEnumerable<MaskProduct> GetByListCategory(int[] lstCategoryId);
+        IEnumerable<MaskProduct> GetByCategory(int categoryId); 
+        IEnumerable<MaskProduct> GetByListCategory(int[] listCategoryId);
+        IEnumerable<MaskProduct> GetOrderbyLevel(int size);
     }
 }

@@ -19,8 +19,8 @@ namespace ShopCore.Repository
         {
             return Context.Set<Category>()
                 .Include(x => x.Products)
-                .Where(x => x.CategoryTypeID == typeId)
-                .ToList();
+                .Include(x => x.CategoryType)
+                .Where(x => x.CategoryTypeID == typeId);
         }
 
     }

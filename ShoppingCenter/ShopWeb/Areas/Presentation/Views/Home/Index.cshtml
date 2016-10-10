@@ -1,7 +1,8 @@
-﻿@using ShopData.Model
+﻿@using ShopCore.Helper
+@using ShopData.Model
 @{
     List<Banner> lstBanner = ViewBag.ListBanner;
-    List<Product> lstProduct = ViewBag.ListProduct;
+    List<MaskProduct> lstMask = ViewBag.ListMask;
 }
 
 <!--Slider-->
@@ -147,11 +148,10 @@
             <!--Main title-->
             <!--Products List-->
             <div class="top">
-                @foreach (var item in lstProduct)
+                @foreach (var item in lstMask)
                 {
                     <div class="col-lg-3 col-md-3 col-sm-4">
-                        <!--Item-->
-                        <a href="#" class="product">
+                        <a href="/Presentation/Mask/MaskDetail/@item.ProductID" class="product">
                             <!--Image Product-->
                             <div class="image-product">
                                 <img src="@item.PictureUrl" alt="">
@@ -160,7 +160,7 @@
                             <!--Description Product-->
                             <div class="description-product text-uppercase">
                                 <h4>@item.PictureUrl</h4>
-                                <p class="price">@item.Price</p>
+                                <p>@Utilities.FormatAmountToVnd(item.Price.ToString())</p>
                             </div>
                             <!--Description Product-->
                         </a>
@@ -171,6 +171,7 @@
         </div>
         <!--Products Gallery-->
     </div>
+    
     <!--Newsletter-->
     <div class="row">
         <div class="col-lg-12">

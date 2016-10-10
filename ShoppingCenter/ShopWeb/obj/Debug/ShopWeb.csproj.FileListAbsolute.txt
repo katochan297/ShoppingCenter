@@ -164,3 +164,7 @@ E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\PagedList.dll
 E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\PagedList.Mvc.dll
 E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\PagedList.xml
 E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\PagedList.Mvc.xml
+C:\1 - Personal\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\PagedList.dll
+C:\1 - Personal\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\PagedList.Mvc.dll
+C:\1 - Personal\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\PagedList.xml
+C:\1 - Personal\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\PagedList.Mvc.xml

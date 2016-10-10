@@ -10,5 +10,6 @@ namespace ShopData.Repository
     public interface IMenuRepository : IGenericRepository<Menu>
     {
         IEnumerable<Menu> GetAllAvailable();
+        IEnumerable<Menu> GetMenuParent();
     }
 }

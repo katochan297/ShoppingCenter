@@ -4,6 +4,7 @@
 
 @{
     List<Category> lstMaskCategory = ViewBag.ListMaskCategory;
+    int? categoryId = ViewBag.CategoryId;
 }
 
 <div class="paddings">
@@ -37,7 +38,8 @@
                         <div class="checkbox-shipping">
                             @foreach (var item in lstMaskCategory)
                             {
-                                <label><input type="checkbox" class="chkCategory" value="@item.CategoryID"> @item.CategoryName</label>
+                                var check = item.CategoryID == categoryId ? "checked=\"checked\"" : "";
+                                <label><input type="checkbox" class="chkCategory" value="@item.CategoryID" @check>@item.CategoryName</label>
                             }
                             <label><input type="checkbox" class="chkCategory" value="Jackets"> Jackets</label>
                             <label><input type="checkbox" class="chkCategory" value="shoes"> shoes</label>
@@ -97,7 +99,6 @@
 @section scripts{
     <script type="text/javascript">
         $(function () {
-
             //Filtering
             $(".chkCategory").click(function () {
                 var dt = [];
@@ -106,20 +107,17 @@
                 });
                 $.ajax({
                     type: "POST",
-                    url: "/Mask/Filter",
+                    url: "/Presentation/Mask/Filter",
                     data: { @GlobalVariable.ListCategoryFilter : dt },
-                    //datatype: "html",
-                    success: function(resp) {
-                        alert(resp);
-                        $("#product-list").html(resp);
+                    datatype: "html",
+                    success: function(result) {
+                        $("#product-list").html(result);
                     }
                 });
             });
-
             //Paging
             $('body').on('click', '#product-list .pagination a', function(event) {
                 event.preventDefault();
-               
                 var url = $(this).attr('href');
                 $.ajax({
                     url: url,

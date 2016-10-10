@@ -23,7 +23,6 @@
           <Property Name="CategoryName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="ntext" />
           <Property Name="PictureUrl" Type="varchar" MaxLength="100" />
-          <Property Name="Status" Type="smallint" Nullable="false" />
         </EntityType>
         <EntityType Name="CategoryType">
           <Key>
@@ -188,7 +187,6 @@
             <End Role="Menu" EntitySet="Menus" />
             <End Role="Menu1" EntitySet="Menus" />
           </AssociationSet>
-          <EntitySet Name="Categories" EntityType="ShoppingCenterModel.Category" />
           <EntitySet Name="Products" EntityType="ShoppingCenterModel.Product" />
           <EntitySet Name="ProductImages" EntityType="ShoppingCenterModel.ProductImage" />
           <AssociationSet Name="FK_ProductImage_Product" Association="ShoppingCenterModel.FK_ProductImage_Product">
@@ -196,6 +194,7 @@
             <End Role="ProductImage" EntitySet="ProductImages" />
           </AssociationSet>
           <EntitySet Name="CategoryTypes" EntityType="ShoppingCenterModel.CategoryType" />
+          <EntitySet Name="Categories" EntityType="ShoppingCenterModel.Category" />
           <AssociationSet Name="FK_Category_CategoryType" Association="ShoppingCenterModel.FK_Category_CategoryType">
             <End Role="CategoryType" EntitySet="CategoryTypes" />
             <End Role="Category" EntitySet="Categories" />
@@ -230,19 +229,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Category">
-          <Key>
-            <PropertyRef Name="CategoryID" />
-          </Key>
-          <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CategoryTypeID" Type="Int32" />
-          <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PictureUrl" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Status" Type="Int16" Nullable="false" />
-          <NavigationProperty Name="CategoryType" Relationship="ShoppingCenterModel.FK_Category_CategoryType" FromRole="Category" ToRole="CategoryType" />
-          <NavigationProperty Name="Products" Relationship="ShoppingCenterModel.FK_Product_Category" FromRole="Category" ToRole="Product" />
-        </EntityType>
         <EntityType Name="MaskProduct" BaseType="ShoppingCenterModel.Product">
           <Property Name="MaskContent" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="SkinType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -293,6 +279,18 @@
           <Property Name="CategoryTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TypeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Categories" Relationship="ShoppingCenterModel.FK_Category_CategoryType" FromRole="CategoryType" ToRole="Category" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryTypeID" Type="Int32" />
+          <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PictureUrl" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CategoryType" Relationship="ShoppingCenterModel.FK_Category_CategoryType" FromRole="Category" ToRole="CategoryType" />
+          <NavigationProperty Name="Products" Relationship="ShoppingCenterModel.FK_Product_Category" FromRole="Category" ToRole="Product" />
         </EntityType>
         <Association Name="FK_Category_CategoryType">
           <End Type="ShoppingCenterModel.CategoryType" Role="CategoryType" Multiplicity="0..1" />
@@ -346,18 +344,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Categories">
-            <EntityTypeMapping TypeName="ShoppingCenterModel.Category">
-              <MappingFragment StoreEntitySet="Category">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="PictureUrl" ColumnName="PictureUrl" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
-                <ScalarProperty Name="CategoryTypeID" ColumnName="CategoryTypeID" />
-                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="IsTypeOf(ShoppingCenterModel.Product)">
               <MappingFragment StoreEntitySet="Product">
@@ -396,6 +382,17 @@
               <MappingFragment StoreEntitySet="CategoryType">
                 <ScalarProperty Name="TypeName" ColumnName="TypeName" />
                 <ScalarProperty Name="CategoryTypeID" ColumnName="CategoryTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="ShoppingCenterModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="PictureUrl" ColumnName="PictureUrl" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="CategoryTypeID" ColumnName="CategoryTypeID" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

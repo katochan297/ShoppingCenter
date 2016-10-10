@@ -8,6 +8,7 @@ using ShopCore.Enum;
 using ShopCore.Service;
 using ShopData.Model;
 using PagedList;
+using ShopCore.Helper;
 
 namespace ShopWeb.Areas.Presentation.Controllers
 {
@@ -15,30 +16,34 @@ namespace ShopWeb.Areas.Presentation.Controllers
     {
         private const int PageSize = 3;
 
-        // GET: Presentation/Mask
-        public ActionResult Index(int page = 1)
+        [NonAction]
+        private ActionResult IndexViewResult(int page)
         {
-            var lstMask = CacheManagement.Instance.ListMaskProduct;
-            var lstMaskCategory = CacheManagement.Instance.ListMaskCategory;
-            
-            ViewBag.ListMaskCategory = lstMaskCategory;
+            var lstMask = SessionHelper.GetSession<List<MaskProduct>>(SessionName.MaskList);           
+            SessionHelper.SetSession(SessionName.MenuActivity, ControllerContext.RouteData.Values["controller"].ToString());
 
-            Session[SessionName.MenuActivity] = ControllerContext.RouteData.Values["controller"].ToString();
-            
-            //return View(lstMask.ToPagedList(page, PageSize));
+            ViewBag.ListMaskCategory = CacheManagement.Instance.ListMaskCategory;
 
             return Request.IsAjaxRequest()
                ? (ActionResult)PartialView("_MaskListPartial", lstMask.ToPagedList(page, PageSize))
-               : View(lstMask.ToPagedList(page, PageSize));
+               : View("Index", lstMask.ToPagedList(page, PageSize));
         }
 
-     
+        // GET: Presentation/Mask
+        public ActionResult Index(int page = 1)
+        {
+            var lstMask = SessionHelper.GetSession<List<MaskProduct>>(SessionName.MaskList);
+            if (lstMask == null)
+                SessionHelper.SetSession(SessionName.MaskList,
+                    CacheManagement.Instance.ListMaskProduct.ToList());
+
+            return IndexViewResult(page);
+        }
+        
+        [HttpPost]
         public ActionResult Filter()
         {
             var cateFilter = Request[GlobalVariable.ListCategoryFilter + "[]"];
-            var html = string.Empty;
-            List<MaskProduct> lst = new List<MaskProduct>();
-
             if (cateFilter != null)
             {
                 var lstCateId = new List<int>();
@@ -48,47 +53,50 @@ namespace ShopWeb.Areas.Presentation.Controllers
                     int.TryParse(item, out i);
                     lstCateId.Add(i);
                 }
-                
+
+                List<MaskProduct> lstMask;
                 using (var uow = new ServiceUoW())
                 {
-                    lst = uow.MaskProductRepository.GetByListCategory(lstCateId.ToArray()).ToList();
+                    lstMask = uow.MaskProductRepository.GetByListCategory(lstCateId.ToArray()).ToList();
                 }
-
-
-                foreach (var item in lst)
-                {
-                    html += @"
-<div class='col-lg-4 col-md-3 col-sm-4'>
-    <div class='product-hover'>
-        <a href='@product_path'>
-            <div class='image-product'>
-                <img src='@product_pictureUrl' alt=''>
-            </div>
-            <div class='text-uppercase hover-description center'>
-                <h4>@product_name</h4>
-                <p>@product_price</p>
-                <div class='boton-dark top-mini'>add to cart</div>
-            </div>
-         </a>
-    </div>
-</div>";
-                    html = html.Replace("@product_path", "");
-                }
-
+               
+                return Request.IsAjaxRequest()
+                    ? (ActionResult) PartialView("_MaskListPartial", lstMask.ToPagedList(1, PageSize))
+                    : View("Index", lstMask.ToPagedList(1, PageSize));
             }
-
-
-            //return Json(new {html});
-
-            //return Json(new { foo = "bar", baz = "Blech" });
-            return Index();
-
-            return Request.IsAjaxRequest()
-               ? (ActionResult)PartialView("_MaskListPartial", lst.ToPagedList(1, PageSize))
-               : View("Index",lst.ToPagedList(1, PageSize));
-
+            else
+            {
+                return Index();
+            }
         }
 
+        [HttpGet]
+        public ActionResult Category(int id = 0)
+        {
+            List<MaskProduct> lstMask;
+            using (var uow = new ServiceUoW())
+            {
+                lstMask = uow.MaskProductRepository.GetByCategory(id).ToList();
+            }
+            SessionHelper.SetSession(SessionName.MaskList, lstMask);
+
+            ViewBag.CategoryId = id;
+
+            return IndexViewResult(1);
+        }
+
+        public ActionResult MaskDetail(int id)
+        {
+            List<MaskProduct> lstMask;
+            MaskProduct mask;
+            using (var uow = new ServiceUoW())
+            {
+                lstMask = uow.MaskProductRepository.GetOrderbyLevel(8).ToList();
+                mask = uow.MaskProductRepository.FindById(id);
+            }
+            ViewBag.ListMask = lstMask;
+            return View(mask);
+        }
 
     }
 }

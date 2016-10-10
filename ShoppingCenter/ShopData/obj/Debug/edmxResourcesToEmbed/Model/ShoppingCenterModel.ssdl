@@ -18,7 +18,6 @@
     <Property Name="CategoryName" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Description" Type="ntext" />
     <Property Name="PictureUrl" Type="varchar" MaxLength="100" />
-    <Property Name="Status" Type="smallint" Nullable="false" />
   </EntityType>
   <EntityType Name="CategoryType">
     <Key>

@@ -21,30 +21,32 @@ namespace ShopCore.Repository
         {
             return Context.Set<MaskProduct>()
                 .Include(x => x.ProductImages)
-                .Where(x => x.Status == DataStatus.Available)
-                .ToList();
+                .Include(x => x.Category)
+                .Where(x => x.Status == DataStatus.Available);
         }
 
         public IEnumerable<MaskProduct> GetByCategory(int categoryId)
         {
-            return Context.Set<MaskProduct>()
-                .Include(x => x.ProductImages)
-                .Where(
-                    x => x.Status == DataStatus.Available && 
-                    x.CategoryID == categoryId)
-                .ToList();
+            return GetAllAvailable()
+                .Where(x => x.CategoryID == categoryId);
         }
 
-        public IEnumerable<MaskProduct> GetByListCategory(int[] lstCategoryId)
+        public IEnumerable<MaskProduct> GetByListCategory(int[] listCategoryId)
         {
-            return Context.Set<MaskProduct>()
-                .Include(x => x.ProductImages)
-                .Where(
-                    x =>
-                        x.Status == DataStatus.Available &&
-                        lstCategoryId.Contains(x.CategoryID ?? -1))
-                .ToList();
+            return GetAllAvailable()
+                .Where
+                (
+                    x => x.Status == DataStatus.Available &&
+                         listCategoryId.Contains(x.CategoryID ?? -1)
+                );
         }
+
+        public IEnumerable<MaskProduct> GetOrderbyLevel(int size)
+        {
+            return GetAllAvailable()
+                .OrderByDescending(x => x.OrderLevel).Take(size);
+        }
+
 
     }
 

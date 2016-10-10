@@ -25,7 +25,6 @@ namespace ShopData.Model
         public string CategoryName { get; set; }
         public string Description { get; set; }
         public string PictureUrl { get; set; }
-        public short Status { get; set; }
     
         public virtual CategoryType CategoryType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

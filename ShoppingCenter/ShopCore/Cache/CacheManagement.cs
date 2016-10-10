@@ -15,7 +15,6 @@ namespace ShopCore.Cache
 
         public List<Banner> ListBanner;
         public List<Menu> ListMenu;
-        public List<Product> ListProduct;
         public List<MaskProduct> ListMaskProduct;
         public List<Category> ListMaskCategory;
 
@@ -24,7 +23,6 @@ namespace ShopCore.Cache
         {
             ListBanner = new List<Banner>();
             ListMenu = new List<Menu>();
-            ListProduct = new List<Product>();
             ListMaskProduct = new List<MaskProduct>();
             ListMaskCategory = new List<Category>();
         }
@@ -36,7 +34,6 @@ namespace ShopCore.Cache
             {
                 ListMenu = uow.MenuRepository.GetAllAvailable().ToList();
                 ListBanner = uow.BannerRepository.GetAll().ToList();
-                ListProduct = uow.ProductRepository.GetAll().ToList();
                 ListMaskProduct = uow.MaskProductRepository.GetAllAvailable().ToList();
 
                 var type = uow.CategoryTypeRepository.FindByName(Discriminator.Mask);

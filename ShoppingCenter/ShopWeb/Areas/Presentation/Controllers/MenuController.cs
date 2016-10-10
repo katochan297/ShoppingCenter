@@ -17,8 +17,12 @@ namespace ShopWeb.Areas.Presentation.Controllers
         [ChildActionOnly]
         public PartialViewResult GetMenu()
         {
-            var lst = CacheManagement.Instance.ListMenu.Where(x => x.ParentID == null).ToList();
-            ViewBag.ListMenu = lst;
+            List<Menu> lstMenu;
+            using (var uow = new ServiceUoW())
+            {
+                lstMenu = uow.MenuRepository.GetMenuParent().ToList();
+            }
+            ViewBag.ListMenu = lstMenu;
             return PartialView("_HeaderPartial");
         }
         

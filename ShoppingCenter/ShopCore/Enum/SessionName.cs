@@ -9,5 +9,7 @@ namespace ShopCore.Enum
     public class SessionName
     {
         public static string MenuActivity = "MenuActivity";
+
+        public static string MaskList = "MaskList";
     }
 }

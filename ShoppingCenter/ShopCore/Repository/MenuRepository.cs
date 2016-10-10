@@ -20,10 +20,19 @@ namespace ShopCore.Repository
         {
             return Context.Set<Menu>()
                 .Include(x => x.Menu1)
-                .Where(x => x.Status == DataStatus.Available)
-                .ToList();
+                .Include(x => x.Menu2)
+                .Where(x => x.Status == DataStatus.Available);
         }
 
+        public IEnumerable<Menu> GetMenuParent()
+        {
+            return GetAllAvailable()
+                .Where
+                (
+                    x => x.Status == DataStatus.Available &&
+                         x.ParentID == null
+                );
+        }
 
     }
 }
