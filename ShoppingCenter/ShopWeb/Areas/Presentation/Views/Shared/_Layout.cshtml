@@ -42,7 +42,9 @@
     <!--Layout Theme Options-->
     <div id="layout">
         
-        @{ Html.RenderAction("GetMenu", "Menu"); }
+        @{
+            Html.RenderAction("GetMenu", "Menu");
+        }
 
         @RenderBody()
         

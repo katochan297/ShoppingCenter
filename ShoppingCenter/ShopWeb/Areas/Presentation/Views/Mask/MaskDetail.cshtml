@@ -7,7 +7,10 @@
     List<MaskProduct> lstMask = ViewBag.ListMask;
 }
 
-<form id="frm" method="post" action="@Url.Action("AddCart","Cart")">>
+<form id="frm" method="post" action="@Url.Action("AddCart","Cart")">
+    <input type="hidden" id="@GlobalVariable.hidCount" name="@GlobalVariable.hidCount" value="1" />
+    <input type="hidden" id="@GlobalVariable.hidProductId" name="@GlobalVariable.hidProductId" value="@Model.ProductID" />
+</form>
 
     <div class="paddings">
         <div class="container">
@@ -66,7 +69,7 @@
                         <!--quickview-->
                         <div class="quickview-info">
                             <h3 class="product-bag">@Model.ProductName</h3>
-                            <p>@Utilities.FormatAmountToVnd(Model.Price.ToString())</p>
+                            <p>@Utilities.FormatAmountToVnd(Model.Price)</p>
                             <!--Rating-->
                             <span class="rating-star">
                                 <i class="fa fa-star"></i>
@@ -186,7 +189,7 @@
                         @foreach (var item in lstMask)
                         {
                             <li class="product">
-                                <a href="/Presentation/Mask/MaskDetail/@item.ProductID">
+                                <a href="@Url.Action("MaskDetail", "Mask", new { id = item.ProductID })">
                                     <!--Image Product-->
                                     <div class="image-product">
                                         <img src="@item.PictureUrl" alt="">
@@ -195,7 +198,7 @@
                                     <!--Description Product-->
                                     <div class="description-product text-uppercase">
                                         <h4>@item.ProductName</h4>
-                                        <p>@Utilities.FormatAmountToVnd(item.Price.ToString())</p>
+                                        <p>@Utilities.FormatAmountToVnd(item.Price)</p>
                                     </div>
                                     <!--Description Product-->
                                 </a>
@@ -208,26 +211,44 @@
         </div>
         <!--Products Gallery-->
     </div>
-    
-    <input type="hidden" id="@GlobalVariable.hidCount" name="@GlobalVariable.hidCount" value="1" />
-    <input type="hidden" id="@GlobalVariable.hidProductId" name="@GlobalVariable.hidProductId" value="@Model.ProductID" />
-</form>
+
 
 
 @section scripts
 {
     <script type="text/javascript">
         $(function () {
+
             $("#btnAddToCart").click(function () {
-                var animationName = "animated rollOut";
-                var animationend = "webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend";
-                var obj = $(this);
-                obj.addClass(animationName).one(animationend, function () {
-                    $(this).removeClass(animationName);
+                //Post Ajax
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("AddCart", "Cart")",
+                    data: $('#frm').serialize(),
+                    datatype: "html",
+                    success: function (data) {
+                        $(".bag-cart").html(data);
+
+                        //Set animate
+                        var animationend = "webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend";
+                        var animationName = "bounceOut";
+                        var obj = $("#btnAddToCart");
+                        obj.addClass("animated " + animationName).one(animationend, function () {
+                            $(this).removeClass(animationName);
+                        });
+
+                        var animationName2 = "bounceIn";
+                        var counter = $(".bag-cart");
+                        counter.addClass("animated " + animationName2).one(animationend, function () {
+                            $(this).removeClass(animationName2);
+                        });
+                    }
                 });
+
             });
 
 
+            //Sub and Add count
             var hidCount = $("#@GlobalVariable.hidCount");
             var count = $("#lblCount");
             $("#addCount").click(function () {

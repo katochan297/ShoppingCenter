@@ -30,6 +30,7 @@ namespace ShopWeb.Areas.Presentation.Controllers
         }
 
         // GET: Presentation/Mask
+        [HttpGet]
         public ActionResult Index(int page = 1)
         {
             var lstMask = SessionHelper.GetSession<List<MaskProduct>>(SessionName.MaskList);
@@ -85,6 +86,7 @@ namespace ShopWeb.Areas.Presentation.Controllers
             return IndexViewResult(1);
         }
 
+        [HttpGet]
         public ActionResult MaskDetail(int id)
         {
             List<MaskProduct> lstMask;

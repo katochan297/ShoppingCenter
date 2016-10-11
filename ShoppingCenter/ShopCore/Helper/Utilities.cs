@@ -9,12 +9,12 @@ namespace ShopCore.Helper
 {
     public static class Utilities
     {
-        public static string FormatAmountToVnd(string amount)
+        public static string FormatAmountToVnd(dynamic amount)
         {
             try
             {
                 double d;
-                double.TryParse(amount, out d);
+                double.TryParse(amount.ToString(), out d);
 
                 var money = string.Format(new CultureInfo("vi-VN"), "{0:#,##0} ₫", d);
 

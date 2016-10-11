@@ -1,7 +1,7 @@
 ﻿@using ShopCore.Enum
 @using ShopData.Model
+@model List<Menu>
 @{
-    List<Menu> lstMenu = ViewBag.ListMenu;
     var active = (string)(Session[SessionName.MenuActivity] != null 
         ? Session[SessionName.MenuActivity] 
         : "");
@@ -14,6 +14,7 @@
             <div class="flat-mega-menu">
                 <!-- flat-mega-menu class -->
                 <label for="mobile-button"> <i class="fa fa-bars"></i> </label>
+
                 <!-- mobile click button to show menu -->
                 <input id="mobile-button" type="checkbox">
                 <ul class="collapse">
@@ -25,7 +26,7 @@
                     </li>
                     <!-- website title class -->
 
-                    @foreach (var menu in lstMenu)
+                    @foreach (var menu in Model)
                     {
                         var isActive = menu.Path.Contains(active) ? "activated" : "";
 
@@ -52,34 +53,11 @@
                     }
 
                     <li class="bag-cart">
-                        <a href="#"><img src="~/Areas/Presentation/Content/img/content-general/cart.png" alt="cart"><span class="counter-cart">1</span></a>
-                        <!-- Cart -->
-                        <ul class="drop-down hover-fade">
-                            <li>
-                                <!--Header panel-->
-                                <div class="header-bag"><p>1 item (s) added to your  bag</p></div>
-                                <!--Header panel-->
-                                <!--body panel-->
-                                <div class="body-bag">
-                                    <img src="~/Areas/Presentation/Content/img/products/product-01.png" alt="">
-                                    <div class="content-body-bag">
-                                        <h4 class="product-bag">YX  Black T-Shirt</h4>
-                                        <p><span class="price">36.00</span></p>
-                                    </div>
-                                </div>
-                                <div class="total-bag center"><p>subtotal <span class="price">36.00</span></p></div>
-                                <!--body panel-->
-                                <!--Footer panel-->
-                                <div class="footer-bag text-uppercase">
-                                    <div class="view-bag"><a href="#">view cart</a></div>
-                                    <div class="check-bag"><a href="#">checkout</a></div>
-                                </div>
-                                <!--Footer panel-->
-                            </li>
-                        </ul>
-                        <!-- Cart -->
+                        @{
+                           Html.RenderPartial("_CartPartial");
+                       }
                     </li>
-                    <li class="search-bar">
+                    @*<li class="search-bar">
                         <a href="#"><i class="fa fa-search"></i></a>
                         <ul class="drop-down hover-fade searching">
                             <li>
@@ -91,7 +69,7 @@
                                 </form>
                             </li>
                         </ul>
-                    </li>
+                    </li>*@
 
                     <li class="register-form"><a href="#">Register</a></li>
                     <li class="login-form">

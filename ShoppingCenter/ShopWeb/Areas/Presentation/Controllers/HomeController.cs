@@ -16,6 +16,7 @@ namespace ShopWeb.Areas.Presentation.Controllers
     public class HomeController : Controller
     {
         // GET: Presentation/Home
+        [HttpGet]
         public ActionResult Index()
         {
             var lstBanner = CacheManagement.Instance.ListBanner;

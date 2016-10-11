@@ -16,11 +16,12 @@
         </EntityType>
         <EntityType Name="Cart">
           <Key>
-            <PropertyRef Name="CartID" />
+            <PropertyRef Name="ProductID" />
           </Key>
-          <Property Name="CartID" Type="int" Nullable="false" />
-          <Property Name="Count" Type="int" />
-          <Property Name="Total" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
+          <Property Name="Total" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IsOverOrder" Type="bit" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -66,7 +67,6 @@
           <Property Name="ProductSKU" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="ProductName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CategoryID" Type="int" />
-          <Property Name="CartID" Type="int" />
           <Property Name="Description" Type="ntext" />
           <Property Name="Quantity" Type="int" Nullable="false" />
           <Property Name="Price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
@@ -83,6 +83,20 @@
           <Property Name="ProductID" Type="int" Nullable="false" />
           <Property Name="ImageUrl" Type="varchar" MaxLength="100" />
         </EntityType>
+        <Association Name="FK_Cart_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Cart" Type="Self.Cart" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Category_CategoryType">
           <End Role="CategoryType" Type="Self.CategoryType" Multiplicity="0..1" />
           <End Role="Category" Type="Self.Category" Multiplicity="*" />
@@ -121,18 +135,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Product_Cart">
-          <End Role="Cart" Type="Self.Cart" Multiplicity="0..1" />
-          <End Role="Product" Type="Self.Product" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cart">
-              <PropertyRef Name="CartID" />
-            </Principal>
-            <Dependent Role="Product">
-              <PropertyRef Name="CartID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Product_Category">
           <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
@@ -168,6 +170,10 @@
           <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductImage" EntityType="Self.ProductImage" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Cart_Product" Association="Self.FK_Cart_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Cart" EntitySet="Cart" />
+          </AssociationSet>
           <AssociationSet Name="FK_Category_CategoryType" Association="Self.FK_Category_CategoryType">
             <End Role="CategoryType" EntitySet="CategoryType" />
             <End Role="Category" EntitySet="Category" />
@@ -179,10 +185,6 @@
           <AssociationSet Name="FK_Menu_Menu" Association="Self.FK_Menu_Menu">
             <End Role="Menu" EntitySet="Menu" />
             <End Role="Menu1" EntitySet="Menu" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Product_Cart" Association="Self.FK_Product_Cart">
-            <End Role="Cart" EntitySet="Cart" />
-            <End Role="Product" EntitySet="Product" />
           </AssociationSet>
           <AssociationSet Name="FK_Product_Category" Association="Self.FK_Product_Category">
             <End Role="Category" EntitySet="Category" />
@@ -213,26 +215,26 @@
             <End Role="Menu" EntitySet="Menus" />
             <End Role="Menu1" EntitySet="Menus" />
           </AssociationSet>
-          <EntitySet Name="Products" EntityType="ShoppingCenterModel.Product" />
           <EntitySet Name="ProductImages" EntityType="ShoppingCenterModel.ProductImage" />
-          <AssociationSet Name="FK_ProductImage_Product" Association="ShoppingCenterModel.FK_ProductImage_Product">
-            <End Role="Product" EntitySet="Products" />
-            <End Role="ProductImage" EntitySet="ProductImages" />
-          </AssociationSet>
           <EntitySet Name="CategoryTypes" EntityType="ShoppingCenterModel.CategoryType" />
           <EntitySet Name="Categories" EntityType="ShoppingCenterModel.Category" />
           <AssociationSet Name="FK_Category_CategoryType" Association="ShoppingCenterModel.FK_Category_CategoryType">
             <End Role="CategoryType" EntitySet="CategoryTypes" />
             <End Role="Category" EntitySet="Categories" />
           </AssociationSet>
+          <EntitySet Name="Carts" EntityType="ShoppingCenterModel.Cart" />
+          <EntitySet Name="Products" EntityType="ShoppingCenterModel.Product" />
+          <AssociationSet Name="FK_Cart_Product" Association="ShoppingCenterModel.FK_Cart_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Cart" EntitySet="Carts" />
+          </AssociationSet>
           <AssociationSet Name="FK_Product_Category" Association="ShoppingCenterModel.FK_Product_Category">
             <End Role="Category" EntitySet="Categories" />
             <End Role="Product" EntitySet="Products" />
           </AssociationSet>
-          <EntitySet Name="Carts" EntityType="ShoppingCenterModel.Cart" />
-          <AssociationSet Name="FK_Product_Cart" Association="ShoppingCenterModel.FK_Product_Cart">
-            <End Role="Cart" EntitySet="Carts" />
+          <AssociationSet Name="FK_ProductImage_Product" Association="ShoppingCenterModel.FK_ProductImage_Product">
             <End Role="Product" EntitySet="Products" />
+            <End Role="ProductImage" EntitySet="ProductImages" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Menu">
@@ -264,26 +266,6 @@
           <Property Name="MaskContent" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="SkinType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="Product">
-          <Key>
-            <PropertyRef Name="ProductID" />
-          </Key>
-          <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProductSKU" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Quantity" Type="Int32" Nullable="false" />
-          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="UnitOnOrder" Type="Int16" Nullable="false" />
-          <Property Name="OrderLevel" Type="Int16" />
-          <Property Name="PictureUrl" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Status" Type="Int16" Nullable="false" />
-          <NavigationProperty Name="ProductImages" Relationship="ShoppingCenterModel.FK_ProductImage_Product" FromRole="Product" ToRole="ProductImage" />
-          <Property Name="CategoryID" Type="Int32" />
-          <NavigationProperty Name="Category" Relationship="ShoppingCenterModel.FK_Product_Category" FromRole="Product" ToRole="Category" />
-          <Property Name="CartID" Type="Int32" />
-          <NavigationProperty Name="Cart" Relationship="ShoppingCenterModel.FK_Product_Cart" FromRole="Product" ToRole="Cart" />
-        </EntityType>
         <EntityType Name="ProductImage">
           <Key>
             <PropertyRef Name="ID" />
@@ -293,18 +275,6 @@
           <Property Name="ImageUrl" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Product" Relationship="ShoppingCenterModel.FK_ProductImage_Product" FromRole="ProductImage" ToRole="Product" />
         </EntityType>
-        <Association Name="FK_ProductImage_Product">
-          <End Type="ShoppingCenterModel.Product" Role="Product" Multiplicity="1" />
-          <End Type="ShoppingCenterModel.ProductImage" Role="ProductImage" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="ProductID" />
-            </Principal>
-            <Dependent Role="ProductImage">
-              <PropertyRef Name="ProductID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="CategoryType">
           <Key>
             <PropertyRef Name="CategoryTypeID" />
@@ -337,6 +307,49 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <NavigationProperty Name="Product" Relationship="ShoppingCenterModel.FK_Cart_Product" FromRole="Cart" ToRole="Product" />
+          <Property Name="IsOverOrder" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Product" Abstract="true">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductSKU" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryID" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="UnitOnOrder" Type="Int16" Nullable="false" />
+          <Property Name="OrderLevel" Type="Int16" />
+          <Property Name="PictureUrl" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="Cart" Relationship="ShoppingCenterModel.FK_Cart_Product" FromRole="Product" ToRole="Cart" />
+          <NavigationProperty Name="Category" Relationship="ShoppingCenterModel.FK_Product_Category" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="ProductImages" Relationship="ShoppingCenterModel.FK_ProductImage_Product" FromRole="Product" ToRole="ProductImage" />
+        </EntityType>
+        <Association Name="FK_Cart_Product">
+          <End Type="ShoppingCenterModel.Product" Role="Product" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ShoppingCenterModel.Cart" Role="Cart" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Product_Category">
           <End Type="ShoppingCenterModel.Category" Role="Category" Multiplicity="0..1" />
           <End Type="ShoppingCenterModel.Product" Role="Product" Multiplicity="*" />
@@ -349,24 +362,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Cart">
-          <Key>
-            <PropertyRef Name="CartID" />
-          </Key>
-          <Property Name="CartID" Type="Int32" Nullable="false" />
-          <Property Name="Count" Type="Int32" />
-          <Property Name="Total" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="Products" Relationship="ShoppingCenterModel.FK_Product_Cart" FromRole="Cart" ToRole="Product" />
-        </EntityType>
-        <Association Name="FK_Product_Cart">
-          <End Type="ShoppingCenterModel.Cart" Role="Cart" Multiplicity="0..1" />
-          <End Type="ShoppingCenterModel.Product" Role="Product" Multiplicity="*" />
+        <Association Name="FK_ProductImage_Product">
+          <End Type="ShoppingCenterModel.Product" Role="Product" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ShoppingCenterModel.ProductImage" Role="ProductImage" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Cart">
-              <PropertyRef Name="CartID" />
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
             </Principal>
-            <Dependent Role="Product">
-              <PropertyRef Name="CartID" />
+            <Dependent Role="ProductImage">
+              <PropertyRef Name="ProductID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -395,31 +401,6 @@
                 <ScalarProperty Name="Path" ColumnName="Path" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="MenuID" ColumnName="MenuID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Products">
-            <EntityTypeMapping TypeName="IsTypeOf(ShoppingCenterModel.Product)">
-              <MappingFragment StoreEntitySet="Product">
-                <ScalarProperty Name="CartID" ColumnName="CartID" />
-                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="PictureUrl" ColumnName="PictureUrl" />
-                <ScalarProperty Name="OrderLevel" ColumnName="OrderLevel" />
-                <ScalarProperty Name="UnitOnOrder" ColumnName="UnitOnOrder" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
-                <ScalarProperty Name="ProductSKU" ColumnName="ProductSKU" />
-              </MappingFragment>
-            </EntityTypeMapping>
-            <EntityTypeMapping TypeName="IsTypeOf(ShoppingCenterModel.MaskProduct)">
-              <MappingFragment StoreEntitySet="MaskProduct">
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-                <ScalarProperty Name="MaskContent" ColumnName="MaskContent" />
-                <ScalarProperty Name="SkinType" ColumnName="SkinType" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -454,9 +435,34 @@
           <EntitySetMapping Name="Carts">
             <EntityTypeMapping TypeName="ShoppingCenterModel.Cart">
               <MappingFragment StoreEntitySet="Cart">
+                <ScalarProperty Name="IsOverOrder" ColumnName="IsOverOrder" />
                 <ScalarProperty Name="Total" ColumnName="Total" />
                 <ScalarProperty Name="Count" ColumnName="Count" />
-                <ScalarProperty Name="CartID" ColumnName="CartID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="IsTypeOf(ShoppingCenterModel.MaskProduct)" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+              <MappingFragment StoreEntitySet="MaskProduct">
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="MaskContent" ColumnName="MaskContent" />
+                <ScalarProperty Name="SkinType" ColumnName="SkinType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(ShoppingCenterModel.Product)">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="PictureUrl" ColumnName="PictureUrl" />
+                <ScalarProperty Name="OrderLevel" ColumnName="OrderLevel" />
+                <ScalarProperty Name="UnitOnOrder" ColumnName="UnitOnOrder" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ProductSKU" ColumnName="ProductSKU" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

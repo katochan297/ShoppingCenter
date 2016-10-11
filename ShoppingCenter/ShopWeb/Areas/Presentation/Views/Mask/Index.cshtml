@@ -107,7 +107,7 @@
                 });
                 $.ajax({
                     type: "POST",
-                    url: "/Presentation/Mask/Filter",
+                    url: "@Url.Action("Filter", "Mask")",
                     data: { @GlobalVariable.lstCategoryFilter : dt },
                     datatype: "html",
                     success: function(result) {

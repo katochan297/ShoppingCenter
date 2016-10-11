@@ -22,8 +22,7 @@ namespace ShopWeb.Areas.Presentation.Controllers
             {
                 lstMenu = uow.MenuRepository.GetMenuParent().ToList();
             }
-            ViewBag.ListMenu = lstMenu;
-            return PartialView("_HeaderPartial");
+            return PartialView("_HeaderPartial", lstMenu);
         }
         
 

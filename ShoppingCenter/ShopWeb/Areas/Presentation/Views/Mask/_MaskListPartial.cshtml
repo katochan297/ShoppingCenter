@@ -9,7 +9,7 @@
         <!--Item-->
         <div class="col-lg-4 col-md-3 col-sm-4">
             <div class="product-hover">
-                <a href="/Presentation/Mask/MaskDetail/@item.ProductID">
+                <a href="@Url.Action("MaskDetail", "Mask", new { id = item.ProductID })">
                     <!--Image Product-->
                     <div class="image-product">
                         <img src="@item.PictureUrl" alt="">
@@ -18,7 +18,7 @@
                     <!--Description Product-->
                     <div class="text-uppercase hover-description center">
                         <h4>@item.ProductName</h4>
-                        <p class="price">@Utilities.FormatAmountToVnd(item.Price.ToString())</p>
+                        <p class="price">@Utilities.FormatAmountToVnd(item.Price)</p>
                         <div class="boton-border top-mini">
                             Xem chi tiết
                         </div>
