@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using ShopCore.Enum;
 using ShopCore.Helper;
 using ShopCore.Service;
@@ -18,66 +19,90 @@ namespace ShopWeb.Areas.Presentation.Controllers
         [HttpPost]
         public ActionResult AddCart()
         {
-            var cart = new Cart();
-            cart.Count = int.Parse(Request.Form[GlobalVariable.hidCount] ?? "0");
-            cart.ProductID = int.Parse(Request.Form[GlobalVariable.hidProductId] ?? "0");
+            var quantity = int.Parse(Request.Form[GlobalVariable.hidCount] ?? "0");
+            var productId = int.Parse(Request.Form[GlobalVariable.hidProductId] ?? "0");
             Product product;
             using (var uow = new ServiceUoW())
             {
-                product = uow.ProductRepository.FindById(cart.ProductID);
+                product = uow.ProductRepository.FindById(productId);
             }
-            cart.Product = product;
-            cart.Total = cart.Count * product.Price;
 
-            AddToShoppingCart(cart);
+            var shoppingCart = SessionHelper.GetSession<Cart>(SessionName.ShoppingCart);
+
+            if (shoppingCart == null)
+            {
+                CreateCart(quantity, product);
+            }
+            else
+            {
+                UpdateCart(quantity, product, shoppingCart);
+            }
+            
             return PartialView("_CartPartial");
         }
 
         [HttpGet]
         public ActionResult Index()
         {
-            return View();
+            var shoppingCart = SessionHelper.GetSession<Cart>(SessionName.ShoppingCart) ?? new Cart();
+            return View(shoppingCart);
         }
 
         [HttpGet]
-        public ActionResult RemoveCart(int id)
+        public ActionResult RemoveCartItem(int id)
         {
-            var shoppingCart = SessionHelper.GetSession<List<Cart>>(SessionName.ShoppingCart) ?? new List<Cart>();
-            var firstOrDefault = shoppingCart.FirstOrDefault(x => x.ProductID == id);
-            shoppingCart.Remove(firstOrDefault);
-            return View("Index");
+            var shoppingCart = SessionHelper.GetSession<Cart>(SessionName.ShoppingCart) ?? new Cart();
+            var firstOrDefault = shoppingCart.CartDetails.FirstOrDefault(x => x.ProductID == id);
+            shoppingCart.CartDetails.Remove(firstOrDefault);
+            return View("Index", shoppingCart);
         }
         
         [NonAction]
-        private void AddToShoppingCart(Cart cart)
+        private void CreateCart(int quantity, Product product)
         {
-            var shoppingCart = SessionHelper.GetSession<List<Cart>>(SessionName.ShoppingCart);
-            if (shoppingCart == null)
+            var total = quantity * product.Price;
+            var cart = new Cart
             {
-                shoppingCart = new List<Cart>
+                TotalPrice = total,
+                CartDetails = new List<CartDetail>
                 {
-                    cart
-                };
-                SessionHelper.SetSession(SessionName.ShoppingCart, shoppingCart);
+                    new CartDetail{
+                        ProductID = product.ProductID,
+                        Quantity = quantity,
+                        Product = product,
+                        TotalUnitPrice = total
+                    }
+                }
+            };
+            SessionHelper.SetSession(SessionName.ShoppingCart, cart);
+        }
+
+        [NonAction]
+        private void UpdateCart(int quantity, Product product, Cart shoppingCart)
+        {
+            var cartDetail = shoppingCart.CartDetails.FirstOrDefault(x => x.ProductID == product.ProductID);
+            if (cartDetail != null)
+            {
+                cartDetail.Quantity += quantity;
+                if (cartDetail.Quantity >= product.UnitOnOrder)
+                {
+                    cartDetail.Quantity = product.UnitOnOrder;
+                    cartDetail.IsOverOrder = true;
+                }
+                cartDetail.TotalUnitPrice = cartDetail.Quantity * product.Price;
             }
             else
             {
-                var oldCart = shoppingCart.FirstOrDefault(x => x.ProductID == cart.ProductID);
-                if (oldCart != null)
+                shoppingCart.CartDetails.Add(new CartDetail
                 {
-                    oldCart.Count += cart.Count;
-                    if (oldCart.Count >= cart.Product.UnitOnOrder)
-                    {
-                        oldCart.Count = cart.Product.UnitOnOrder;
-                        oldCart.IsOverOrder = true;
-                    }
-                    oldCart.Total = oldCart.Count * oldCart.Product.Price;
-                }
-                else
-                {
-                    shoppingCart.Add(cart);
-                }
+                    ProductID = product.ProductID,
+                    Quantity = quantity,
+                    Product = product,
+                    TotalUnitPrice = quantity * product.Price
+                });
             }
+
+            shoppingCart.TotalPrice = shoppingCart.CartDetails.Select(x => x.TotalUnitPrice).Sum();
         }
         
     }

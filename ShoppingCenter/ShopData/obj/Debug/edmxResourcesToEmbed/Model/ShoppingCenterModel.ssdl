@@ -11,11 +11,21 @@
   </EntityType>
   <EntityType Name="Cart">
     <Key>
+      <PropertyRef Name="CartID" />
+    </Key>
+    <Property Name="CartID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="TotalPrice" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CartDetail">
+    <Key>
+      <PropertyRef Name="CartID" />
       <PropertyRef Name="ProductID" />
     </Key>
+    <Property Name="CartID" Type="int" Nullable="false" />
     <Property Name="ProductID" Type="int" Nullable="false" />
-    <Property Name="Count" Type="int" Nullable="false" />
-    <Property Name="Total" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+    <Property Name="TotalUnitPrice" Type="decimal" Precision="18" Scale="0" Nullable="false" />
     <Property Name="IsOverOrder" Type="bit" />
   </EntityType>
   <EntityType Name="Category">
@@ -78,16 +88,28 @@
     <Property Name="ProductID" Type="int" Nullable="false" />
     <Property Name="ImageUrl" Type="varchar" MaxLength="100" />
   </EntityType>
-  <Association Name="FK_Cart_Product">
+  <Association Name="FK_CartDetail_Cart">
+    <End Role="Cart" Type="Self.Cart" Multiplicity="1" />
+    <End Role="CartDetail" Type="Self.CartDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cart">
+        <PropertyRef Name="CartID" />
+      </Principal>
+      <Dependent Role="CartDetail">
+        <PropertyRef Name="CartID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CartDetail_Product">
     <End Role="Product" Type="Self.Product" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
-    <End Role="Cart" Type="Self.Cart" Multiplicity="0..1" />
+    <End Role="CartDetail" Type="Self.CartDetail" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Product">
         <PropertyRef Name="ProductID" />
       </Principal>
-      <Dependent Role="Cart">
+      <Dependent Role="CartDetail">
         <PropertyRef Name="ProductID" />
       </Dependent>
     </ReferentialConstraint>
@@ -159,15 +181,20 @@
   <EntityContainer Name="ShoppingCenterModelStoreContainer">
     <EntitySet Name="Banner" EntityType="Self.Banner" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CartDetail" EntityType="Self.CartDetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CategoryType" EntityType="Self.CategoryType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MaskProduct" EntityType="Self.MaskProduct" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProductImage" EntityType="Self.ProductImage" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK_Cart_Product" Association="Self.FK_Cart_Product">
-      <End Role="Product" EntitySet="Product" />
+    <AssociationSet Name="FK_CartDetail_Cart" Association="Self.FK_CartDetail_Cart">
       <End Role="Cart" EntitySet="Cart" />
+      <End Role="CartDetail" EntitySet="CartDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CartDetail_Product" Association="Self.FK_CartDetail_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="CartDetail" EntitySet="CartDetail" />
     </AssociationSet>
     <AssociationSet Name="FK_Category_CategoryType" Association="Self.FK_Category_CategoryType">
       <End Role="CategoryType" EntitySet="CategoryType" />

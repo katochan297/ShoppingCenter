@@ -13,12 +13,14 @@
         <EntityTypeShape EntityType="ShoppingCenterModel.CategoryType" Width="1.5" PointX="5.375" PointY="1.375" />
         <EntityTypeShape EntityType="ShoppingCenterModel.Category" Width="1.5" PointX="7.625" PointY="1" />
         <AssociationConnector Association="ShoppingCenterModel.FK_Category_CategoryType" />
-        <EntityTypeShape EntityType="ShoppingCenterModel.Cart" Width="1.5" PointX="3" PointY="10.5" />
         <EntityTypeShape EntityType="ShoppingCenterModel.Product" Width="1.5" PointX="9.875" PointY="6.625" />
-        <AssociationConnector Association="ShoppingCenterModel.FK_Cart_Product" />
         <AssociationConnector Association="ShoppingCenterModel.FK_Product_Category" />
         <AssociationConnector Association="ShoppingCenterModel.FK_ProductImage_Product" />
         <InheritanceConnector EntityType="ShoppingCenterModel.MaskProduct" />
+        <EntityTypeShape EntityType="ShoppingCenterModel.Cart" Width="1.5" PointX="9.875" PointY="3.625" />
+        <EntityTypeShape EntityType="ShoppingCenterModel.CartDetail" Width="1.5" PointX="12.125" PointY="7.25" />
+        <AssociationConnector Association="ShoppingCenterModel.FK_CartDetail_Cart" />
+        <AssociationConnector Association="ShoppingCenterModel.FK_CartDetail_Product" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

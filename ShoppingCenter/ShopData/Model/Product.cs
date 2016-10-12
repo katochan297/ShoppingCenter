@@ -18,6 +18,7 @@ namespace ShopData.Model
         public Product()
         {
             this.ProductImages = new HashSet<ProductImage>();
+            this.CartDetails = new HashSet<CartDetail>();
         }
     
         public int ProductID { get; set; }
@@ -32,9 +33,10 @@ namespace ShopData.Model
         public string PictureUrl { get; set; }
         public short Status { get; set; }
     
-        public virtual Cart Cart { get; set; }
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductImage> ProductImages { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CartDetail> CartDetails { get; set; }
     }
 }

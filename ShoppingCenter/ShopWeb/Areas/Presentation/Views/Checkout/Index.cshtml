@@ -1,4 +1,20 @@
-﻿<div class="paddings">
+﻿@using ShopCore.Enum
+@using ShopCore.Helper
+@using ShopData.Model
+@section styles
+{
+    <style type="text/css">
+        .font-red {
+            color: red;
+        }
+    </style>
+}
+
+@{
+    var shoppingCart = SessionHelper.GetSession<Cart>(SessionName.ShoppingCart) ?? new Cart();
+}
+
+<div class="paddings">
     <div class="container">
         <!--BreadCrumbs-->
         <div class="row">
@@ -12,104 +28,115 @@
 
         <div class="margin-top-section">
             <div class="row">
+
                 <div class="col-lg-6">
-                    <form class="row form-checkout" action="#">
-                        <!--Name-->
+                    <legend><h3>Thông tin giao hàng</h3></legend>
+                    <form class="row form-checkout" method="post">
                         <div class="form-group col-lg-12">
-                            <label for="InputName">First Name*</label>
-                            <input type="text" class="form-control" name="name" id="InputName" placeholder="" required="">
+                            <label for="@GlobalVariable.txtFullName">Họ & Tên <span class="font-red">*</span></label>
+                            <input type="text" class="form-control"
+                                   name="@GlobalVariable.txtFullName" id="@GlobalVariable.txtFullName" required=""/>
                         </div>
-                        <!--Name-->
-                        <!--Country-->
                         <div class="form-group col-lg-12">
-                            <label>Country*</label>
-                            <div class="selector">
-                                <select class="guests-input">
-                                    <option value="selected" selected>Select your Country</option>
-                                    <option value="Colombia">Colombia</option>
-                                    <option value="Peru">Peru</option>
-                                    <option value="Bolivia">Bolivia</option>
-                                </select>
-                                <span class="custom-select">Select your Country</span>
-                            </div>
+                            <label for="@GlobalVariable.txtAddress">Địa chỉ <span class="font-red">*</span></label>
+                            <input type="text" class="form-control"
+                                   name="@GlobalVariable.txtAddress" id="@GlobalVariable.txtAddress" required=""/>
                         </div>
-                        <!--Country-->
-                        <!--Address-->
                         <div class="form-group col-lg-12">
-                            <label for="address">Address*</label>
-                            <input type="text" class="form-control" name="address" id="address" placeholder="" required="">
+                            <label for="@GlobalVariable.txtCity">Thành phố <span class="font-red">*</span></label>
+                            <input type="text" class="form-control"
+                                   name="@GlobalVariable.txtCity" id="@GlobalVariable.txtCity" required=""/>
                         </div>
-                        <!--Address-->
-                        <!--Town/City-->
-                        <div class="form-group col-lg-12">
-                            <label for="City">Town/City*</label>
-                            <input type="text" class="form-control" name="City" id="City" placeholder="" required="">
-                        </div>
-                        <!--Town/City-->
-                        <!--State-->
-                        <div class="form-group col-lg-6">
-                            <label for="InputState">State</label>
-                            <input type="text" class="form-control" name="InputState" id="InputState" placeholder="">
-                        </div>
-                        <!--State-->
-                        <!--PostCode-->
-                        <div class="form-group col-lg-6">
-                            <label for="PostCode">PostCode*</label>
-                            <input type="text" class="form-control" name="PostCode" id="PostCode" placeholder="" required="">
-                        </div>
-                        <!--PostCode-->
                         <!--Email Address-->
                         <div class="form-group col-lg-6">
-                            <label for="InputEmailAdress">Email Address*</label>
-                            <input type="email" class="form-control" name="email" id="InputEmailAdress" placeholder="" required="">
+                            <label for="@GlobalVariable.txtEmail">Email <span class="font-red">*</span></label>
+                            <input type="email" class="form-control"
+                                   name="@GlobalVariable.txtEmail" id="@GlobalVariable.txtEmail" required="">
                         </div>
                         <!--Email Address-->
                         <!--Email Address-->
                         <div class="form-group col-lg-6">
-                            <label for="Phone">Phone*</label>
-                            <input type="number" class="form-control" name="email" id="Phone" placeholder="" required="">
+                            <label for="@GlobalVariable.txtSDT">Số điện thoại <span class="font-red">*</span></label>
+                            <input type="number" class="form-control"
+                                   name="@GlobalVariable.txtSDT" id="@GlobalVariable.txtSDT" required=""/>
                         </div>
                         <!--Email Address-->
 
                         <div class="col-lg-12 checkbox-shipping">
-                            <label><input type="checkbox" value=""> Create Account</label>
-                            <label><input type="checkbox" value="" checked="checked"> Shipping address is the same like Billing Address</label>
+                            <label>
+                                Quý khách vui lòng cung cấp chính xác địa chỉ giao hàng để được giao hàng tận nơi
+                            </label>
                         </div>
 
                         <!--Message-->
                         <div class="form-group col-lg-12 top-mini">
-                            <label for="notes">Order Notes</label>
-                            <textarea class="form-control" name="message" id="notes" placeholder="Notes about your delivery, e. g.  special notes for delivery."></textarea>
+                            <label for="@GlobalVariable.txtNote">Ghi chú</label>
+                            <textarea class="form-control"
+                                      name="@GlobalVariable.txtNote" id="@GlobalVariable.txtNote"
+                                      placeholder="Quý khách có ghi chú về địa chỉ giao hàng hoặc thông tin khác, xin hãy điền vào đây."></textarea>
                         </div>
                         <!--Message-->
+                        <div class="form-group col-lg-12 right">
+                            <button type="submit" value="Submit" class="boton-dark bottom-mini top text-uppercase">Xác nhận</button>
+                        </div>
                     </form>
                 </div>
                 <div class="col-lg-6">
                     <div class="bg-gray order-resume">
                         <div class="text-uppercase">
-                            <h3>Your Order</h3>
-                            <p class="top"><b>products<span class="float-right">total</span></b></p>
-                            <hr>
-                            <p class="item-detail">YX  Black T-Shirt<span class="amount">x1</span><span class="price float-right">36.00</span></p>
-                            <p class="item-detail">Y4  White Jersey<span class="amount">x1</span><span class="price float-right">36.00</span></p>
-                            <hr>
-                            <p>subtotal<span class="float-right price">72.00</span></p>
-                            <p>SHIPPING AND HANDLING:<span class="float-right">Free Shipping</span></p>
-                            <hr>
-                            <p class="total">Order total<span class="float-right price">72.00</span></p>
+                            <h3>Hóa đơn</h3>
+                            <p class="top">
+                                <b>Sản phẩm<span class="float-right">Giá</span></b>
+                            </p>
+                            <hr />
+                            @foreach (var item in shoppingCart.CartDetails)
+                            {
+                                <p class="item-detail">
+                                    @item.Product.ProductName
+                                    <span class="amount">x @item.Quantity</span>
+                                    <span class="float-right">@Utilities.FormatAmountToVnd(item.Product.Price)</span>
+                                </p>
+                            }
+                            <hr />
+                            <p>Tổng Giá <span class="float-right">@Utilities.FormatAmountToVnd(shoppingCart.TotalPrice)</span></p>
+                            <p>Phí vận chuyển<span class="float-right">Miễn Phí</span></p>
+                            <hr />
+                            <p class="total">Tổng cộng<span class="float-right">@Utilities.FormatAmountToVnd(shoppingCart.TotalPrice)</span></p>
                             <hr>
                         </div>
-
-                        <div class="checkbox-shipping top">
-                            <label><input type="checkbox" value="" checked="checked"> Direct Bank Transfer</label>
-                            <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order wont be shipped until the funds have cleared in our account.</p>
-                            <label><input type="checkbox" value=""> Check Payment</label>
-                            <label><input type="checkbox" value=""> Paypal</label>
-                        </div>
-                        <button type="submit" value="Submit" class="boton-dark bottom-mini top text-uppercase">Place Order</button>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
 </div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(function() {
+            var msgFillOut = "Vui lòng nhập đủ thông tin";
+            var msgEmail = "Vui lòng nhập đúng địa chỉ email";
+
+            function invalidMsg(textbox) {
+                if (textbox.value.trim() == '') {
+                    textbox.setCustomValidity(msgFillOut);
+                }
+                else if (textbox.validity.typeMismatch) {
+                    textbox.setCustomValidity(msgEmail);
+                }
+                else {
+                    textbox.setCustomValidity('');
+                }
+                return true;
+            }
+
+            var control = $(".form-control");
+            control.on("invalid input", function () {
+                invalidMsg(this);
+            });
+
+        });
+    </script>
+}

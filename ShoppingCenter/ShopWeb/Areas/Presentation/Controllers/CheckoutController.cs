@@ -14,5 +14,12 @@ namespace ShopWeb.Areas.Presentation.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public ActionResult Confirm()
+        {
+            
+        }
+
     }
 }

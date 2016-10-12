@@ -51,16 +51,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Carts">
-      <EntityTypeMapping TypeName="ShoppingCenterModel.Cart">
-        <MappingFragment StoreEntitySet="Cart">
-          <ScalarProperty Name="IsOverOrder" ColumnName="IsOverOrder" />
-          <ScalarProperty Name="Total" ColumnName="Total" />
-          <ScalarProperty Name="Count" ColumnName="Count" />
-          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Products">
       <EntityTypeMapping TypeName="IsTypeOf(ShoppingCenterModel.MaskProduct)" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <MappingFragment StoreEntitySet="MaskProduct">
@@ -82,6 +72,26 @@
           <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
           <ScalarProperty Name="ProductName" ColumnName="ProductName" />
           <ScalarProperty Name="ProductSKU" ColumnName="ProductSKU" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Carts">
+      <EntityTypeMapping TypeName="ShoppingCenterModel.Cart">
+        <MappingFragment StoreEntitySet="Cart">
+          <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="CartID" ColumnName="CartID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CartDetails">
+      <EntityTypeMapping TypeName="ShoppingCenterModel.CartDetail">
+        <MappingFragment StoreEntitySet="CartDetail">
+          <ScalarProperty Name="IsOverOrder" ColumnName="IsOverOrder" />
+          <ScalarProperty Name="TotalUnitPrice" ColumnName="TotalUnitPrice" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="CartID" ColumnName="CartID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

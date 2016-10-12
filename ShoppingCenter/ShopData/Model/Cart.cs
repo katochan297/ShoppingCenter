@@ -14,11 +14,17 @@ namespace ShopData.Model
     
     public partial class Cart
     {
-        public int ProductID { get; set; }
-        public int Count { get; set; }
-        public decimal Total { get; set; }
-        public Nullable<bool> IsOverOrder { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Cart()
+        {
+            this.CartDetails = new HashSet<CartDetail>();
+        }
     
-        public virtual Product Product { get; set; }
+        public int CartID { get; set; }
+        public Nullable<int> UserID { get; set; }
+        public decimal TotalPrice { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CartDetail> CartDetails { get; set; }
     }
 }
