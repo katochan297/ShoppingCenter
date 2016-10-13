@@ -9,6 +9,7 @@ namespace ShopData.Repository
 {
     public interface IProductRepository : IGenericRepository<Product>
     {
+        IEnumerable<Product> GetAllAvailable();
     }
 
 }

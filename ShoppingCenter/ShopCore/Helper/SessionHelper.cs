@@ -33,5 +33,11 @@ namespace ShopCore.Helper
         {
             Session[key] = value;
         }
+
+        public static void ClearSession()
+        {
+            Session.Abandon();
+        }
+
     }
 }

@@ -22,6 +22,7 @@ namespace ShopCore.Repository
             return Context.Set<MaskProduct>()
                 .Include(x => x.ProductImages)
                 .Include(x => x.Category)
+                .Include(x => x.CartDetails)
                 .Where(x => x.Status == DataStatus.Available);
         }
 

@@ -58,15 +58,19 @@
     <Compile Include="Enum\Discriminator.cs" />
     <Compile Include="Enum\GlobalVariable.cs" />
     <Compile Include="Enum\SessionName.cs" />
+    <Compile Include="Helper\AlertHelper.cs" />
     <Compile Include="Helper\SessionHelper.cs" />
     <Compile Include="Helper\Utilities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\BannerRepository.cs" />
+    <Compile Include="Repository\CartDetailRepository.cs" />
+    <Compile Include="Repository\CartRepository.cs" />
     <Compile Include="Repository\CategoryRepository.cs" />
     <Compile Include="Repository\CategoryTypeRepository.cs" />
     <Compile Include="Repository\GenericRepository.cs" />
     <Compile Include="Repository\MaskProductRepository.cs" />
     <Compile Include="Repository\MenuRepository.cs" />
+    <Compile Include="Repository\OrderRepository.cs" />
     <Compile Include="Repository\ProductRepository.cs" />
     <Compile Include="Service\ServiceUoW.cs" />
   </ItemGroup>

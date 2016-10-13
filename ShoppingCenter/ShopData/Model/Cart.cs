@@ -20,11 +20,13 @@ namespace ShopData.Model
             this.CartDetails = new HashSet<CartDetail>();
         }
     
-        public int CartID { get; set; }
+        public string CartID { get; set; }
         public Nullable<int> UserID { get; set; }
         public decimal TotalPrice { get; set; }
+        public short Status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CartDetail> CartDetails { get; set; }
+        public virtual Order Order { get; set; }
     }
 }

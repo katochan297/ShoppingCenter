@@ -1,4 +1,25 @@
-﻿<!DOCTYPE html>
+﻿@using ShopCore.Helper
+@{
+    var alert = TempData.ContainsKey(Alert.TempDataKey) ? (Alert) TempData[Alert.TempDataKey] : new Alert();
+    var fontColor = string.Empty;
+    switch (alert.Style)
+    {
+        case AlertStyle.Success:
+            fontColor = "color: #3c763d";
+            break;
+        case AlertStyle.Information:
+            fontColor = "color: #31708f";
+            break;
+        case AlertStyle.Warning:
+            fontColor = "color: #8a6d3b";
+            break;
+        case AlertStyle.Danger:
+            fontColor = "color: #a94442";
+            break;
+    }
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -48,11 +69,36 @@
 
         @RenderBody()
         
+        <!-- Modal -->
+        <div class="modal fade" id="modalAlert" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">
+                            @alert.Title
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <p style="@fontColor">
+                            @Html.Raw(alert.Message)
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
         @{
             Html.RenderPartial("_FooterPartial");
         }
     </div>
     <!--Layout Theme Options-->
+
     <!-- ======================= JQuery libs =========================== -->
     <!-- jQuery local-->
     <script type="text/javascript" src="~/Areas/Presentation/Content/js/jquery.js"></script>
@@ -78,6 +124,17 @@
     <!--fUNCTIONS-->
     <script type="text/javascript" src="~/Areas/Presentation/Content/js/main.js"></script>
     <!-- ======================= End JQuery libs =========================== -->
+
+    <!--Custom script-->
+    <script type="text/javascript">
+        $(function() {
+            var isShow = @alert.Show.ToString().ToLower();
+            var stt = 'hide';
+            if (isShow === true)
+                stt = 'show';
+            $("#modalAlert").modal(stt);
+        });
+    </script>
 
     @RenderSection("scripts", required: false)
 </body>

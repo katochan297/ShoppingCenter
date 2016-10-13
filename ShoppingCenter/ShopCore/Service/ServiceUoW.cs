@@ -18,7 +18,9 @@ namespace ShopCore.Service
         public IMaskProductRepository MaskProductRepository { get; private set; }
         public ICategoryTypeRepository CategoryTypeRepository { get; private set; }
         public ICategoryRepository CategoryRepository { get; private set; }
-
+        public ICartRepository CartRepository { get; private set; }
+        public ICartDetailRepository CartDetailRepository { get; private set; }
+        public IOrderRepository OrderRepository { get; private set; }
 
         public ServiceUoW()
         {
@@ -28,6 +30,9 @@ namespace ShopCore.Service
             MaskProductRepository = new MaskProductRepository(_context);
             CategoryTypeRepository = new CategoryTypeRepository(_context);
             CategoryRepository = new CategoryRepository(_context);
+            CartRepository = new CartRepository(_context);
+            CartDetailRepository = new CartDetailRepository(_context);
+            OrderRepository = new OrderRepository(_context);
         }
 
        

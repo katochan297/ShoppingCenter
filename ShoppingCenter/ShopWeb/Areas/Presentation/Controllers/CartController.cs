@@ -6,6 +6,7 @@ using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
+using ShopCore.Cache;
 using ShopCore.Enum;
 using ShopCore.Helper;
 using ShopCore.Service;
@@ -17,16 +18,13 @@ namespace ShopWeb.Areas.Presentation.Controllers
     {
         // GET: Presentation/Cart
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddCart()
         {
             var quantity = int.Parse(Request.Form[GlobalVariable.hidCount] ?? "0");
             var productId = int.Parse(Request.Form[GlobalVariable.hidProductId] ?? "0");
-            Product product;
-            using (var uow = new ServiceUoW())
-            {
-                product = uow.ProductRepository.FindById(productId);
-            }
-
+            var product = CacheManagement.Instance.ListProduct.FirstOrDefault(x => x.ProductID == productId);
+           
             var shoppingCart = SessionHelper.GetSession<Cart>(SessionName.ShoppingCart);
 
             if (shoppingCart == null)
@@ -51,7 +49,7 @@ namespace ShopWeb.Areas.Presentation.Controllers
         [HttpGet]
         public ActionResult RemoveCartItem(int id)
         {
-            var shoppingCart = SessionHelper.GetSession<Cart>(SessionName.ShoppingCart) ?? new Cart();
+            var shoppingCart = SessionHelper.GetSession<Cart>(SessionName.ShoppingCart);
             var firstOrDefault = shoppingCart.CartDetails.FirstOrDefault(x => x.ProductID == id);
             shoppingCart.CartDetails.Remove(firstOrDefault);
             return View("Index", shoppingCart);
@@ -61,16 +59,20 @@ namespace ShopWeb.Areas.Presentation.Controllers
         private void CreateCart(int quantity, Product product)
         {
             var total = quantity * product.Price;
+            var id = Guid.NewGuid().ToString();
             var cart = new Cart
             {
+                CartID = id,
                 TotalPrice = total,
+                Status = DataStatus.Available,
                 CartDetails = new List<CartDetail>
                 {
                     new CartDetail{
+                        CartID = id,
                         ProductID = product.ProductID,
                         Quantity = quantity,
-                        Product = product,
-                        TotalUnitPrice = total
+                        TotalUnitPrice = total,
+                        Product = product
                     }
                 }
             };
@@ -95,13 +97,13 @@ namespace ShopWeb.Areas.Presentation.Controllers
             {
                 shoppingCart.CartDetails.Add(new CartDetail
                 {
+                    CartID = shoppingCart.CartID,
                     ProductID = product.ProductID,
                     Quantity = quantity,
                     Product = product,
                     TotalUnitPrice = quantity * product.Price
                 });
             }
-
             shoppingCart.TotalPrice = shoppingCart.CartDetails.Select(x => x.TotalUnitPrice).Sum();
         }
         

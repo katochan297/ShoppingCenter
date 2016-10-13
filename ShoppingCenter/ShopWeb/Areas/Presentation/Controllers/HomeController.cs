@@ -15,6 +15,11 @@ namespace ShopWeb.Areas.Presentation.Controllers
 {
     public class HomeController : Controller
     {
+        public HomeController()
+        {
+            SessionHelper.SetSession(SessionName.MenuActivity, "Home");
+        }
+
         // GET: Presentation/Home
         [HttpGet]
         public ActionResult Index()
@@ -29,8 +34,6 @@ namespace ShopWeb.Areas.Presentation.Controllers
 
             ViewBag.ListBanner = lstBanner;
             ViewBag.ListMask = lstMask;
-            
-            SessionHelper.SetSession(SessionName.MenuActivity, ControllerContext.RouteData.Values["controller"].ToString());
             
             return View();
         }

@@ -14,7 +14,7 @@ namespace ShopData.Model
     
     public partial class CartDetail
     {
-        public int CartID { get; set; }
+        public string CartID { get; set; }
         public int ProductID { get; set; }
         public int Quantity { get; set; }
         public decimal TotalUnitPrice { get; set; }

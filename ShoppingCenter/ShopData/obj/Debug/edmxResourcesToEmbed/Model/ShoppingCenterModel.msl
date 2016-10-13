@@ -78,6 +78,7 @@
     <EntitySetMapping Name="Carts">
       <EntityTypeMapping TypeName="ShoppingCenterModel.Cart">
         <MappingFragment StoreEntitySet="Cart">
+          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
           <ScalarProperty Name="UserID" ColumnName="UserID" />
           <ScalarProperty Name="CartID" ColumnName="CartID" />
@@ -91,6 +92,23 @@
           <ScalarProperty Name="TotalUnitPrice" ColumnName="TotalUnitPrice" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
           <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="CartID" ColumnName="CartID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="ShoppingCenterModel.Order">
+        <MappingFragment StoreEntitySet="Order">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="ShipFee" ColumnName="ShipFee" />
+          <ScalarProperty Name="ShipNote" ColumnName="ShipNote" />
+          <ScalarProperty Name="ShipEmail" ColumnName="ShipEmail" />
+          <ScalarProperty Name="ShipMobile" ColumnName="ShipMobile" />
+          <ScalarProperty Name="ShipCity" ColumnName="ShipCity" />
+          <ScalarProperty Name="ShipAddress" ColumnName="ShipAddress" />
+          <ScalarProperty Name="ShipName" ColumnName="ShipName" />
+          <ScalarProperty Name="ShippedDate" ColumnName="ShippedDate" />
+          <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
           <ScalarProperty Name="CartID" ColumnName="CartID" />
         </MappingFragment>
       </EntityTypeMapping>

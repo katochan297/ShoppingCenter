@@ -432,6 +432,8 @@
     <Content Include="Areas\Presentation\Views\Shared\_CartPartial.cshtml" />
     <Content Include="Areas\Presentation\Views\Cart\Index.cshtml" />
     <Content Include="Areas\Presentation\Views\Checkout\Index.cshtml" />
+    <Content Include="Areas\Presentation\Views\About\Index.cshtml" />
+    <Content Include="Areas\Presentation\Views\Contact\Index.cshtml" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="scripts\jquery-1.10.2.js" />
     <Content Include="scripts\jquery-1.10.2.min.js" />
@@ -440,8 +442,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Presentation\Controllers\AboutController.cs" />
     <Compile Include="Areas\Presentation\Controllers\CartController.cs" />
     <Compile Include="Areas\Presentation\Controllers\CheckoutController.cs" />
+    <Compile Include="Areas\Presentation\Controllers\ContactController.cs" />
     <Compile Include="Areas\Presentation\Controllers\HomeController.cs" />
     <Compile Include="Areas\Presentation\Controllers\MaskController.cs" />
     <Compile Include="Areas\Presentation\Controllers\MenuController.cs" />
@@ -497,7 +501,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Presentation\Models\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ShopCore\ShopCore.csproj">

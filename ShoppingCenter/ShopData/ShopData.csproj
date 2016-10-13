@@ -75,6 +75,9 @@
     <Compile Include="Model\Menu.cs">
       <DependentUpon>ShoppingCenterModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Order.cs">
+      <DependentUpon>ShoppingCenterModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Product.cs">
       <DependentUpon>ShoppingCenterModel.tt</DependentUpon>
     </Compile>
@@ -98,11 +101,14 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IBannerRepository.cs" />
+    <Compile Include="Repository\ICartDetailRepository.cs" />
+    <Compile Include="Repository\ICartRepository.cs" />
     <Compile Include="Repository\ICategoryRepository.cs" />
     <Compile Include="Repository\ICategoryTypeRepository.cs" />
     <Compile Include="Repository\IGenericRepository.cs" />
     <Compile Include="Repository\IMaskProductRepository.cs" />
     <Compile Include="Repository\IMenuRepository.cs" />
+    <Compile Include="Repository\IOrderRepository.cs" />
     <Compile Include="Repository\IProductRepository.cs" />
   </ItemGroup>
   <ItemGroup>

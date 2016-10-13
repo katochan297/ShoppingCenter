@@ -13,16 +13,17 @@
     <Key>
       <PropertyRef Name="CartID" />
     </Key>
-    <Property Name="CartID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CartID" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="UserID" Type="int" />
     <Property Name="TotalPrice" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Status" Type="smallint" Nullable="false" />
   </EntityType>
   <EntityType Name="CartDetail">
     <Key>
       <PropertyRef Name="CartID" />
       <PropertyRef Name="ProductID" />
     </Key>
-    <Property Name="CartID" Type="int" Nullable="false" />
+    <Property Name="CartID" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="ProductID" Type="int" Nullable="false" />
     <Property Name="Quantity" Type="int" Nullable="false" />
     <Property Name="TotalUnitPrice" Type="decimal" Precision="18" Scale="0" Nullable="false" />
@@ -64,6 +65,22 @@
     <Property Name="ParentID" Type="int" />
     <Property Name="Status" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="CartID" />
+    </Key>
+    <Property Name="CartID" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="OrderDate" Type="varchar" MaxLength="20" />
+    <Property Name="ShippedDate" Type="varchar" MaxLength="20" />
+    <Property Name="ShipName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ShipAddress" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ShipCity" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="ShipMobile" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="ShipEmail" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ShipNote" Type="nvarchar" MaxLength="200" />
+    <Property Name="ShipFee" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Status" Type="smallint" Nullable="false" />
+  </EntityType>
   <EntityType Name="Product">
     <Key>
       <PropertyRef Name="ProductID" />
@@ -88,7 +105,19 @@
     <Property Name="ProductID" Type="int" Nullable="false" />
     <Property Name="ImageUrl" Type="varchar" MaxLength="100" />
   </EntityType>
-  <Association Name="FK_CartDetail_Cart">
+  <Association Name="FK_Cart_Order">
+    <End Role="Order" Type="Self.Order" Multiplicity="1" />
+    <End Role="Cart" Type="Self.Cart" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="CartID" />
+      </Principal>
+      <Dependent Role="Cart">
+        <PropertyRef Name="CartID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CartDetail_Cart1">
     <End Role="Cart" Type="Self.Cart" Multiplicity="1" />
     <End Role="CartDetail" Type="Self.CartDetail" Multiplicity="*" />
     <ReferentialConstraint>
@@ -186,9 +215,14 @@
     <EntitySet Name="CategoryType" EntityType="Self.CategoryType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MaskProduct" EntityType="Self.MaskProduct" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProductImage" EntityType="Self.ProductImage" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK_CartDetail_Cart" Association="Self.FK_CartDetail_Cart">
+    <AssociationSet Name="FK_Cart_Order" Association="Self.FK_Cart_Order">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="Cart" EntitySet="Cart" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CartDetail_Cart1" Association="Self.FK_CartDetail_Cart1">
       <End Role="Cart" EntitySet="Cart" />
       <End Role="CartDetail" EntitySet="CartDetail" />
     </AssociationSet>

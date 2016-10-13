@@ -15,7 +15,15 @@ namespace ShopCore.Repository
         internal ProductRepository(DbContext ctx) : base(ctx)
         {
         }
-        
+
+        public IEnumerable<Product> GetAllAvailable()
+        {
+            return Context.Set<Product>()
+                .Include(x => x.ProductImages)
+                .Include(x => x.Category)
+                .Include(x => x.CartDetails)
+                .Where(x => x.Status == DataStatus.Available);
+        }
 
     }
 }

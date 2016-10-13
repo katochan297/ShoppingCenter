@@ -8,7 +8,7 @@
         <EntityTypeShape EntityType="ShoppingCenterModel.Banner" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ShoppingCenterModel.Menu" Width="1.5" PointX="2.625" PointY="0.75" />
         <AssociationConnector Association="ShoppingCenterModel.FK_Menu_Menu" />
-        <EntityTypeShape EntityType="ShoppingCenterModel.MaskProduct" Width="1.5" PointX="4" PointY="4.75" />
+        <EntityTypeShape EntityType="ShoppingCenterModel.MaskProduct" Width="1.5" PointX="6.125" PointY="5.125" />
         <EntityTypeShape EntityType="ShoppingCenterModel.ProductImage" Width="1.5" PointX="3" PointY="7.625" />
         <EntityTypeShape EntityType="ShoppingCenterModel.CategoryType" Width="1.5" PointX="5.375" PointY="1.375" />
         <EntityTypeShape EntityType="ShoppingCenterModel.Category" Width="1.5" PointX="7.625" PointY="1" />
@@ -17,10 +17,12 @@
         <AssociationConnector Association="ShoppingCenterModel.FK_Product_Category" />
         <AssociationConnector Association="ShoppingCenterModel.FK_ProductImage_Product" />
         <InheritanceConnector EntityType="ShoppingCenterModel.MaskProduct" />
-        <EntityTypeShape EntityType="ShoppingCenterModel.Cart" Width="1.5" PointX="9.875" PointY="3.625" />
+        <EntityTypeShape EntityType="ShoppingCenterModel.Cart" Width="1.5" PointX="9.875" PointY="12.375" />
         <EntityTypeShape EntityType="ShoppingCenterModel.CartDetail" Width="1.5" PointX="12.125" PointY="7.25" />
-        <AssociationConnector Association="ShoppingCenterModel.FK_CartDetail_Cart" />
+        <AssociationConnector Association="ShoppingCenterModel.FK_CartDetail_Cart1" />
         <AssociationConnector Association="ShoppingCenterModel.FK_CartDetail_Product" />
+        <EntityTypeShape EntityType="ShoppingCenterModel.Order" Width="1.5" PointX="7.625" PointY="11.75" />
+        <AssociationConnector Association="ShoppingCenterModel.FK_Cart_Order" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

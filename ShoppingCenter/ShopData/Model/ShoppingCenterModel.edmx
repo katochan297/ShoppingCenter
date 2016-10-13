@@ -18,16 +18,17 @@
           <Key>
             <PropertyRef Name="CartID" />
           </Key>
-          <Property Name="CartID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CartID" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="UserID" Type="int" />
           <Property Name="TotalPrice" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Status" Type="smallint" Nullable="false" />
         </EntityType>
         <EntityType Name="CartDetail">
           <Key>
             <PropertyRef Name="CartID" />
             <PropertyRef Name="ProductID" />
           </Key>
-          <Property Name="CartID" Type="int" Nullable="false" />
+          <Property Name="CartID" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="ProductID" Type="int" Nullable="false" />
           <Property Name="Quantity" Type="int" Nullable="false" />
           <Property Name="TotalUnitPrice" Type="decimal" Precision="18" Scale="0" Nullable="false" />
@@ -69,6 +70,22 @@
           <Property Name="ParentID" Type="int" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="CartID" />
+          </Key>
+          <Property Name="CartID" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="OrderDate" Type="varchar" MaxLength="20" />
+          <Property Name="ShippedDate" Type="varchar" MaxLength="20" />
+          <Property Name="ShipName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ShipAddress" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ShipCity" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="ShipMobile" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="ShipEmail" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ShipNote" Type="nvarchar" MaxLength="200" />
+          <Property Name="ShipFee" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Status" Type="smallint" Nullable="false" />
+        </EntityType>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="ProductID" />
@@ -93,7 +110,19 @@
           <Property Name="ProductID" Type="int" Nullable="false" />
           <Property Name="ImageUrl" Type="varchar" MaxLength="100" />
         </EntityType>
-        <Association Name="FK_CartDetail_Cart">
+        <Association Name="FK_Cart_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="Cart" Type="Self.Cart" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="CartID" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="CartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CartDetail_Cart1">
           <End Role="Cart" Type="Self.Cart" Multiplicity="1" />
           <End Role="CartDetail" Type="Self.CartDetail" Multiplicity="*" />
           <ReferentialConstraint>
@@ -191,9 +220,14 @@
           <EntitySet Name="CategoryType" EntityType="Self.CategoryType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MaskProduct" EntityType="Self.MaskProduct" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductImage" EntityType="Self.ProductImage" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_CartDetail_Cart" Association="Self.FK_CartDetail_Cart">
+          <AssociationSet Name="FK_Cart_Order" Association="Self.FK_Cart_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="Cart" EntitySet="Cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CartDetail_Cart1" Association="Self.FK_CartDetail_Cart1">
             <End Role="Cart" EntitySet="Cart" />
             <End Role="CartDetail" EntitySet="CartDetail" />
           </AssociationSet>
@@ -260,13 +294,18 @@
           </AssociationSet>
           <EntitySet Name="Carts" EntityType="ShoppingCenterModel.Cart" />
           <EntitySet Name="CartDetails" EntityType="ShoppingCenterModel.CartDetail" />
-          <AssociationSet Name="FK_CartDetail_Cart" Association="ShoppingCenterModel.FK_CartDetail_Cart">
+          <AssociationSet Name="FK_CartDetail_Cart1" Association="ShoppingCenterModel.FK_CartDetail_Cart1">
             <End Role="Cart" EntitySet="Carts" />
             <End Role="CartDetail" EntitySet="CartDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_CartDetail_Product" Association="ShoppingCenterModel.FK_CartDetail_Product">
             <End Role="Product" EntitySet="Products" />
             <End Role="CartDetail" EntitySet="CartDetails" />
+          </AssociationSet>
+          <EntitySet Name="Orders" EntityType="ShoppingCenterModel.Order" />
+          <AssociationSet Name="FK_Cart_Order" Association="ShoppingCenterModel.FK_Cart_Order">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="Cart" EntitySet="Carts" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Menu">
@@ -388,25 +427,27 @@
           <Key>
             <PropertyRef Name="CartID" />
           </Key>
-          <Property Name="CartID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CartID" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="UserID" Type="Int32" />
           <Property Name="TotalPrice" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <NavigationProperty Name="CartDetails" Relationship="ShoppingCenterModel.FK_CartDetail_Cart" FromRole="Cart" ToRole="CartDetail" />
+          <Property Name="Status" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="CartDetails" Relationship="ShoppingCenterModel.FK_CartDetail_Cart1" FromRole="Cart" ToRole="CartDetail" />
+          <NavigationProperty Name="Order" Relationship="ShoppingCenterModel.FK_Cart_Order" FromRole="Cart" ToRole="Order" />
         </EntityType>
         <EntityType Name="CartDetail">
           <Key>
             <PropertyRef Name="CartID" />
             <PropertyRef Name="ProductID" />
           </Key>
-          <Property Name="CartID" Type="Int32" Nullable="false" />
+          <Property Name="CartID" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="ProductID" Type="Int32" Nullable="false" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="TotalUnitPrice" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <Property Name="IsOverOrder" Type="Boolean" />
-          <NavigationProperty Name="Cart" Relationship="ShoppingCenterModel.FK_CartDetail_Cart" FromRole="CartDetail" ToRole="Cart" />
+          <NavigationProperty Name="Cart" Relationship="ShoppingCenterModel.FK_CartDetail_Cart1" FromRole="CartDetail" ToRole="Cart" />
           <NavigationProperty Name="Product" Relationship="ShoppingCenterModel.FK_CartDetail_Product" FromRole="CartDetail" ToRole="Product" />
         </EntityType>
-        <Association Name="FK_CartDetail_Cart">
+        <Association Name="FK_CartDetail_Cart1">
           <End Type="ShoppingCenterModel.Cart" Role="Cart" Multiplicity="1" />
           <End Type="ShoppingCenterModel.CartDetail" Role="CartDetail" Multiplicity="*" />
           <ReferentialConstraint>
@@ -429,6 +470,35 @@
             </Principal>
             <Dependent Role="CartDetail">
               <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="CartID" />
+          </Key>
+          <Property Name="CartID" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="OrderDate" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ShippedDate" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ShipName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ShipAddress" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ShipCity" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ShipMobile" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="ShipEmail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ShipNote" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ShipFee" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Status" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="Cart" Relationship="ShoppingCenterModel.FK_Cart_Order" FromRole="Order" ToRole="Cart" />
+        </EntityType>
+        <Association Name="FK_Cart_Order">
+          <End Type="ShoppingCenterModel.Order" Role="Order" Multiplicity="1" />
+          <End Type="ShoppingCenterModel.Cart" Role="Cart" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="CartID" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="CartID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -515,6 +585,7 @@
           <EntitySetMapping Name="Carts">
             <EntityTypeMapping TypeName="ShoppingCenterModel.Cart">
               <MappingFragment StoreEntitySet="Cart">
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="CartID" ColumnName="CartID" />
@@ -528,6 +599,23 @@
                 <ScalarProperty Name="TotalUnitPrice" ColumnName="TotalUnitPrice" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="CartID" ColumnName="CartID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="ShoppingCenterModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ShipFee" ColumnName="ShipFee" />
+                <ScalarProperty Name="ShipNote" ColumnName="ShipNote" />
+                <ScalarProperty Name="ShipEmail" ColumnName="ShipEmail" />
+                <ScalarProperty Name="ShipMobile" ColumnName="ShipMobile" />
+                <ScalarProperty Name="ShipCity" ColumnName="ShipCity" />
+                <ScalarProperty Name="ShipAddress" ColumnName="ShipAddress" />
+                <ScalarProperty Name="ShipName" ColumnName="ShipName" />
+                <ScalarProperty Name="ShippedDate" ColumnName="ShippedDate" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
                 <ScalarProperty Name="CartID" ColumnName="CartID" />
               </MappingFragment>
             </EntityTypeMapping>

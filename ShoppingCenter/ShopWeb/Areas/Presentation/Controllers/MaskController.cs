@@ -16,14 +16,18 @@ namespace ShopWeb.Areas.Presentation.Controllers
     {
         private const int PageSize = 3;
 
+        public MaskController()
+        {
+            SessionHelper.SetSession(SessionName.MenuActivity, "Mask");
+        }
+
         [NonAction]
         private ActionResult IndexViewResult(int page)
         {
             var lstMask = SessionHelper.GetSession<List<MaskProduct>>(SessionName.MaskList);           
-            SessionHelper.SetSession(SessionName.MenuActivity, ControllerContext.RouteData.Values["controller"].ToString());
 
             ViewBag.ListMaskCategory = CacheManagement.Instance.ListMaskCategory;
-
+            
             return Request.IsAjaxRequest()
                ? (ActionResult)PartialView("_MaskListPartial", lstMask.ToPagedList(page, PageSize))
                : View("Index", lstMask.ToPagedList(page, PageSize));
