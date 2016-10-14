@@ -32,6 +32,7 @@ namespace ShopCore.Repository
 
         public void Insert(T entity)
         {
+            _dbSet.Attach(entity);
             _dbSet.Add(entity);
         }
 

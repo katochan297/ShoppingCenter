@@ -434,6 +434,8 @@
     <Content Include="Areas\Presentation\Views\Checkout\Index.cshtml" />
     <Content Include="Areas\Presentation\Views\About\Index.cshtml" />
     <Content Include="Areas\Presentation\Views\Contact\Index.cshtml" />
+    <Content Include="Areas\Presentation\Views\Wishlist\Index.cshtml" />
+    <Content Include="Areas\Presentation\Views\Shared\_WishlistPartial.cshtml" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="scripts\jquery-1.10.2.js" />
     <Content Include="scripts\jquery-1.10.2.min.js" />
@@ -449,6 +451,7 @@
     <Compile Include="Areas\Presentation\Controllers\HomeController.cs" />
     <Compile Include="Areas\Presentation\Controllers\MaskController.cs" />
     <Compile Include="Areas\Presentation\Controllers\MenuController.cs" />
+    <Compile Include="Areas\Presentation\Controllers\WishlistController.cs" />
     <Compile Include="Areas\Presentation\PresentationAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">

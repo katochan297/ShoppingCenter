@@ -57,19 +57,11 @@
                            Html.RenderPartial("_CartPartial");
                        }
                     </li>
-                    @*<li class="search-bar">
-                        <a href="#"><i class="fa fa-search"></i></a>
-                        <ul class="drop-down hover-fade searching">
-                            <li>
-                                <form method="post" action="#">
-                                    <div class="form-group">
-                                        <input type="email" class="form-control" id="InputEmail1" placeholder="write you're searching here">
-                                    </div>
-                                    <button type="submit" class="boton-dark">search</button>
-                                </form>
-                            </li>
-                        </ul>
-                    </li>*@
+                    <li class="search-bar">
+                        @{
+                            Html.RenderPartial("_WishlistPartial");
+                        }
+                    </li>
 
                     <li class="register-form"><a href="#">Register</a></li>
                     <li class="login-form">

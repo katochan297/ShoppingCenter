@@ -18,7 +18,6 @@ namespace ShopWeb.Areas.Presentation.Controllers
     {
         // GET: Presentation/Cart
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult AddCart()
         {
             var quantity = int.Parse(Request.Form[GlobalVariable.hidCount] ?? "0");
@@ -49,7 +48,7 @@ namespace ShopWeb.Areas.Presentation.Controllers
         [HttpGet]
         public ActionResult RemoveCartItem(int id)
         {
-            var shoppingCart = SessionHelper.GetSession<Cart>(SessionName.ShoppingCart);
+            var shoppingCart = SessionHelper.GetSession<Cart>(SessionName.ShoppingCart) ?? new Cart();
             var firstOrDefault = shoppingCart.CartDetails.FirstOrDefault(x => x.ProductID == id);
             shoppingCart.CartDetails.Remove(firstOrDefault);
             return View("Index", shoppingCart);

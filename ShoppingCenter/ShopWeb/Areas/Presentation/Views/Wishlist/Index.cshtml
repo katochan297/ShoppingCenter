@@ -1,0 +1,71 @@
+﻿@using ShopCore.Helper
+@using ShopData.Model
+@model IEnumerable<CartDetail>
+
+<div class="paddings">
+    <div class="container">
+        <div class="row">
+            <!--BreadCrumbs-->
+            <div class="col-lg-12">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-title">Danh mục yêu thích của bạn</li>
+                </ol>
+            </div>
+            <!--BreadCrumbs-->
+        </div>
+
+        <div class="row">
+            <div class="margin-top-section">
+                <!--Totals-->
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="item-total myaccount">
+                        @foreach (var item in Model)
+                        {
+                            <div class="row content-body-bag">
+                                <!--Image feature-->
+                                <div class="col-lg-3 col-md-4 col-sm-12">
+                                    <div class="image-preview-center">
+                                        <img src="@item.Product.PictureUrl" alt="">
+                                    </div>
+                                </div>
+                                <!--Image feature-->
+                                <!--Info product-->
+                                <div class="col-lg-5 col-md-5 col-sm-6">
+                                    <h4 class="product-bag top">@item.Product.ProductName</h4>
+                                    <p>
+                                        <span>x @item.Quantity</span><br />
+                                        <span>@Utilities.FormatAmountToVnd(item.Product.Price)</span>
+                                    </p>
+                                    <p class="product-color top-mini">
+                                        <span class="text-uppercase">Tổng giá:</span> @Utilities.FormatAmountToVnd(item.TotalUnitPrice)
+                                    </p>
+                                </div>
+                                <!--Info product-->
+                                <!--add to cart boton-->
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                                    @*<button type="submit" value="Submit" class="boton-dark top text-uppercase">Checkout</button>*@
+                                    <a href="@Url.Action("AddCart", "Cart")" class="boton-dark top text-uppercase">Thêm vào giỏ hàng</a>
+                                </div>
+                                <!--add to cart boton-->
+                                <!--Close-->
+                                <div class="col-lg-1 col-md-1 col-sm-2">
+                                    <p class="top close">
+                                        <a href="@Url.Action("RemoveItem", "Wishlist", new { id = item.ProductID })"><i class="fa fa-times"></i></a>
+                                    </p>
+                                </div>
+                                <!--Close-->
+                            </div>
+                        }
+                    </div>
+                </div>
+                <!--Totals-->
+                @if (Model.Any() == false)
+                {
+                    <section class="cart-empty bg-gray center">
+                        <h4>Hiện tại bạn không có danh mục yêu thích nào</h4>
+                    </section>
+                }
+            </div>
+        </div>
+    </div>
+</div>

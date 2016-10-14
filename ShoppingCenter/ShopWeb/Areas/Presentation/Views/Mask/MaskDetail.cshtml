@@ -12,7 +12,6 @@
 <div class="paddings">
 
     <form id="frm" method="post" action="@Url.Action("AddCart", "Cart")">
-        @Html.AntiForgeryToken()
         <input type="hidden" id="@GlobalVariable.hidCount" name="@GlobalVariable.hidCount" value="1" />
         <input type="hidden" id="@GlobalVariable.hidProductId" name="@GlobalVariable.hidProductId" value="@Model.ProductID" />
     </form>
@@ -117,13 +116,17 @@
                             <div class="col-lg-5 col-md-6 col-sm-8 col-xs-6">
                                 <button type="submit" value="Submit" class="boton-dark text-uppercase" id="btnAddToCart">add to cart</button>
                             </div>
-                            @*<div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                                    <!--Add to bag and save to closet-->
-                                    <ul class="gotobag text-uppercase list-unstyled">
-                                        <li><span><a href="#">add to wishlist +</a></span></li>
-                                    </ul>
-                                    <!--Add to bag and save to closet-->
-                                </div>*@
+                            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                                <!--Add to bag and save to closet-->
+                                <ul class="gotobag text-uppercase list-unstyled">
+                                    <li>
+                                        <span>
+                                            <a href="@Url.Action("AddWishlist", "Wishlist")" type="submit">Thêm vào yêu thích +</a>
+                                        </span>
+                                    </li>
+                                </ul>
+                                <!--Add to bag and save to closet-->
+                            </div>
                         </div>
                     </div>
                     <!--quickview-->
@@ -192,21 +195,21 @@
                 <ul class="carousel-product list-inline top-mini">
                     @foreach (var item in lstMask)
                     {
-                    <li class="product">
-                        <a href="@Url.Action("MaskDetail", "Mask", new {id = item.ProductID})">
-                            <!--Image Product-->
-                            <div class="image-product">
-                                <img src="@item.PictureUrl" alt="">
-                            </div>
-                            <!--Image Product-->
-                            <!--Description Product-->
-                            <div class="description-product text-uppercase">
-                                <h4>@item.ProductName</h4>
-                                <p>@Utilities.FormatAmountToVnd(item.Price)</p>
-                            </div>
-                            <!--Description Product-->
-                        </a>
-                    </li>
+                        <li class="product">
+                            <a href="@Url.Action("MaskDetail", "Mask", new {id = item.ProductID})">
+                                <!--Image Product-->
+                                <div class="image-product">
+                                    <img src="@item.PictureUrl" alt="">
+                                </div>
+                                <!--Image Product-->
+                                <!--Description Product-->
+                                <div class="description-product text-uppercase">
+                                    <h4>@item.ProductName</h4>
+                                    <p>@Utilities.FormatAmountToVnd(item.Price)</p>
+                                </div>
+                                <!--Description Product-->
+                            </a>
+                        </li>
                     }
                 </ul>
             </div>
@@ -222,7 +225,10 @@
 {
     <script type="text/javascript">
         $(function () {
+            //Add to Wishlist
 
+
+            //Add to Cart
             $("#btnAddToCart").click(function () {
                 //Post Ajax
                 $.ajax({
