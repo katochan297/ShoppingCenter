@@ -7,6 +7,10 @@
     int? categoryId = ViewBag.CategoryId;
 }
 
+<form id="frmMaskListPartial" method="post">
+    <input type="hidden" name="@GlobalVariable.hidProductId" id="@GlobalVariable.hidProductId" />
+</form>
+
 <div class="paddings">
     <div class="container">
         <!--Sort by list filter-->
@@ -98,6 +102,28 @@
 
 @section scripts{
     <script type="text/javascript">
+        function AddCartQuickly(id) {
+            $("#@GlobalVariable.hidProductId").attr("value",id);
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("AddCartQuickly", "Cart")",
+                data: $('#frmMaskListPartial').serialize(),
+                datatype: "html",
+                success: function(data) {
+                    var counter = $(".bag-cart");
+                    counter.html(data);
+
+                    var animationend = "webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend";
+                    var animationName = "bounceIn";
+                    counter.addClass("animated " + animationName)
+                        .one(animationend,
+                            function() {
+                                $(this).removeClass(animationName);
+                            });
+                }
+            });
+        }
+
         $(function () {
             //Filtering
             $(".chkCategory").click(function () {

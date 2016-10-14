@@ -2,19 +2,14 @@
 @using ShopCore.Helper
 @using ShopData.Model
 @model MaskProduct
-
 @{
     List<MaskProduct> lstMask = ViewBag.ListMask;
 }
-
-
-
+<form id="frmDetail" method="post">
+    <input type="hidden" id="@GlobalVariable.hidCount" name="@GlobalVariable.hidCount" value="1" />
+    <input type="hidden" id="@GlobalVariable.hidProductId" name="@GlobalVariable.hidProductId" value="@Model.ProductID" />
+</form>
 <div class="paddings">
-
-    <form id="frm" method="post" action="@Url.Action("AddCart", "Cart")">
-        <input type="hidden" id="@GlobalVariable.hidCount" name="@GlobalVariable.hidCount" value="1" />
-        <input type="hidden" id="@GlobalVariable.hidProductId" name="@GlobalVariable.hidProductId" value="@Model.ProductID" />
-    </form>
 
     <div class="container">
         <!--BreadCrumbs-->
@@ -28,7 +23,6 @@
             </div>
         </div>
         <!--BreadCrumbs-->
-
         <div class="margin-top-section">
             <div class="row">
                 <div class="col-lg-5 col-md-5 col-sm-5">
@@ -57,7 +51,6 @@
                                 </a>
                             </li>
                         }
-
                     </ul>
                     @*<ul class="social-simple list-inline top-mini center">
                             <li><a href="#"><i class="fa fa-facebook"></i></a></li>
@@ -67,7 +60,6 @@
                             <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
                         </ul>*@
                 </div>
-
                 <div class="col-lg-7 col-md-7 col-sm-7 bottom">
                     <!--quickview-->
                     <div class="quickview-info">
@@ -114,27 +106,27 @@
                                 <!--Counter bag-->
                             </div>
                             <div class="col-lg-5 col-md-6 col-sm-8 col-xs-6">
-                                <button type="submit" value="Submit" class="boton-dark text-uppercase" id="btnAddToCart">add to cart</button>
+                                <button type="submit" value="Submit" class="boton-dark text-uppercase" id="btnAddToCart" onclick="AddToCart();">Thêm vào giỏ</button>
                             </div>
                             <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                                 <!--Add to bag and save to closet-->
                                 <ul class="gotobag text-uppercase list-unstyled">
                                     <li>
                                         <span>
-                                            <a href="@Url.Action("AddWishlist", "Wishlist")" type="submit">Thêm vào yêu thích +</a>
+                                            <a href="#" id="btnAddToWishlist" onclick="AddToWishlist();">Thêm vào yêu thích +</a>
                                         </span>
                                     </li>
                                 </ul>
                                 <!--Add to bag and save to closet-->
                             </div>
                         </div>
+
                     </div>
                     <!--quickview-->
                 </div>
             </div>
         </div>
     </div>
-
     <div class="container">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs margin-top-section text-uppercase" role="tablist">
@@ -188,7 +180,6 @@
                 </div>
             </div>
         </div>
-
         <div class="row">
             <!--Products List-->
             <div class="col-lg-12">
@@ -219,64 +210,78 @@
     <!--Products Gallery-->
 </div>
 
-
-
 @section scripts
 {
     <script type="text/javascript">
-        $(function () {
-            //Add to Wishlist
+        
+        function SetAnimate(obj, counter) {
+            var animationend = "webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend";
+            var animationName = "bounceOut";
+            //var obj = $("#btnAddToCart");
+            obj.addClass("animated " + animationName)
+                .one(animationend,
+                    function () {
+                        $(this).removeClass(animationName);
+                    });
 
+            var animationName2 = "bounceIn";
+            //var counter = $(".bag-cart");
+            counter.addClass("animated " + animationName2)
+                .one(animationend,
+                    function () {
+                        $(this).removeClass(animationName2);
+                    });
+        }
 
-            //Add to Cart
-            $("#btnAddToCart").click(function () {
-                //Post Ajax
-                $.ajax({
-                    type: "POST",
-                    url: "@Url.Action("AddCart", "Cart")",
-                    data: $('#frm').serialize(),
-                    datatype: "html",
-                    success: function (data) {
-                        $(".bag-cart").html(data);
-
-                        //Set animate
-                        var animationend = "webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend";
-                        var animationName = "bounceOut";
-                        var obj = $("#btnAddToCart");
-                        obj.addClass("animated " + animationName).one(animationend, function () {
-                            $(this).removeClass(animationName);
-                        });
-
-                        var animationName2 = "bounceIn";
-                        var counter = $(".bag-cart");
-                        counter.addClass("animated " + animationName2).one(animationend, function () {
-                            $(this).removeClass(animationName2);
-                        });
-                    }
-                });
-
+        function AddToCart() {
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("AddCart", "Cart")",
+                data: $('#frmDetail').serialize(),
+                datatype: "html",
+                success: function(data) {
+                    $(".bag-cart").html(data);
+                    SetAnimate($("#btnAddToCart"), $(".bag-cart"));
+                }
             });
+        }
+
+        function AddToWishlist() {
+            event.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("AddWishlist", "Wishlist")",
+                data: $('#frmDetail').serialize(),
+                datatype: "html",
+                success: function(data) {
+                    $("#wishlist-bar").html(data);
+                    SetAnimate($("#btnAddToWishlist"), $("#wishlist-bar"));
+                }
+            });
+        }
 
 
+        $(function() {
             //Sub and Add count
             var hidCount = $("#@GlobalVariable.hidCount");
             var count = $("#lblCount");
-            $("#addCount").click(function () {
-                var size = parseInt(count.text());
-                if (size >= 1 && size < 10)
-                    size = size + 1;
-                count.text(size);
-                hidCount.val(size);
-            });
+            $("#addCount")
+                .click(function() {
+                    var size = parseInt(count.text());
+                    if (size >= 1 && size < 10)
+                        size = size + 1;
+                    count.text(size);
+                    hidCount.val(size);
+                });
 
-            $("#subCount").click(function () {
-                var size = parseInt(count.text());
-                if (size > 1 && size <= 10)
-                    size = size - 1;
-                count.text(size);
-                hidCount.val(size);
-            });
-
+            $("#subCount")
+                .click(function() {
+                    var size = parseInt(count.text());
+                    if (size > 1 && size <= 10)
+                        size = size - 1;
+                    count.text(size);
+                    hidCount.val(size);
+                });
         });
     </script>
 }

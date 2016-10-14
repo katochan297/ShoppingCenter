@@ -44,7 +44,7 @@
                                 <!--add to cart boton-->
                                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
                                     @*<button type="submit" value="Submit" class="boton-dark top text-uppercase">Checkout</button>*@
-                                    <a href="@Url.Action("AddCart", "Cart")" class="boton-dark top text-uppercase">Thêm vào giỏ hàng</a>
+                                    <a href="@Url.Action("AddCartByWishlist", "Cart", new {id = item.ProductID})" class="boton-dark top text-uppercase">Thêm vào giỏ</a>
                                 </div>
                                 <!--add to cart boton-->
                                 <!--Close-->

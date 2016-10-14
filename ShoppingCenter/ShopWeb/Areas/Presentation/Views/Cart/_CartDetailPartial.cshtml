@@ -1,0 +1,91 @@
+﻿@using ShopCore.Helper
+@model ShopData.Model.Cart
+
+@foreach (var item in Model.CartDetails)
+{
+    <div class="row content-body-bag">
+        <!--Image feature-->
+        <div class="col-lg-3 col-md-4 col-sm-12">
+            <div class="image-preview-center">
+                <img src="@item.Product.PictureUrl" alt="">
+            </div>
+        </div>
+        <!--Image feature-->
+        <!--Info product-->
+        <div class="col-lg-3 col-md-3 col-sm-4">
+            <h4 class="product-bag top">@item.Product.ProductName</h4>
+            <p><span>@Utilities.FormatAmountToVnd(item.Product.Price)</span></p>
+            @if (item.IsOverOrder == true)
+            {
+                <p class="product-color top-mini">
+                    <span style="color: red">Số lượng đặt hàng đã đạt tối đa</span>
+                </p>
+            }
+        </div>
+        <!--Info product-->
+        <!--Counter Bag-->
+        <div class="col-lg-2 col-md-2 col-sm-4">
+            <ul class="counter-bag top list-inline">
+                <li><a href="#" id="subQuantity" onclick="ChangeQuantity(@item.ProductID, -1)">-</a></li>
+                <li><label id="lblQuantity" name="lblQuantity">@item.Quantity</label></li>
+                <li><a href="#" id="addQuantity" onclick="ChangeQuantity(@item.ProductID, 1)">+</a></li>
+            </ul>
+        </div>
+        <!--Counter Bag-->
+        <!--Price-->
+        <div class="col-lg-2 col-md-2 col-sm-2">
+            <p class="top"><span>@Utilities.FormatAmountToVnd(item.TotalUnitPrice)</span></p>
+        </div>
+        <!--Price-->
+        <!--Close-->
+        <div class="col-lg-2 col-md-1 col-sm-2">
+            <p class="top close">
+                <a href="@Url.Action("RemoveCartItem", "Cart", new { id = item.ProductID })"><i class="fa fa-times"></i></a>
+            </p>
+        </div>
+        <!--Close-->
+    </div>
+}
+
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="top-mini text-uppercase bg-gray totals">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div class="giftcard right top">
+                        <input type="email" class="form-control" placeholder="nhập mã khuyến mãi của quý khách" required>
+                        <button type="button" class="boton-dark text-uppercase">Xác nhận</button>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div class="totals-cart">
+                        <h4>cart subtotal<span class="price">72.00</span></h4>
+                        <hr>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <h4>shipping and handling</h4>
+                            </div>
+                            <div class="col-lg-6 checkbox-shipping">
+                                <label><input type="checkbox" value=""> Free Shipping</label>
+                                <label><input type="checkbox" value=""> Express: <span class="price">15.00</span></label>
+                                <label><input type="checkbox" value=""> International Shipping: <span class="price">35.00</span></label>
+                            </div>
+                        </div>
+                        <hr>
+                        <h3>Order Total<span class="price">72.00</span></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <div class="boton-arrow top text-uppercase">
+            <a href="@Url.Action("Index", "Home")"> <i class="fa fa-angle-left"></i> Quay lại cửa hàng</a>
+        </div>
+    </div>
+
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 right">
+        <button type="submit" value="Submit" class="boton-dark gitfbotton bottom-mini top text-uppercase">Thanh Toán</button>
+    </div>
+</div>

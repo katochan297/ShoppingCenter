@@ -14,7 +14,7 @@ namespace ShopWeb.Areas.Presentation.Controllers
 {
     public class MaskController : Controller
     {
-        private const int PageSize = 3;
+        private const int PageSize = 12;
 
         public MaskController()
         {
@@ -37,10 +37,7 @@ namespace ShopWeb.Areas.Presentation.Controllers
         [HttpGet]
         public ActionResult Index(int page = 1)
         {
-            var lstMask = SessionHelper.GetSession<List<MaskProduct>>(SessionName.MaskList);
-            if (lstMask == null)
-                SessionHelper.SetSession(SessionName.MaskList,
-                    CacheManagement.Instance.ListMaskProduct.ToList());
+            SessionHelper.SetSession(SessionName.MaskList, CacheManagement.Instance.ListMaskProduct.ToList());
 
             return IndexViewResult(page);
         }
