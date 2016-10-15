@@ -23,20 +23,12 @@ namespace ShopWeb.Areas.Presentation.Controllers
         [HttpPost]
         public ActionResult AddWishlist()
         {
-            var quantity = int.Parse(Request.Form[GlobalVariable.hidCount] ?? "0");
+            //var quantity = int.Parse(Request.Form[GlobalVariable.hidCount] ?? "0");
             var productId = int.Parse(Request.Form[GlobalVariable.hidProductId] ?? "0");
             var product = CacheManagement.Instance.ListProduct.FirstOrDefault(x => x.ProductID == productId);
 
-            var wishlist = SessionHelper.GetSession<List<CartDetail>>(SessionName.Wishlist);
-
-            if (wishlist == null)
-            {
-                CreateWishlist(quantity, product);
-            }
-            else
-            {
-                UpdateWishlist(quantity, product, wishlist);
-            }
+            if (product != null)
+                ManageWishlist(product);
 
             return PartialView("_WishlistPartial");
         }
@@ -50,10 +42,24 @@ namespace ShopWeb.Areas.Presentation.Controllers
             return View("Index", wishlist);
         }
 
+        [NonAction]
+        private void ManageWishlist(Product product)
+        {
+            var wishlist = SessionHelper.GetSession<List<CartDetail>>(SessionName.Wishlist);
+            if (wishlist == null)
+            {
+                CreateWishlist(product);
+            }
+            else
+            {
+                UpdateWishlist(product, wishlist);
+            }
+        }
 
         [NonAction]
-        private void CreateWishlist(int quantity, Product product)
+        private void CreateWishlist(Product product)
         {
+            const int quantity = 1;
             var total = quantity * product.Price;
             var wishlist = new List<CartDetail>
             {
@@ -69,19 +75,11 @@ namespace ShopWeb.Areas.Presentation.Controllers
         }
 
         [NonAction]
-        private void UpdateWishlist(int quantity, Product product, List<CartDetail> wishlist)
+        private void UpdateWishlist(Product product, List<CartDetail> wishlist)
         {
+            const int quantity = 1;
             var cartDetail = wishlist.FirstOrDefault(x => x.ProductID == product.ProductID);
-            if (cartDetail != null)
-            {
-                cartDetail.Quantity += quantity;
-                if (cartDetail.Quantity >= product.UnitOnOrder)
-                {
-                    cartDetail.Quantity = product.UnitOnOrder;
-                }
-                cartDetail.TotalUnitPrice = cartDetail.Quantity * product.Price;
-            }
-            else
+            if (cartDetail == null)
             {
                 wishlist.Add(new CartDetail
                 {

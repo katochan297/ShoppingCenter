@@ -27,7 +27,7 @@
 @section scripts{
     <script type="text/javascript">
         function ChangeQuantity(id, qty) {
-            //event.preventDefault();
+            event.preventDefault();
             var data ={ Quantity : qty, ProductID : id}
             $.ajax({
                 type: "POST",
@@ -35,8 +35,9 @@
                 data: JSON.stringify(data),
                 contentType: "application/json",
                 datatype: "html",
-                success: function (data) {
-                    $(".item-total").html(data);
+                success: function (response) {
+                    $(".item-total").html(response.cartDetailPartialView);
+                    $(".bag-cart").html(response.cartPartialView);
                 }
             });
         }

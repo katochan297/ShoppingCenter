@@ -14,7 +14,9 @@ namespace ShopWeb.Areas.Presentation.Controllers
         {
             SessionHelper.SetSession(SessionName.MenuActivity, "Contact");
         }
+
         // GET: Presentation/Contact
+        [HttpGet]
         public ActionResult Index()
         {
             return View();

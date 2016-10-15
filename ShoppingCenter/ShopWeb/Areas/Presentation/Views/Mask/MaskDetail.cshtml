@@ -236,7 +236,7 @@
         function AddToCart() {
             $.ajax({
                 type: "POST",
-                url: "@Url.Action("AddCart", "Cart")",
+                url: "@Url.Action("AddCartByDetailView", "Cart")",
                 data: $('#frmDetail').serialize(),
                 datatype: "html",
                 success: function(data) {
@@ -266,7 +266,8 @@
             var hidCount = $("#@GlobalVariable.hidCount");
             var count = $("#lblCount");
             $("#addCount")
-                .click(function() {
+                .click(function () {
+                    event.preventDefault();
                     var size = parseInt(count.text());
                     if (size >= 1 && size < 10)
                         size = size + 1;
@@ -275,7 +276,8 @@
                 });
 
             $("#subCount")
-                .click(function() {
+                .click(function () {
+                    event.preventDefault();
                     var size = parseInt(count.text());
                     if (size > 1 && size <= 10)
                         size = size - 1;

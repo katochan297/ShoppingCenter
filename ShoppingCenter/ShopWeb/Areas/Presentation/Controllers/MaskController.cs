@@ -20,19 +20,7 @@ namespace ShopWeb.Areas.Presentation.Controllers
         {
             SessionHelper.SetSession(SessionName.MenuActivity, "Mask");
         }
-
-        [NonAction]
-        private ActionResult IndexViewResult(int page)
-        {
-            var lstMask = SessionHelper.GetSession<List<MaskProduct>>(SessionName.MaskList);           
-
-            ViewBag.ListMaskCategory = CacheManagement.Instance.ListMaskCategory;
-            
-            return Request.IsAjaxRequest()
-               ? (ActionResult)PartialView("_MaskListPartial", lstMask.ToPagedList(page, PageSize))
-               : View("Index", lstMask.ToPagedList(page, PageSize));
-        }
-
+        
         // GET: Presentation/Mask
         [HttpGet]
         public ActionResult Index(int page = 1)
@@ -99,6 +87,18 @@ namespace ShopWeb.Areas.Presentation.Controllers
             }
             ViewBag.ListMask = lstMask;
             return View(mask);
+        }
+
+        [NonAction]
+        private ActionResult IndexViewResult(int page)
+        {
+            var lstMask = SessionHelper.GetSession<List<MaskProduct>>(SessionName.MaskList);
+
+            ViewBag.ListMaskCategory = CacheManagement.Instance.ListMaskCategory;
+
+            return Request.IsAjaxRequest()
+               ? (ActionResult)PartialView("_MaskListPartial", lstMask.ToPagedList(page, PageSize))
+               : View("Index", lstMask.ToPagedList(page, PageSize));
         }
 
     }

@@ -2,9 +2,7 @@
 @using ShopData.Model
 @model List<Menu>
 @{
-    var active = (string)(Session[SessionName.MenuActivity] != null 
-        ? Session[SessionName.MenuActivity] 
-        : "");
+    var active = (string)(Session[SessionName.MenuActivity] ?? "");
 }
 
 <header class="menu-standar">

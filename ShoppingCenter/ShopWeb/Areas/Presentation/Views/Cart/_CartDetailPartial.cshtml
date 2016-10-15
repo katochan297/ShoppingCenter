@@ -53,26 +53,30 @@
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-12">
                     <div class="giftcard right top">
-                        <input type="email" class="form-control" placeholder="nhập mã khuyến mãi của quý khách" required>
-                        <button type="button" class="boton-dark text-uppercase">Xác nhận</button>
+                        <div class="row">
+                            <div class="col-lg-8 col-md-6 col-xs-12">
+                                <input style="width: 100% !important" type="text" class="form-control" placeholder="nhập mã khuyến mãi của quý khách(nếu có)">
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-xs-12">
+                                <button type="button" class="boton-dark text-uppercase left">Xác nhận</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12">
                     <div class="totals-cart">
-                        <h4>cart subtotal<span class="price">72.00</span></h4>
-                        <hr>
+                        <h4>Tổng cộng <span>@Utilities.FormatAmountToVnd(Model.TotalPrice)</span></h4>
+                        <hr />
                         <div class="row">
                             <div class="col-lg-6">
-                                <h4>shipping and handling</h4>
+                                <h4>Phí vận chuyển</h4>
                             </div>
-                            <div class="col-lg-6 checkbox-shipping">
-                                <label><input type="checkbox" value=""> Free Shipping</label>
-                                <label><input type="checkbox" value=""> Express: <span class="price">15.00</span></label>
-                                <label><input type="checkbox" value=""> International Shipping: <span class="price">35.00</span></label>
+                            <div class="col-lg-6 checkbox-shipping right">
+                                <label>Miễn phí</label>
                             </div>
                         </div>
                         <hr>
-                        <h3>Order Total<span class="price">72.00</span></h3>
+                        <h3>Thanh toán<span>@Utilities.FormatAmountToVnd(Model.TotalPrice)</span></h3>
                     </div>
                 </div>
             </div>
@@ -86,6 +90,6 @@
     </div>
 
     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 right">
-        <button type="submit" value="Submit" class="boton-dark gitfbotton bottom-mini top text-uppercase">Thanh Toán</button>
+        <a href="@Url.Action("Index","Checkout")" class="boton-dark gitfbotton bottom-mini top text-uppercase">Thanh Toán</a>
     </div>
 </div>

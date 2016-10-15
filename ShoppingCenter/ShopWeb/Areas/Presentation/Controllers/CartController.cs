@@ -12,20 +12,29 @@ using ShopCore.Enum;
 using ShopCore.Helper;
 using ShopCore.Service;
 using ShopData.Model;
+using ShopWeb.Controllers;
 
 namespace ShopWeb.Areas.Presentation.Controllers
 {
-    public class CartController : Controller
+    public class CartController : BaseController
     {
         // GET: Presentation/Cart
+        [HttpGet]
+        public ActionResult Index()
+        {
+            var shoppingCart = SessionHelper.GetSession<Cart>(SessionName.ShoppingCart) ?? new Cart();
+            return View(shoppingCart);
+        }
+        
         [HttpPost]
-        public ActionResult AddCart()
+        public ActionResult AddCartByDetailView()
         {
             var quantity = int.Parse(Request.Form[GlobalVariable.hidCount] ?? "0");
             var productId = int.Parse(Request.Form[GlobalVariable.hidProductId] ?? "0");
             var product = CacheManagement.Instance.ListProduct.FirstOrDefault(x => x.ProductID == productId);
 
-            CreateShoppingCart(quantity, product);
+            if (product != null && quantity > 0 && quantity <= product.UnitOnOrder)
+                CreateShoppingCart(quantity, product);
             
             return PartialView("_CartPartial");
         }
@@ -56,14 +65,7 @@ namespace ShopWeb.Areas.Presentation.Controllers
 
             return PartialView("_CartPartial");
         }
-
-        [HttpGet]
-        public ActionResult Index()
-        {
-            var shoppingCart = SessionHelper.GetSession<Cart>(SessionName.ShoppingCart) ?? new Cart();
-            return View(shoppingCart);
-        }
-
+        
         [HttpGet]
         public ActionResult RemoveCartItem(int id)
         {
@@ -92,8 +94,11 @@ namespace ShopWeb.Areas.Presentation.Controllers
                 if (product != null)
                     UpdateCart(qty, product.Product, shoppingCart);
             }
-            //TODO
-            return PartialView("_CartDetailPartial", shoppingCart);
+            
+            var cartDetailPartialView = RenderRazorViewToString(ControllerContext, "_CartDetailPartial", shoppingCart);
+            var cartPartialView = RenderRazorViewToString(ControllerContext, "_CartPartial", shoppingCart);
+            var response = Json(new { cartDetailPartialView, cartPartialView });
+            return response;
         }
 
         [NonAction]
@@ -114,29 +119,26 @@ namespace ShopWeb.Areas.Presentation.Controllers
         [NonAction]
         private void CreateCart(int quantity, Product product)
         {
-            if (quantity > 0 && quantity <= product.UnitOnOrder)
+            var total = quantity*product.Price;
+            var id = Guid.NewGuid().ToString();
+            var cart = new Cart
             {
-                var total = quantity*product.Price;
-                var id = Guid.NewGuid().ToString();
-                var cart = new Cart
+                CartID = id,
+                TotalPrice = total,
+                Status = DataStatus.Available,
+                CartDetails = new List<CartDetail>
                 {
-                    CartID = id,
-                    TotalPrice = total,
-                    Status = DataStatus.Available,
-                    CartDetails = new List<CartDetail>
+                    new CartDetail
                     {
-                        new CartDetail
-                        {
-                            CartID = id,
-                            ProductID = product.ProductID,
-                            Quantity = quantity,
-                            TotalUnitPrice = total,
-                            Product = product
-                        }
+                        CartID = id,
+                        ProductID = product.ProductID,
+                        Quantity = quantity,
+                        TotalUnitPrice = total,
+                        Product = product
                     }
-                };
-                SessionHelper.SetSession(SessionName.ShoppingCart, cart);
-            }
+                }
+            };
+            SessionHelper.SetSession(SessionName.ShoppingCart, cart);
         }
 
         [NonAction]
@@ -154,22 +156,23 @@ namespace ShopWeb.Areas.Presentation.Controllers
                 else if (cartDetail.Quantity < 1)
                 {
                     cartDetail.Quantity = 1;
+                    cartDetail.IsOverOrder = false;
                 }
-                cartDetail.TotalUnitPrice = cartDetail.Quantity * product.Price;
+                else
+                    cartDetail.IsOverOrder = false;
+                cartDetail.TotalUnitPrice = cartDetail.Quantity*product.Price;
             }
             else
             {
-                if (quantity > 0 && quantity <= product.UnitOnOrder)
+                shoppingCart.CartDetails.Add(new CartDetail
                 {
-                    shoppingCart.CartDetails.Add(new CartDetail
-                    {
-                        CartID = shoppingCart.CartID,
-                        ProductID = product.ProductID,
-                        Quantity = quantity,
-                        Product = product,
-                        TotalUnitPrice = quantity * product.Price
-                    });
-                }
+                    CartID = shoppingCart.CartID,
+                    ProductID = product.ProductID,
+                    Quantity = quantity,
+                    Product = product,
+                    IsOverOrder = quantity == product.UnitOnOrder,
+                    TotalUnitPrice = quantity * product.Price
+                });
             }
             shoppingCart.TotalPrice = shoppingCart.CartDetails.Select(x => x.TotalUnitPrice).Sum();
         }

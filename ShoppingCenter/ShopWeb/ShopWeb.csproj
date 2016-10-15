@@ -454,6 +454,7 @@
     <Compile Include="Areas\Presentation\Controllers\MenuController.cs" />
     <Compile Include="Areas\Presentation\Controllers\WishlistController.cs" />
     <Compile Include="Areas\Presentation\PresentationAreaRegistration.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

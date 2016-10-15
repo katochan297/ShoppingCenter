@@ -72,19 +72,16 @@
                             @Html.TextAreaFor(m => m.ShipNote, new { @class = "form-control", placeholder = "Quý khách có ghi chú về địa chỉ giao hàng hoặc thông tin khác, xin hãy điền vào đây." })
                         </div>
                         <!--Note-->
-                        <div class="form-group col-lg-12 right">
-                            <button type="submit" value="Submit" class="boton-dark bottom-mini top text-uppercase">Xác nhận</button>
-                        </div>
-
+                        <button type="submit" id="btnConfirm" style="display: none"></button>
                         @Html.HiddenFor(m => m.ShipFee)
                     </form>
                 </div>
                 <div class="col-lg-6">
                     <div class="bg-gray order-resume">
                         <div class="text-uppercase">
-                            <h3>Hóa đơn</h3>
+                            <h3>Đơn hàng của bạn</h3>
                             <p class="top">
-                                <b>Sản phẩm<span class="float-right">Giá</span></b>
+                                <b>Sản phẩm<span class="float-right">Tổng</span></b>
                             </p>
                             <hr />
                             @foreach (var item in shoppingCart.CartDetails)
@@ -92,16 +89,17 @@
                                 <p class="item-detail">
                                     @item.Product.ProductName
                                     <span class="amount">x @item.Quantity</span>
-                                    <span class="float-right">@Utilities.FormatAmountToVnd(item.Product.Price)</span>
+                                    <span class="float-right">@Utilities.FormatAmountToVnd(item.TotalUnitPrice)</span>
                                 </p>
                             }
                             <hr />
-                            <p>Tổng Giá <span class="float-right">@Utilities.FormatAmountToVnd(shoppingCart.TotalPrice)</span></p>
+                            <p>Tổng Cộng <span class="float-right">@Utilities.FormatAmountToVnd(shoppingCart.TotalPrice)</span></p>
                             <p>Phí vận chuyển<span class="float-right">Miễn Phí</span></p>
                             <hr />
-                            <p class="total">Tổng cộng<span class="float-right">@Utilities.FormatAmountToVnd(shoppingCart.TotalPrice)</span></p>
+                            <p class="total">Thanh toán<span class="float-right">@Utilities.FormatAmountToVnd(shoppingCart.TotalPrice)</span></p>
                             <hr>
                         </div>
+                        <button type="button" class="boton-dark bottom-mini top text-uppercase" onclick="SubmitCheckoutForm();">Đặt hàng</button>
                     </div>
                 </div>
 
@@ -113,6 +111,10 @@
 @section scripts
 {
     <script type="text/javascript">
+        function SubmitCheckoutForm() {
+            $("#btnConfirm").click();
+        }
+
         $(function() {
             var msgFillOut = "Vui lòng nhập đủ thông tin";
             var msgEmail = "Vui lòng nhập đúng địa chỉ email";

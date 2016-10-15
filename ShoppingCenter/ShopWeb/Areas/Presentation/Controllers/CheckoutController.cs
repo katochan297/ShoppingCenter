@@ -45,9 +45,8 @@ namespace ShopWeb.Areas.Presentation.Controllers
 
                 var msg = "Cám ơn quý khách đã đặt hàng.<br />Cửa hàng sẽ liên hệ với quý khách trong thời gian sớm nhất.";
                 TempData[Alert.TempDataKey] = AlertHelper.Success(msg, true);
-                return View("Index");
             }
-            return null;
+            return View("Index");
         }
 
     }
