@@ -168,3 +168,43 @@ C:\1 - Personal\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\PagedList.dll
 C:\1 - Personal\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\PagedList.Mvc.dll
 C:\1 - Personal\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\PagedList.xml
 C:\1 - Personal\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\PagedList.Mvc.xml
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\Microsoft.CSharp.dll
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\System.ComponentModel.DataAnnotations.dll
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\System.Configuration.dll
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\System.Data.DataSetExtensions.dll
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\System.Data.dll
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\System.dll
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\System.Drawing.dll
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\System.EnterpriseServices.dll
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\System.Web.ApplicationServices.dll
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\System.Web.dll
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\System.Web.DynamicData.dll
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\System.Web.Entity.dll
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\System.Web.Extensions.dll
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\System.Web.Services.dll
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\System.Xml.dll
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\System.Xml.Linq.dll
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\Microsoft.AspNet.Identity.Core.dll
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\Microsoft.AspNet.Identity.Owin.dll
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\Microsoft.Owin.dll
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\Microsoft.Owin.Host.SystemWeb.dll
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\Microsoft.Owin.Security.Cookies.dll
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\Microsoft.Owin.Security.dll
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\Microsoft.Owin.Security.OAuth.dll
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\Newtonsoft.Json.dll
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\Owin.dll
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\Microsoft.AspNet.Identity.Core.xml
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\Microsoft.AspNet.Identity.Owin.xml
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\Microsoft.Owin.xml
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\Microsoft.Owin.Host.SystemWeb.xml
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\Microsoft.Owin.Security.xml
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\Microsoft.Owin.Security.Cookies.xml
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\Microsoft.Owin.Security.OAuth.xml
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\Newtonsoft.Json.xml
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\Antlr3.Runtime.dll
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\System.Web.Optimization.dll
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\WebGrease.dll
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\Antlr3.Runtime.pdb
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\System.Web.Optimization.xml

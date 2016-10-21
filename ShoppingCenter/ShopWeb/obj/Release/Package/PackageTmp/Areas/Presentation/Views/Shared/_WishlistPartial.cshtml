@@ -1,0 +1,23 @@
+﻿@using ShopCore.Enum
+@using ShopCore.Helper
+@using ShopData.Model
+
+@{
+    var wishlist = SessionHelper.GetSession<List<CartDetail>>(SessionName.Wishlist) ?? new List<CartDetail>();
+    var count = wishlist.Count;
+}
+
+<a href="@Url.Action("Index","Wishlist")" title="Danh mục yêu thích">
+    <i class="fa fa-heart"></i>
+    <span class="counter-wishlist">@count</span>
+</a>
+@*<ul class="drop-down hover-fade searching">
+        <li>
+            <form method="post" action="#">
+                <div class="form-group">
+                    <input type="email" class="form-control" id="InputEmail1" placeholder="write you're searching here">
+                </div>
+                <button type="submit" class="boton-dark">search</button>
+            </form>
+        </li>
+    </ul>*@

@@ -1,0 +1,29 @@
+a,
+a:hover,
+.button-hover-slider:hover,
+.button-hover-slider,
+.flat-mega-menu > ul > li:hover > a,
+.flat-mega-menu > ul > li > a,
+.product:hover .sale-item,
+.product .sale-item,
+.product-hover:hover .hover-description,
+.product-hover,
+.hover-description,
+.image-gallery:hover .hover-gallery,
+.hover-gallery,
+.description-product:hover i,
+.description-product i,
+.boton-dark:hover,
+.boton-dark,
+.footer-bag .check-bag:hover,
+.footer-bag .check-bag,
+.product div:hover .description-product,
+.product .description-product,
+.product a,
+.product div:hover a{	
+	-webkit-transition: 0.3s all ease;
+	-moz-transition: 0.3s all ease;
+	-o-transition: 0.3s all ease;
+	-ms-transition: 0.3s all ease;
+	transition: 0.3s all ease;
+}

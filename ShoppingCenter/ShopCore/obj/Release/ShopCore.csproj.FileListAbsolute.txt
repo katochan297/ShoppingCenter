@@ -1,0 +1,12 @@
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopCore\bin\Release\ShopCore.dll.config
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopCore\bin\Release\ShopCore.dll
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopCore\bin\Release\ShopCore.pdb
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopCore\bin\Release\EntityFramework.dll
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopCore\bin\Release\EntityFramework.SqlServer.dll
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopCore\bin\Release\ShopData.dll
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopCore\bin\Release\ShopData.pdb
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopCore\bin\Release\EntityFramework.xml
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopCore\bin\Release\EntityFramework.SqlServer.xml
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopCore\obj\Release\ShopCore.csprojResolveAssemblyReference.cache
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopCore\obj\Release\ShopCore.dll
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopCore\obj\Release\ShopCore.pdb

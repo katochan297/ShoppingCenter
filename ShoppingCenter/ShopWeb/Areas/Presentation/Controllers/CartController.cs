@@ -16,7 +16,7 @@ using ShopWeb.Controllers;
 
 namespace ShopWeb.Areas.Presentation.Controllers
 {
-    public class CartController : BaseController
+    public class CartController : PresentController
     {
         // GET: Presentation/Cart
         [HttpGet]

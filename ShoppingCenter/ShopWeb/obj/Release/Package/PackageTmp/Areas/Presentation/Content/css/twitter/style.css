@@ -1,0 +1,55 @@
+.tweet_list{
+	padding: 0;
+	margin: 0;
+}
+.tweet_list li{
+	list-style: none;
+}
+.tweet_time{
+	line-height: 4rem;
+}
+.tweet_time a{
+	color: #efefef;
+}
+.tweet_text{
+	color: #efefef;
+	float: right;
+	padding-left: 2rem;
+}
+.tweet_text a{
+	color: #efefef;
+}
+.tweet_time:before{
+	content: "\f099";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    color: #fff;
+    font-size: 25px;
+    padding-right: 0.3em;
+}
+.rewind-icon-tweet{
+	padding: 12.64rem 0 !important;
+	position: relative;
+}
+.rewind-icon-tweet::before{
+	content: "";
+	width: 0; 
+	height: 0; 
+	border-top: 25px solid transparent;
+	border-bottom: 25px solid transparent;
+	border-left: 25px solid #313131;
+	position: absolute;
+	right: -15px;
+}
+.rewind-icon-tweet a{
+	color: #fff;
+}
+.tweet-text{
+	display: inline-block;
+	width: 99.1%;
+	padding: 8.65rem 5rem;
+	color: #fff;
+	margin-left: -6px;
+}

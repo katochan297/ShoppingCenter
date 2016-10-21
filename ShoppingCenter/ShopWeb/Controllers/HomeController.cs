@@ -13,5 +13,11 @@ namespace ShopWeb.Controllers
         {
             return RedirectToAction("Index", "Home", new { Area = "Presentation" });
         }
+
+        public ActionResult Error()
+        {
+            return RedirectToAction("Error", "Home", new { Area = "Presentation" });
+        }
+
     }
 }

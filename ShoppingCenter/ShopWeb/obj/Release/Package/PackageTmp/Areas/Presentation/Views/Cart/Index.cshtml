@@ -1,0 +1,45 @@
+﻿@using ShopCore.Helper
+@using ShopData.Model
+@model Cart
+
+
+<div class="paddings">
+    <div class="container">
+        <!--BreadCrumbs-->
+        <div class="col-lg-12">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-title">Giỏ hàng của bạn</li>
+            </ol>
+        </div>
+        <!--BreadCrumbs-->
+        <!--Totals-->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="item-total margin-top-section">
+                @{
+                    Html.RenderPartial("_CartDetailPartial", Model);
+                }
+            </div>
+        </div>
+        <!--Totals-->
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        function ChangeQuantity(id, qty) {
+            event.preventDefault();
+            var data ={ Quantity : qty, ProductID : id}
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("ChangeQuantity", "Cart")",
+                data: JSON.stringify(data),
+                contentType: "application/json",
+                datatype: "html",
+                success: function (response) {
+                    $(".item-total").html(response.cartDetailPartialView);
+                    $(".bag-cart").html(response.cartPartialView);
+                }
+            });
+        }
+    </script>
+}

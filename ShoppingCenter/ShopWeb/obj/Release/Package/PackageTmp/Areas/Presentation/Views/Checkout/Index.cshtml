@@ -1,0 +1,142 @@
+﻿@using ShopCore.Enum
+@using ShopCore.Helper
+@using ShopData.Model
+@model Order
+
+@section styles
+{
+    <style type="text/css">
+        .font-red {
+            color: red;
+        }
+    </style>
+}
+
+@{
+    var shoppingCart = SessionHelper.GetSession<Cart>(SessionName.ShoppingCart) ?? new Cart();
+}
+
+<div class="paddings">
+    <div class="container">
+        <!--BreadCrumbs-->
+        <div class="row">
+            <div class="col-lg-12">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-title">Thanh Toán</li>
+                </ol>
+            </div>
+        </div>
+        <!--BreadCrumbs-->
+
+        <div class="margin-top-section">
+            <div class="row">
+
+                <div class="col-lg-6">
+                    <legend>
+                        <h3>Thông tin giao hàng</h3>
+                    </legend>
+
+                    <form class="row form-checkout" method="post" action="@Url.Action("Confirm", "Checkout")">
+                        @Html.AntiForgeryToken()
+                        <div class="form-group col-lg-12">
+                            @Html.LabelFor(m => m.ShipName)<span class="font-red">*</span>
+                            @Html.TextBoxFor(m => m.ShipName, new {@class = "form-control", required = "" })
+                        </div>
+                        <div class="form-group col-lg-12">
+                            @Html.LabelFor(m => m.ShipAddress)<span class="font-red">*</span>
+                            @Html.TextBoxFor(m => m.ShipAddress, new { @class = "form-control", required = "" })
+                        </div>
+                        <div class="form-group col-lg-12">
+                            @Html.LabelFor(m => m.ShipCity)<span class="font-red">*</span>
+                            @Html.TextBoxFor(m => m.ShipCity, new { @class = "form-control", required = "" })
+                        </div>
+                       
+                        <div class="form-group col-lg-6">
+                            @Html.LabelFor(m => m.ShipEmail)<span class="font-red">*</span>
+                            @Html.TextBoxFor(m => m.ShipEmail, new { @class = "form-control", required = "" })
+                        </div>
+                        <div class="form-group col-lg-6">
+                            @Html.LabelFor(m => m.ShipMobile)<span class="font-red">*</span>
+                            @Html.TextBoxFor(m => m.ShipMobile, new { @class = "form-control", required = "" })
+                        </div>
+
+                        <div class="col-lg-12 checkbox-shipping">
+                            <label>
+                                Quý khách vui lòng cung cấp chính xác địa chỉ giao hàng để được giao hàng tận nơi
+                            </label>
+                        </div>
+
+                        <!--Note-->
+                        <div class="form-group col-lg-12 top-mini">
+                            @Html.LabelFor(m => m.ShipNote)
+                            @Html.TextAreaFor(m => m.ShipNote, new { @class = "form-control", placeholder = "Quý khách có ghi chú về địa chỉ giao hàng hoặc thông tin khác, xin hãy điền vào đây." })
+                        </div>
+                        <!--Note-->
+                        <button type="submit" id="btnConfirm" style="display: none"></button>
+                        @Html.HiddenFor(m => m.ShipFee)
+                    </form>
+                </div>
+                <div class="col-lg-6">
+                    <div class="bg-gray order-resume">
+                        <div class="text-uppercase">
+                            <h3>Đơn hàng của bạn</h3>
+                            <p class="top">
+                                <b>Sản phẩm<span class="float-right">Tổng</span></b>
+                            </p>
+                            <hr />
+                            @foreach (var item in shoppingCart.CartDetails)
+                            {
+                                <p class="item-detail">
+                                    @item.Product.ProductName
+                                    <span class="amount">x @item.Quantity</span>
+                                    <span class="float-right">@Utilities.FormatAmountToVnd(item.TotalUnitPrice)</span>
+                                </p>
+                            }
+                            <hr />
+                            <p>Tổng Cộng <span class="float-right">@Utilities.FormatAmountToVnd(shoppingCart.TotalPrice)</span></p>
+                            <p>Phí vận chuyển<span class="float-right">Miễn Phí</span></p>
+                            <hr />
+                            <p class="total">Thanh toán<span class="float-right">@Utilities.FormatAmountToVnd(shoppingCart.TotalPrice)</span></p>
+                            <hr>
+                        </div>
+                        <button type="button" class="boton-dark bottom-mini top text-uppercase" onclick="SubmitCheckoutForm();">Đặt hàng</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        function SubmitCheckoutForm() {
+            $("#btnConfirm").click();
+        }
+
+        $(function() {
+            var msgFillOut = "Vui lòng nhập đủ thông tin";
+            var msgEmail = "Vui lòng nhập đúng địa chỉ email";
+
+            function invalidMsg(textbox) {
+                if (textbox.value.trim() == '') {
+                    textbox.setCustomValidity(msgFillOut);
+                }
+                else if (textbox.validity.typeMismatch) {
+                    textbox.setCustomValidity(msgEmail);
+                }
+                else {
+                    textbox.setCustomValidity('');
+                }
+                return true;
+            }
+
+            var control = $(".form-control");
+            control.on("invalid input", function () {
+                invalidMsg(this);
+            });
+
+        });
+    </script>
+}

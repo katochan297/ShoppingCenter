@@ -1,0 +1,57 @@
+﻿@using ShopCore.Enum
+@using ShopCore.Helper
+@using ShopData.Model
+
+@{
+    var shoppingCart = SessionHelper.GetSession<Cart>(SessionName.ShoppingCart) ?? new Cart();
+    var count = shoppingCart.CartDetails.Count;
+}
+
+<a href="#">
+    <img src="~/Areas/Presentation/Content/img/content-general/cart.png" alt="cart">
+    <span class="counter-cart">@count</span>
+</a>
+<!-- Cart -->
+<ul class="drop-down hover-fade">
+    <li>
+        <!--Header panel-->
+        <div class="header-bag">
+            <p>Giỏ hàng bạn đang có @count sản phẩm</p>
+        </div>
+        <!--Header panel-->
+        @if (count > 0)
+        {
+            foreach (var item in shoppingCart.CartDetails)
+            {
+                <div class="body-bag">
+                    <img src="~/Areas/Presentation/Content/img/products/product-01.png" alt="">
+                    <div class="content-body-bag">
+                        <h4 class="product-bag">@item.Product.ProductName</h4>
+                        <p>
+                            <span>x @item.Quantity</span><br />
+                            <span>@Utilities.FormatAmountToVnd(item.Product.Price)</span><br />
+                            @if (item.IsOverOrder == true)
+                            {
+                                <span style="color: red">Số lượng đạt tối đa</span>
+                            }
+                        </p>
+                    </div>
+                </div>
+            }
+            <div class="total-bag center">
+                <p>Tổng Cộng: <span>@Utilities.FormatAmountToVnd(shoppingCart.TotalPrice)</span></p>
+            </div>
+            <!--Footer panel-->
+            <div class="footer-bag text-uppercase">
+                <div class="view-bag">
+                    <a href="@Url.Action("Index", "Cart")">Giỏ hàng</a>
+                </div>
+                <div class="check-bag">
+                    <a href="@Url.Action("Index","Checkout")">Thanh toán</a>
+                </div>
+            </div>
+            <!--Footer panel-->
+        }
+    </li>
+</ul>
+<!-- Cart -->

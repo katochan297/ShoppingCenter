@@ -20,7 +20,6 @@ namespace ShopWeb.Areas.Presentation.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult Confirm(Order order)
         {

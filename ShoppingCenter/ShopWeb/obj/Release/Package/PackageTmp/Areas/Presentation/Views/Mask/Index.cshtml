@@ -1,0 +1,158 @@
+﻿@using ShopCore.Enum
+@using ShopData.Model
+@model PagedList.IPagedList<MaskProduct>
+
+@{
+    List<Category> lstMaskCategory = ViewBag.ListMaskCategory;
+    int? categoryId = ViewBag.CategoryId;
+}
+
+<form id="frmMaskListPartial" method="post">
+    <input type="hidden" name="@GlobalVariable.hidProductId" id="@GlobalVariable.hidProductId" />
+</form>
+
+<div class="paddings">
+    <div class="container">
+        <!--Sort by list filter-->
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                @*<div class="selector">
+                    <select class="guests-input">
+                        <option value="Newest" selected>Newest first</option>
+                        <option value="Lastest">Lastest</option>
+                        <option value="Orders">orders</option>
+                        <option value="Categories">New Categories</option>
+                    </select>
+                    <span class="custom-select">Newest first</span>
+                </div>*@
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <div class="right filter-toggle">
+                    <a href="#" data-toggle="tooltip" data-placement="top" title="Filter Toggle"><i class="fa fa-bars"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="filterdrop top-mini text-uppercase">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-offset-5">
+                    <div class="col-lg-3 col-md-3 col-sm-3">
+                        <h4>Categories</h4>
+                        <div class="checkbox-shipping">
+                            @foreach (var item in lstMaskCategory)
+                            {
+                                var check = item.CategoryID == categoryId ? "checked=\"checked\"" : "";
+                                <label><input type="checkbox" class="chkCategory" value="@item.CategoryID" @check>@item.CategoryName</label>
+                            }
+                            <label><input type="checkbox" class="chkCategory" value="Jackets"> Jackets</label>
+                            <label><input type="checkbox" class="chkCategory" value="shoes"> shoes</label>
+                            <label><input type="checkbox" class="chkCategory" value="bags"> bags</label>
+                            <label><input type="checkbox" class="chkCategory" value="shirt"> t-shirt</label>
+                            <label><input type="checkbox" class="chkCategory" value="swearters"> swearters</label>
+                            <label><input type="checkbox" class="chkCategory" value="others"> others</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3">
+                        <h4>size</h4>
+                        <div class="checkbox-shipping">
+                            <label><input type="checkbox" class="chkTest" value="abc"> x</label>
+                            <label><input type="checkbox" value=""> xs</label>
+                            <label><input type="checkbox" value=""> s</label>
+                            <label><input type="checkbox" value="" checked="checked"> m</label>
+                            <label><input type="checkbox" value=""> l</label>
+                            <label><input type="checkbox" value=""> xl</label>
+                            <label><input type="checkbox" value=""> xxl</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3">
+                        <h4>color</h4>
+                        <div class="checkbox-shipping">
+                            <label><input type="checkbox" value=""> beige</label>
+                            <label><input type="checkbox" value=""> black</label>
+                            <label><input type="checkbox" value=""> white</label>
+                            <label><input type="checkbox" value=""> gray</label>
+                            <label><input type="checkbox" value=""> blue</label>
+                            <label><input type="checkbox" value="" checked="checked"> yellow</label>
+                            <label><input type="checkbox" value=""> red</label>
+                            <label><input type="checkbox" value=""> brown</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3">
+                        <h4>Price</h4>
+                        <div class="checkbox-shipping">
+                            <label><input type="checkbox" value="" checked="checked"> <span class="price"></span> 10</label>
+                            <label><input type="checkbox" value=""> <span class="price"></span> 10-25</label>
+                            <label><input type="checkbox" value=""> <span class="price"></span> 26-50</label>
+                            <label><input type="checkbox" value=""> <span class="price"></span> 51-100</label>
+                            <label><input type="checkbox" value=""> <span class="price"></span> 101</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Sort by  list filter-->
+
+    <div class="container" id="product-list">
+        @Html.Partial("_MaskListPartial", Model)
+    </div>
+</div>
+
+
+@section scripts{
+    <script type="text/javascript">
+        function AddCartQuickly(id) {
+            $("#@GlobalVariable.hidProductId").attr("value",id);
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("AddCartQuickly", "Cart")",
+                data: $('#frmMaskListPartial').serialize(),
+                datatype: "html",
+                success: function(data) {
+                    var counter = $(".bag-cart");
+                    counter.html(data);
+
+                    var animationend = "webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend";
+                    var animationName = "bounceIn";
+                    counter.addClass("animated " + animationName)
+                        .one(animationend,
+                            function() {
+                                $(this).removeClass(animationName);
+                            });
+                }
+            });
+        }
+
+        $(function () {
+            //Filtering
+            $(".chkCategory").click(function () {
+                var dt = [];
+                $.each($(".chkCategory:checked"), function() {
+                    dt.push($(this).val());
+                });
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("Filter", "Mask")",
+                    data: { @GlobalVariable.lstCategoryFilter : dt },
+                    datatype: "html",
+                    success: function(result) {
+                        $("#product-list").html(result);
+                    }
+                });
+            });
+            //Paging
+            $('body').on('click', '#product-list .pagination a', function(event) {
+                event.preventDefault();
+                var url = $(this).attr('href');
+                $.ajax({
+                    url: url,
+                    success: function(result) {
+                        $('#product-list').html(result);
+                    }
+                });
+            });
+
+        });
+    </script>
+}

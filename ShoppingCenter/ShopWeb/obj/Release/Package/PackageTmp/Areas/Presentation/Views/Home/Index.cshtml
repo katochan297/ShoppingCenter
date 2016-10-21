@@ -1,0 +1,315 @@
+﻿@using ShopCore.Helper
+@using ShopData.Model
+@{
+    List<Banner> lstBanner = ViewBag.ListBanner;
+    List<MaskProduct> lstMask = ViewBag.ListMask;
+}
+
+<!--Slider-->
+<div class="row">
+    <div class="col-lg-12">
+        <div id="slider_one_wrapper" class="rev_slider_wrapper fullscreen-container" data-alias="notgeneric1" style="background-color:transparent;padding:0px;">
+            <!-- START REVOLUTION SLIDER -->
+            <div id="slider_one" class="rev_slider fullscreenbanner" style="display:none;" data-version="5.0.7">
+                <ul>
+                    @for (int i = 0; i < lstBanner.Count; i++)
+                    {
+                        if (i % 2 == 0)
+                        {
+                            <!-- SLIDE -->
+                            <li data-transition="zoomout" data-slotamount="default" data-easein="Power4.easeInOut" data-easeout="Power4.easeInOut" data-masterspeed="2000"
+                                data-thumb="@lstBanner[i].PictureUrl"
+                                data-rotate="0" data-fstransition="fade" data-fsmasterspeed="1500" data-fsslotamount="7" data-saveperformance="off" data-title="Slider" data-description="">
+                                <!-- MAIN IMAGE -->
+                                <img src="@lstBanner[i].PictureUrl" 
+                                     alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="10" class="rev-slidebg" data-no-retina>
+                                <!-- LAYERS -->
+                                <!-- LAYER NR. 1 -->
+                                <div class="tp-caption tp-resizeme rs-parallaxlevel-0"
+                                     data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
+                                     data-y="['center','middle','middle','middle']" data-voffset="['0','0','0','0']"
+                                     data-fontsize="['60','50','50','45']"
+                                     data-lineheight="['100','60','70','50']"
+                                     data-width="none"
+                                     data-height="none"
+                                     data-whitespace="nowrap"
+                                     data-transform_idle="o:1;"
+                                     data-transform_in="x:[105%];z:0;rX:45deg;rY:0deg;rZ:90deg;sX:1;sY:1;skX:0;skY:0;s:2000;e:Power4.easeInOut;"
+                                     data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
+                                     data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
+                                     data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
+                                     data-start="1000"
+                                     data-splitin="line"
+                                     data-splitout="none"
+                                     data-responsive_offset="on"
+                                     data-elementdelay="0.05"
+                                     style="z-index: 5; white-space: nowrap; color: #fff;">
+
+                                    @lstBanner[i].BannerTitle
+                                </div>
+                                <!-- LAYER NR. 2 -->
+                                <div class="tp-caption tp-resizeme rs-parallaxlevel-0"
+                                     data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
+                                     data-y="['470','480','middle','middle']" data-voffset="['52','52','52','51']"
+                                     data-fontsize="['20','40','30','45']"
+                                     data-lineheight="['30','40','70','50']"
+                                     data-width="none"
+                                     data-height="none"
+                                     data-whitespace="nowrap"
+                                     data-transform_idle="o:1;"
+                                     data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2000;e:Power4.easeInOut;"
+                                     data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
+                                     data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;"
+                                     data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
+                                     data-start="1500"
+                                     data-splitin="none"
+                                     data-splitout="none"
+                                     data-responsive_offset="on"
+                                     style="z-index: 6; white-space: nowrap; color: #757575; font-weight: 500; text-transform: uppercase;">
+
+                                    @lstBanner[i].Description
+                                </div>
+
+                            </li>
+                        }
+                        else
+                        {
+                            <!-- SLIDE  -->
+                            <li data-transition="fade" data-title="Slider">
+                                <!-- MAIN IMAGE -->
+                                <img src="@lstBanner[i].PictureUrl" 
+                                     alt="" width="1920" height="1280">
+                                <!-- LAYER NR. 1 -->
+                                <div class="tp-caption tp-resizeme rs-parallaxlevel-0"
+                                     data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
+                                     data-y="['300','middle','middle','middle']" data-voffset="['0','0','0','0']"
+                                     data-fontsize="['54','70','70','45']"
+                                     data-lineheight="['100','70','70','50']"
+                                     data-width="none"
+                                     data-height="none"
+                                     data-whitespace="nowrap"
+                                     data-transform_idle="o:1;"
+                                     data-transform_in="x:[105%];z:0;rX:45deg;rY:0deg;rZ:90deg;sX:1;sY:1;skX:0;skY:0;s:2000;e:Power4.easeInOut;"
+                                     data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
+                                     data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
+                                     data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
+                                     data-start="1000"
+                                     data-splitin="line"
+                                     data-splitout="none"
+                                     data-responsive_offset="on"
+                                     data-elementdelay="0.05"
+                                     style="z-index: 5; white-space: nowrap; color: #fff;">
+
+                                    @lstBanner[i].BannerTitle
+                                </div>
+                                <!-- LAYER NR. 2 -->
+                                <div class="tp-caption tp-resizeme rs-parallaxlevel-0"
+                                     data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
+                                     data-y="['center','middle','middle','middle']" data-voffset="['52','52','52','51']"
+                                     data-fontsize="['20','70','70','45']"
+                                     data-lineheight="['30','70','70','50']"
+                                     data-width="none"
+                                     data-height="none"
+                                     data-whitespace="nowrap"
+                                     data-transform_idle="o:1;"
+                                     data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2000;e:Power4.easeInOut;"
+                                     data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
+                                     data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;"
+                                     data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
+                                     data-start="1500"
+                                     data-splitin="none"
+                                     data-splitout="none"
+                                     data-responsive_offset="on"
+                                     style="z-index: 6; white-space: nowrap; color: #fff; font-weight: 500; text-transform: uppercase;">
+
+                                    @lstBanner[i].Description
+                                </div>
+                            </li>
+                        }
+                    }
+
+                </ul>
+                <div class="tp-bannertimer tp-bottom" style="visibility: hidden !important;"></div>
+            </div>
+            <!-- START REVOLUTION SLIDER -->
+        </div>
+    </div>
+</div>
+<!--Slider-->
+
+<section class="container">
+    <div class="paddings">
+        <!--Products Gallery-->
+        <div class="row">
+            <!--Main title-->
+            <div class="main-title text-uppercase center">
+                <h3>features products</h3>
+            </div>
+            <!--Main title-->
+            <!--Products List-->
+            <div class="top">
+                @foreach (var item in lstMask)
+                {
+                    <div class="col-lg-3 col-md-3 col-sm-4">
+                        <a href="@Url.Action("MaskDetail", "Mask", new { id = item.ProductID })" class="product">
+                            <!--Image Product-->
+                            <div class="image-product">
+                                <img src="@item.PictureUrl" alt="">
+                            </div>
+                            <!--Image Product-->
+                            <!--Description Product-->
+                            <div class="description-product text-uppercase">
+                                <h4>@item.PictureUrl</h4>
+                                <p>@Utilities.FormatAmountToVnd(item.Price)</p>
+                            </div>
+                            <!--Description Product-->
+                        </a>
+                    </div>
+                }
+            </div>
+            <!--Products List-->
+        </div>
+        <!--Products Gallery-->
+    </div>
+    
+    <!--Newsletter-->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="newsletter-box center paddings text-uppercase">
+                <h2>subscribe to our newsletter</h2>
+                <p>BE THE FIRST TO KNOW ABOUT NEW ARRIVALS, SALES AND MUCH MORE</p>
+                <form class="newsletterForm" action="php/mailchip/newsletter-subscribe.php">
+                    <div class="input-group newsletterFormborder">
+                        <input class="form-control" placeholder="Email Address" name="email" type="email" required="required">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" type="submit" name="subscribe">subscribe</button>
+                        </span>
+                    </div>
+                </form>
+                <div class="result-newsletter"></div>
+            </div>
+        </div>
+    </div>
+    <!--Newsletter-->
+    <!--Stay Connect Section-->
+    <div class="row paddings">
+        <!--Main title-->
+        <div class="col-lg-12 main-title text-uppercase center">
+            <h3>STAY CONNECTED</h3>
+            <p>Read our  blog and follow us through our social networks</p>
+        </div>
+        <!--Main title-->
+        <div class="col-lg-12 top">
+            <ul class="list-inline list-float">
+                <li>
+                    <div class="layer-imagetext">
+                        <img src="~/Areas/Presentation/Content/img/stay-connect/stay-connect-01.jpg" alt="">
+                        <div class="text-hover text-uppercase">
+                            <h3>Shooting S/S 2016 Lookbook</h3>
+                            <div class="boton-arrow top"><a href="#">read more <i class="fa fa-angle-right"></i></a></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="layer-imagetext">
+                        <a href="#">
+                            <img src="~/Areas/Presentation/Content/img/stay-connect/stay-connect-02.png" alt="">
+                            <div class="text-hover text-uppercase right-text">
+                                <h3><i class="fa fa-facebook-square"></i> Facebook</h3>
+                                <div class="boton-arrow top">see moments <i class="fa fa-angle-right"></i></div>
+                            </div>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--Stay Connect Section-->
+</section>
+
+@section scripts {
+    <!--Extensions of revolution slider-->
+    <script type="text/javascript" src="~/Areas/Presentation/Content/js/slide-revolution/jquery.themepunch.tools.min.js"></script>
+    <script type="text/javascript" src="~/Areas/Presentation/Content/js/slide-revolution/jquery.themepunch.revolution.min.js"></script>
+    <script type="text/javascript" src="~/Areas/Presentation/Content/js/slide-revolution/extensions/revolution.extension.slideanims.min.js"></script>
+    <script type="text/javascript" src="~/Areas/Presentation/Content/js/slide-revolution/extensions/revolution.extension.actions.min.js"></script>
+    <script type="text/javascript" src="~/Areas/Presentation/Content/js/slide-revolution/extensions/revolution.extension.layeranimation.min.js"></script>
+    <script type="text/javascript" src="~/Areas/Presentation/Content/js/slide-revolution/extensions/revolution.extension.navigation.min.js"></script>
+    <script type="text/javascript" src="~/Areas/Presentation/Content/js/slide-revolution/extensions/revolution.extension.parallax.min.js"></script>
+    <script type="text/javascript" src="~/Areas/Presentation/Content/js/slide-revolution/extensions/revolution.extension.kenburn.min.js"></script>
+
+    <script type="text/javascript">
+        var tpj = jQuery;
+        var rewind;
+        tpj(document).ready(function () {
+            if (tpj("#slider_one").revolution == undefined) {
+                window.revslider_showDoubleJqueryError("#slider_one");
+            } else {
+                rewind = tpj("#slider_one").show().revolution({
+                    sliderType: "standard",
+                    jsFileLocation: "../../revolution/js/",
+                    sliderLayout: "fullscreen",
+                    navigation: {
+                        keyboardNavigation: "off",
+                        keyboard_direction: "horizontal",
+                        mouseScrollNavigation: "off",
+                        onHoverStop: "off",
+                        touch: {
+                            touchenabled: "on",
+                            swipe_threshold: 75,
+                            swipe_min_touches: 1,
+                            swipe_direction: "horizontal",
+                            drag_block_vertical: false
+                        },
+                        bullets: {
+                            enable: true,
+                            hide_onmobile: true,
+                            hide_under: 960,
+                            style: "zeus",
+                            hide_onleave: false,
+                            direction: "horizontal",
+                            h_align: "right",
+                            v_align: "bottom",
+                            h_offset: 80,
+                            v_offset: 50,
+                            space: 5,
+                            tmp: '<span class="tp-bullet-image"></span><span class="tp-bullet-imageoverlay"></span><span class="tp-bullet-title">{{title}}</span>'
+                        }
+                    },
+                    responsiveLevels: [1240, 1024, 778, 480],
+                    gridwidth: [1240, 1024, 778, 480],
+                    gridheight: [868, 768, 960, 720],
+                    lazyType: "none",
+                    parallax: {
+                        type: "mouse",
+                        origo: "slidercenter",
+                        speed: 1000,
+                        levels: [2, 3, 4, 5, 6, 7, 12, 16, 10, 50],
+                        disable_onmobile: "on"
+                    },
+                    shadow: 0,
+                    spinner: "off",
+                    stopLoop: "on",
+                    stopAfterLoops: 0,
+                    stopAtSlide: 1,
+                    shuffle: "off",
+                    autoHeight: "off",
+                    fullScreenAlignForce: "off",
+                    fullScreenOffsetContainer: "",
+                    fullScreenOffset: "60px",
+                    disableProgressBar: "on",
+                    hideThumbsOnMobile: "off",
+                    hideSliderAtLimit: 0,
+                    hideCaptionAtLimit: 0,
+                    hideAllCaptionAtLilmit: 0,
+                    debugMode: false,
+                    fallbacks: {
+                        simplifyAll: "off",
+                        nextSlideOnWindowFocus: "off",
+                        disableFocusListener: false
+                    }
+                });
+            }
+        });
+    </script>
+}
