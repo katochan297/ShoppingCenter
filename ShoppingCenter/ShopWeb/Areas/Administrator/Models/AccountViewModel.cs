@@ -5,6 +5,8 @@ using System.Linq;
 using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity.EntityFramework;
+using ShopData.Model;
 
 namespace ShopWeb.Areas.Administrator.Models
 {
@@ -25,15 +27,18 @@ namespace ShopWeb.Areas.Administrator.Models
 
         }
 
-
-        public class AppUser : ClaimsPrincipal
+        public class RegisterViewModel
         {
-            public AppUser(ClaimsPrincipal principal) : base(principal)
-            {
-            }
+            [Required]
+            [DataType(DataType.Text)]
+            public string Username { get; set; }
 
-            public string Name => FindFirst(ClaimTypes.Name).Value;
+            [Required]
+            [DataType(DataType.Password)]
+            public string Password { get; set; }
         }
+
+        
 
     }
 }

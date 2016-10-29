@@ -208,3 +208,6 @@ E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\System.Web.Optimization.dll
 E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\WebGrease.dll
 E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\Antlr3.Runtime.pdb
 E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\System.Web.Optimization.xml
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\NLog.config
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\NLog.dll
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopWeb\bin\NLog.xml

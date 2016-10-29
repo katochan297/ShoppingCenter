@@ -34,3 +34,5 @@ C:\1 - Personal\GitHub\ShoppingCenter\ShoppingCenter\ShopCore\bin\Debug\EntityFr
 C:\1 - Personal\GitHub\ShoppingCenter\ShoppingCenter\ShopCore\obj\Debug\ShopCore.csprojResolveAssemblyReference.cache
 C:\1 - Personal\GitHub\ShoppingCenter\ShoppingCenter\ShopCore\obj\Debug\ShopCore.dll
 C:\1 - Personal\GitHub\ShoppingCenter\ShoppingCenter\ShopCore\obj\Debug\ShopCore.pdb
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopCore\bin\Debug\NLog.dll
+E:\GitHub\ShoppingCenter\ShoppingCenter\ShopCore\bin\Debug\NLog.xml

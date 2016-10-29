@@ -4,11 +4,14 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NLog;
 
 namespace ShopCore.Helper
 {
     public static class Utilities
     {
+        public static Logger ShopLogger = LogManager.GetCurrentClassLogger();
+
         public static string FormatAmountToVnd(dynamic amount)
         {
             try

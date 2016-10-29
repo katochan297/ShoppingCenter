@@ -255,7 +255,7 @@
             <End Role="Product" EntitySet="Product" />
             <End Role="ProductImage" EntitySet="ProductImage" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
